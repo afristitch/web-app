@@ -49,6 +49,10 @@ function VerifyEmailContent() {
         verify();
     }, [token]);
 
+    if (!token) {
+        return <div className="bg-white min-h-screen whitespace-pre" />;
+    }
+
     return (
         <div className="flex min-h-screen flex-col items-center pt-24 px-6 bg-white">
             <div className="w-full max-w-lg text-left">

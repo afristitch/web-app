@@ -25,7 +25,7 @@ function VerifyEmailContent() {
 
                 // Constructing the backend endpoint based on the requested logic
                 // Path + Search is /verify-email?token=...
-                const response = await fetch(`${baseUrl}/auth/verify-email?token=${token}`, {
+                const response = await fetch(`${baseUrl}/auth/verify-email/${token}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

@@ -1,32 +1,94 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Termina';
+  src: url('/fonts/TerminaTest-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Termina';
+  src: url('/fonts/TerminaTest-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Termina';
+  src: url('/fonts/TerminaTest-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-accent: #FFFFFF;
+  --color-deep-black: #000000;
+  --color-surface-gray: #0A0A0A;
+  --color-stone: #F2F0EB;
+  --color-stone-500: #78716C;
+
+  --font-headlines: var(--font-termina), 'Termina', system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
-  /* Gray 900 */
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: system-ui, -apple-system, sans-serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* AWS-style Link refinement */
-a {
-  color: #2563eb;
-  text-decoration: none;
+.font-headlines-forced {
+  font-family: 'Termina', system-ui, sans-serif !important;
 }
 
-a:hover {
-  text-decoration: underline;
+
+/* Cinematic Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Custom Utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.tracking-cinematic {
+  letter-spacing: 0.2em;
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s ease-in-out infinite alternate;
 }
 
 ::-webkit-scrollbar {
@@ -34,6 +96,6 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
+  background: #333;
   border-radius: 10px;
 }

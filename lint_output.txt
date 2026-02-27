@@ -1,0 +1,69 @@
+
+> sew-digital-web@0.1.0 lint
+> eslint
+
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/clients/page.tsx
+   12:5   warning  'Mail' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   16:10  warning  'cn' is defined but never used                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   19:13  warning  'user' is assigned a value but never used                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   20:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   27:86  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  108:61  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/dashboard/page.tsx
+   25:17  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   52:51  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   53:56  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:69  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   58:50  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   58:79  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  112:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/layout.tsx
+   5:7  warning  'geistSans' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  10:7  warning  'geistMono' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/login/page.tsx
+  23:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/measurements/page.tsx
+  12:5   warning  'Loader2' is defined but never used       @typescript-eslint/no-unused-vars
+  14:10  warning  'cn' is defined but never used            @typescript-eslint/no-unused-vars
+  17:48  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  23:80  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/app/orders/page.tsx
+    9:5   warning  'Search' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   19:14  warning  'formatDate' is defined but never used                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+   40:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   49:58  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  131:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/components/dashboard/RecentOrders.tsx
+   5:7   warning  'orders' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  20:68  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/components/dashboard/Sidebar.tsx
+  38:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/context/AuthContext.tsx
+  42:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/jimmy/Desktop/personal/Tailor/frontend/sew-digital-web/context/AuthContext.tsx:42:13
+  40 |
+  41 |         if (storedUser && storedOrg && token) {
+> 42 |             setUser(JSON.parse(storedUser));
+     |             ^^^^^^^ Avoid calling setState() directly within an effect
+  43 |             setOrganization(JSON.parse(storedOrg));
+  44 |         }
+  45 |         setLoading(false);  react-hooks/set-state-in-effect
+
+✖ 29 problems (15 errors, 14 warnings)
+

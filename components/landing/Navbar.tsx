@@ -46,7 +46,7 @@ export function Navbar() {
                     className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-cinematic uppercase text-stone-400"
                     style={{ fontFamily: 'var(--font-termina)' }}
                 >
-                    <Link href="/" className="hover:text-white transition-colors">Platform</Link>
+                    <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                     <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
                     <a
@@ -71,7 +71,7 @@ export function Navbar() {
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
                 <div className="absolute top-full left-0 right-0 bg-black border-b border-white/5 p-8 flex flex-col gap-6 text-sm font-bold tracking-cinematic uppercase animate-in fade-in slide-in-from-top-4" style={{ fontFamily: 'var(--font-termina)' }}>
-                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
+                    <Link href="/how-it-works" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                     <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
                     <a

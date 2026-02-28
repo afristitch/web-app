@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
     const openWaitlist = () => {
@@ -47,9 +48,9 @@ export function Hero() {
                         </span>
                     </button>
 
-                    <button className="px-8 py-4 border border-white/10 hover:bg-white/5 backdrop-blur-md text-white font-bold rounded-full transition-all">
+                    <Link href="/how-it-works" className="px-8 py-4 border border-white/10 hover:bg-white/5 backdrop-blur-md text-white font-bold rounded-full transition-all">
                         See how it works
-                    </button>
+                    </Link>
                 </div>
             </div>
 

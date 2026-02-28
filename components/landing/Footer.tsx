@@ -25,7 +25,7 @@ export function Footer() {
                                 SewDigital
                             </span>
                         </Link>
-                        
+
                         <p className="text-stone-500 text-sm max-w-xs font-medium mb-8">
                             Empowering tailors with modern digital tools for a timeless craft.
                         </p>
@@ -49,6 +49,7 @@ export function Footer() {
                         className="flex gap-12 text-[11px] font-bold tracking-cinematic uppercase text-stone-500"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
+                        <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
                         <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
                         <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                         <Link href="#" className="hover:text-white transition-colors">Contact</Link>

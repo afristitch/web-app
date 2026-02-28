@@ -25,13 +25,14 @@ export function Navbar() {
                 }`}
         >
             <div className="container mx-auto max-w-7xl flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-4 group">
+                <Link href="/" className="flex items-center gap-2 group">
                     <Image
                         src="/stitch-logo-white.png"
                         alt="SewDigital Logo"
                         width={40}
                         height={40}
                         className="object-contain"
+                        unoptimized
                     />
                     <span
                         className="text-2xl font-bold tracking-tighter uppercase group-hover:text-white/70 transition-colors"

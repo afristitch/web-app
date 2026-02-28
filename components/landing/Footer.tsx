@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
@@ -8,12 +9,23 @@ export function Footer() {
             <div className="container mx-auto max-w-7xl">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
                     <div>
-                        <h2
-                            className="text-2xl font-bold tracking-tighter mb-4 uppercase"
-                            style={{ fontFamily: 'var(--font-termina)' }}
-                        >
-                            SEWDIGITAL
-                        </h2>
+                        <Link href="/" className="flex items-center gap-2 group">
+                            <Image
+                                src="/stitch-logo-white.png"
+                                alt="SewDigital Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                                unoptimized
+                            />
+                            <span
+                                className="text-2xl font-bold tracking-tighter uppercase group-hover:text-white/70 transition-colors"
+                                style={{ fontFamily: 'var(--font-termina)' }}
+                            >
+                                SewDigital
+                            </span>
+                        </Link>
+                        
                         <p className="text-stone-500 text-sm max-w-xs font-medium mb-8">
                             Empowering tailors with modern digital tools for a timeless craft.
                         </p>

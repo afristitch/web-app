@@ -1,19 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Send } from "lucide-react";
 
 export function Waitlist() {
-    const [email, setEmail] = useState("");
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (email) {
-            setSubmitted(true);
-            // Logic for waitlist would go here
-        }
-    };
 
     return (
         <section id="waitlist" className="py-28 md:py-48 px-6 bg-stone text-black">

@@ -3,6 +3,7 @@
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const stories = [
     {
@@ -48,10 +49,11 @@ export default function StoriesPage() {
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
                     <div className="relative group overflow-hidden rounded-[40px] aspect-[16/9] md:aspect-[21/9]">
-                        <img
+                        <Image
                             src="https://images.unsplash.com/photo-1598501479155-00c0a93bd855?w=1600&q=80"
                             alt="Workshop"
-                            className="absolute inset-0 w-full h-full object-cover grayscale opacity-50 transition-transform duration-1000 group-hover:scale-105"
+                            fill
+                            className="absolute inset-0 object-cover grayscale opacity-50 transition-transform duration-1000 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                         <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-3xl">
@@ -77,10 +79,11 @@ export default function StoriesPage() {
                         {stories.map((story, idx) => (
                             <div key={idx} className="group">
                                 <div className="mb-8 overflow-hidden rounded-2xl aspect-square grayscale transition-all group-hover:grayscale-0 border border-white/5">
-                                    <img
+                                    <Image
                                         src={story.image}
                                         alt={story.name}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                 </div>
                                 <h3

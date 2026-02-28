@@ -1,6 +1,7 @@
 "use client";
 
 import { Eye } from "lucide-react";
+import Image from "next/image";
 
 interface Activity {
     id: string;
@@ -71,7 +72,13 @@ export function ActivityTable() {
                                 <td className="px-5 py-3">
                                     <div className="flex items-center gap-3">
                                         <div className="h-8 w-8 overflow-hidden rounded-full ring-2 ring-white">
-                                            <img src={activity.user.avatar} alt={activity.user.name} className="h-full w-full object-cover" />
+                                            <Image
+                                                src={activity.user.avatar}
+                                                alt={activity.user.name}
+                                                width={32}
+                                                height={32}
+                                                className="h-full w-full object-cover"
+                                            />
                                         </div>
                                         <div>
                                             <p className="font-bold text-slate-900">{activity.user.name}</p>

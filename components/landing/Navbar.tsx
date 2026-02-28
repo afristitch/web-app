@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -24,11 +25,13 @@ export function Navbar() {
                 }`}
         >
             <div className="container mx-auto max-w-7xl flex items-center justify-between">
-                <a href="/" className="flex items-center gap-4 group">
-                    <img
+                <Link href="/" className="flex items-center gap-4 group">
+                    <Image
                         src="/stitch-logo-white.png"
                         alt="SewDigital Logo"
-                        className="w-10 h-10 object-contain"
+                        width={40}
+                        height={40}
+                        className="object-contain"
                     />
                     <span
                         className="text-2xl font-bold tracking-tighter uppercase group-hover:text-white/70 transition-colors"
@@ -36,7 +39,7 @@ export function Navbar() {
                     >
                         SewDigital
                     </span>
-                </a>
+                </Link>
                 {/* Desktop Menu */}
                 <div
                     className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-cinematic uppercase text-stone-400"

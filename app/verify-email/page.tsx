@@ -40,7 +40,7 @@ function VerifyEmailContent() {
                     setStatus("error");
                     setMessage(errorData.message || "Failed to verify email. The link may be expired or invalid.");
                 }
-            } catch (err) {
+            } catch {
                 setStatus("error");
                 setMessage("An error occurred during verification. Please try again later.");
             }

@@ -29,7 +29,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export function Sidebar() {
     const pathname = usePathname();
-    const { organization, logout } = useAuth();
+    const { logout } = useAuth();
 
     return (
         <div className="flex h-full w-60 flex-col border-r border-slate-100 bg-white font-sans transition-all">

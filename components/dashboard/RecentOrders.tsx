@@ -2,13 +2,6 @@
 
 import { formatDate, formatCurrency, cn } from "@/lib/utils";
 
-const orders = [
-    { id: "ORD-001", client: "John Doe", status: "pending", amount: 120, dueDate: "2024-03-25" },
-    { id: "ORD-002", client: "Jane Smith", status: "in-progress", amount: 350, dueDate: "2024-03-22" },
-    { id: "ORD-003", client: "Alice Brown", status: "completed", amount: 200, dueDate: "2024-03-20" },
-    { id: "ORD-004", client: "Robert Wilson", status: "delivered", amount: 450, dueDate: "2024-03-18" },
-    { id: "ORD-005", client: "Sarah Miller", status: "in-progress", amount: 180, dueDate: "2024-03-28" },
-];
 
 const statusStyles = {
     pending: "bg-amber-50 text-amber-700 border-amber-100 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/50",

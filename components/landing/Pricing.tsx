@@ -6,7 +6,7 @@ const plans = [
     {
         name: "Standard",
         duration: "1 Month",
-        price: "₵50",
+        price: "$5.99",
         description: "Perfect for getting started.",
         features: ["Unlimited Clients", "Order Management", "Basic Reports"],
         isPopular: false
@@ -14,7 +14,7 @@ const plans = [
     {
         name: "Growth",
         duration: "6 Months",
-        price: "₵270",
+        price: "$32.99",
         description: "Better value for growing shops.",
         features: ["All Standard features", "Custom Templates", "Advanced Analytics", "Priority Support"],
         isPopular: false
@@ -22,7 +22,7 @@ const plans = [
     {
         name: "Pro",
         duration: "12 Months",
-        price: "₵500",
+        price: "$59.99",
         description: "Best for professional workshops.",
         features: ["All Growth features", "White-label reports", "SMS Notifications", "Early access to new features"],
         isPopular: true,

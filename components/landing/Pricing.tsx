@@ -109,7 +109,7 @@ export function Pricing() {
                                     : 'bg-white/5 text-white hover:bg-white/10'
                                     }`}
                             >
-                                Get Started
+                                Coming Soon
                             </a>
                         </div>
                     ))}

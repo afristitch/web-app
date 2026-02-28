@@ -6,7 +6,7 @@ const plans = [
     {
         name: "Standard",
         duration: "1 Month",
-        price: "₵150",
+        price: "₵50",
         description: "Perfect for getting started.",
         features: ["Unlimited Clients", "Order Management", "Basic Reports"],
         isPopular: false
@@ -14,7 +14,7 @@ const plans = [
     {
         name: "Growth",
         duration: "6 Months",
-        price: "₵750",
+        price: "₵270",
         description: "Better value for growing shops.",
         features: ["All Standard features", "Custom Templates", "Advanced Analytics", "Priority Support"],
         isPopular: false
@@ -22,11 +22,11 @@ const plans = [
     {
         name: "Pro",
         duration: "12 Months",
-        price: "₵1,200",
+        price: "₵500",
         description: "Best for professional workshops.",
         features: ["All Growth features", "White-label reports", "SMS Notifications", "Early access to new features"],
         isPopular: true,
-        tag: "Best Discount - 33% Off"
+        tag: "Recommended"
     }
 ];
 
@@ -100,14 +100,17 @@ export function Pricing() {
                                 ))}
                             </div>
 
-                            <button
-                                className={`w-full py-4 rounded-full font-bold transition-all ${plan.isPopular
+                            <a
+                                href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`w-full py-4 rounded-full font-bold transition-all text-center ${plan.isPopular
                                     ? 'bg-white text-black hover:bg-white/90'
                                     : 'bg-white/5 text-white hover:bg-white/10'
                                     }`}
                             >
                                 Get Started
-                            </button>
+                            </a>
                         </div>
                     ))}
                 </div>

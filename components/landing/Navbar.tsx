@@ -18,7 +18,9 @@ export function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 ${isScrolled ? "bg-black/80 backdrop-blur-lg border-b border-white/5 py-3" : "bg-transparent"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 border-b ${isScrolled
+                ? "bg-black/80 backdrop-blur-lg border-white/10 py-3 shadow-2xl shadow-black/50"
+                : "bg-transparent border-transparent"
                 }`}
         >
             <div className="container mx-auto max-w-7xl flex items-center justify-between">
@@ -43,12 +45,14 @@ export function Navbar() {
                     <Link href="/" className="hover:text-white transition-colors">Platform</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                     <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
-                    <Link
-                        href="/#waitlist"
+                    <a
+                        href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-6 py-2 bg-white text-black rounded-full hover:bg-stone-100 transition-all active:scale-95"
                     >
                         Join Waitlist
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -66,13 +70,15 @@ export function Navbar() {
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                     <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
-                    <Link
-                        href="/#waitlist"
+                    <a
+                        href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="w-full py-4 bg-white text-black rounded-full font-bold text-center"
                     >
                         Join Waitlist
-                    </Link>
+                    </a>
                 </div>
             )}
         </nav>

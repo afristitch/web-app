@@ -36,32 +36,16 @@ export function Waitlist() {
                     </p>
                 </div>
 
-                {submitted ? (
-                    <div className="p-12 rounded-3xl bg-black text-white fade-up inline-block border border-white/10">
-                        <h4 className="text-2xl font-bold mb-2 text-white tracking-tight uppercase" style={{ fontFamily: 'var(--font-termina)' }}>You&apos;re on the list!</h4>
-                        <p className="text-stone-500 font-medium">We&apos;ll reach out as soon as we&apos;re ready for you.</p>
-                    </div>
-                ) : (
-                    <form
-                        onSubmit={handleSubmit}
-                        className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto"
+                <div className="flex justify-center">
+                    <a
+                        href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-12 py-6 bg-black text-white font-bold rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-black/20 text-xl"
                     >
-                        <input
-                            type="email"
-                            required
-                            placeholder="Enter your email address"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="flex-grow px-8 py-5 rounded-full bg-white border border-stone-200 text-black font-medium focus:outline-none focus:border-black transition-all"
-                        />
-                        <button
-                            type="submit"
-                            className="px-8 py-5 bg-black text-white font-bold rounded-full flex items-center justify-center gap-2 hover:bg-black/90 active:scale-95 transition-all shadow-xl shadow-black/10"
-                        >
-                            Join Waitlist <Send size={18} />
-                        </button>
-                    </form>
-                )}
+                        Join the Waitlist <Send size={24} />
+                    </a>
+                </div>
 
                 <p className="mt-8 text-stone-400 text-sm font-medium">
                     No credit card required. Private beta starting soon.

@@ -3,12 +3,12 @@
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
-    const scrollToWaitlist = () => {
-        document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
+    const openWaitlist = () => {
+        window.open("https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl", "_blank");
     };
 
     return (
-        <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[90vh] flex items-center md:items-center justify-center overflow-hidden pt-20 md:pt-0">
             {/* Cinematic Background */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black z-10" />
@@ -39,7 +39,7 @@ export function Hero() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <button
-                        onClick={scrollToWaitlist}
+                        onClick={openWaitlist}
                         className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-lg shadow-white/5"
                     >
                         <span className="relative z-10 flex items-center gap-2">

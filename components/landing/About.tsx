@@ -37,7 +37,7 @@ export function About() {
                         The Platform
                     </h2>
                     <h3
-                        className="text-4xl md:text-6xl font-bold tracking-tighter max-w-3xl leading-none uppercase"
+                        className="text-3xl md:text-6xl font-bold tracking-tighter max-w-3xl leading-none uppercase"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
                         EVERYTHING YOU NEED TO <span className="text-stone-500">DIGITIZE YOUR WORKSHOP.</span>

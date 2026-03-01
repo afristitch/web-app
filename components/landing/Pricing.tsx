@@ -42,7 +42,7 @@ export function Pricing() {
                         Simple Pricing
                     </h2>
                     <h3
-                        className="text-4xl md:text-6xl font-bold tracking-tighter leading-none mb-6 uppercase"
+                        className="text-3xl md:text-6xl font-bold tracking-tighter leading-none mb-6 uppercase"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
                         CHOOSE THE <span className="text-stone-500">PERFECT PLAN.</span>

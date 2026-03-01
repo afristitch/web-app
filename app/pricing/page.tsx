@@ -13,7 +13,7 @@ export default function PricingPage() {
                 <div className="container mx-auto max-w-7xl px-6 mb-24">
                     <div className="max-w-4xl">
                         <h1
-                            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
                             style={{ fontFamily: 'var(--font-termina)' }}
                         >
                             Plans for every <span className="opacity-40">scale.</span>
@@ -77,7 +77,7 @@ export default function PricingPage() {
                 <div className="container mx-auto max-w-7xl px-6 py-24 text-center">
                     <div className="p-16 rounded-[40px] bg-white text-black">
                         <h2
-                            className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-8"
+                            className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-8"
                             style={{ fontFamily: 'var(--font-termina)' }}
                         >
                             Still have questions?
@@ -87,7 +87,7 @@ export default function PricingPage() {
                         </p>
                         <Link
                             href="/#waitlist"
-                            className="inline-flex items-center gap-2 px-10 py-5 bg-black text-white rounded-full font-bold hover:scale-105 transition-transform"
+                            className="inline-flex items-center gap-2 px-5 py-3 sm:px-10 sm:py-5 bg-black text-white rounded-full font-bold hover:scale-105 transition-transform"
                         >
                             Get in touch <ArrowRight size={20} />
                         </Link>

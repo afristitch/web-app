@@ -52,7 +52,7 @@ export function Hero() {
                 </div>
 
                 <h1
-                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 max-w-6xl mx-auto leading-[0.85] text-balance uppercase"
+                    className="text-4xl md:text-8xl font-bold tracking-tighter mb-8 max-w-6xl mx-auto leading-[0.85] text-balance uppercase"
                     style={{ fontFamily: 'var(--font-termina)' }}
                 >
                     SEWING THE <br className="hidden md:block" /><span className="text-white">NEW WAY</span>

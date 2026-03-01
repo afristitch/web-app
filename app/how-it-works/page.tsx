@@ -36,7 +36,7 @@ export default function HowItWorksPage() {
                 <div className="container mx-auto max-w-7xl px-6 mb-24">
                     <div className="max-w-4xl">
                         <h1
-                            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
+                            className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
                             style={{ fontFamily: 'var(--font-termina)' }}
                         >
                             The Art of <span className="opacity-40">Precision.</span>
@@ -51,7 +51,7 @@ export default function HowItWorksPage() {
             {/* Video Section */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
-                    <div className="relative group aspect-video rounded-[40px] overflow-hidden border border-white/10 bg-white/5 cursor-pointer">
+                    <div className="relative group aspect-video md:rounded-[40px] overflow-hidden border border-white/10 bg-white/5 cursor-pointer">
                         <Image
                             src="/tour.png"
                             alt="Product Tour"
@@ -80,7 +80,7 @@ export default function HowItWorksPage() {
                             <div key={idx} className="relative pt-12 border-t border-white/10">
                                 <span className="absolute top-4 left-0 text-xs font-bold tracking-cinematic text-stone-500 uppercase">0{idx + 1}</span>
                                 <h3
-                                    className="text-3xl font-bold uppercase mb-6"
+                                    className="text-2xl sm:text-3xl font-bold uppercase mb-6"
                                     style={{ fontFamily: 'var(--font-termina)' }}
                                 >
                                     {step.title}
@@ -108,7 +108,7 @@ export default function HowItWorksPage() {
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 py-24 text-center border-t border-white/5">
                     <h2
-                        className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12 text-balance leading-none"
+                        className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12 text-balance leading-none"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
                         READY TO REVOLUTIONIZE <span className="opacity-40">YOUR WORKSHOP?</span>

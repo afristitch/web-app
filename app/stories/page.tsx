@@ -107,7 +107,7 @@ export default function StoriesPage() {
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
                     <div className="max-w-4xl">
                         <h1
-                            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
+                            className="text-4xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
                             style={{ fontFamily: 'var(--font-termina)' }}
                         >
                             Success <span className="opacity-40">By Design.</span>
@@ -122,24 +122,24 @@ export default function StoriesPage() {
             {/* Featured Story */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
-                    <div className="relative group overflow-hidden rounded-[40px] aspect-[16/9] md:aspect-[21/9] border border-white/10">
-                        <WorkshopVisual />
+                    <div className="relative group overflow-hidden sm:rounded-[40px] sm:aspect-[16/9] h-[350px] md:h-auto md:aspect-[21/9] border border-white/10">
+                        {/* <WorkshopVisual /> */}
                         <div className="absolute inset-0 grayscale opacity-40 mix-blend-overlay">
                             <Image
                                 src={FEATURED_STORY_IMAGE}
                                 alt="Ellen Osei"
                                 fill
-                                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                                className="object-cover  transition-transform duration-1000 group-hover:scale-105"
                                 priority
                             />
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
                         <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-3xl">
                             <div className="flex gap-1 mb-4">
                                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="white" className="text-white" />)}
                             </div>
                             <h2
-                                className="text-3xl md:text-5xl font-bold tracking-tighter uppercase mb-6 leading-none"
+                                className="text-2xl md:text-5xl font-bold tracking-tighter uppercase mb-6 leading-none"
                                 style={{ fontFamily: 'var(--font-termina)' }}
                             >
                                 &quot;THE MOST IMPORTANT TOOL IN MY WORKSHOP AFTER MY SEWING MACHINE.&quot;
@@ -187,7 +187,7 @@ export default function StoriesPage() {
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 py-24 text-center border-t border-white/5">
                     <h2
-                        className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12"
+                        className="text-3xl md:text-6xl font-bold tracking-tighter uppercase mb-12"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
                         WRITE YOUR <span className="opacity-40">OWN STORY.</span>

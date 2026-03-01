@@ -4,29 +4,29 @@ import { Check } from "lucide-react";
 
 const plans = [
     {
-        name: "Standard",
+        name: "Monthly",
         duration: "1 Month",
         price: "$5.99",
-        description: "Perfect for getting started.",
-        features: ["Unlimited Clients", "Order Management", "Basic Reports"],
+        description: "Essential features for your shop.",
+        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: false
     },
     {
-        name: "Growth",
+        name: "6 Months",
         duration: "6 Months",
         price: "$32.99",
-        description: "Better value for growing shops.",
-        features: ["All Standard features", "Custom Templates", "Advanced Analytics", "Priority Support"],
+        description: "Save 8% with the 6-month plan.",
+        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: false
     },
     {
-        name: "Pro",
+        name: "Yearly",
         duration: "12 Months",
         price: "$59.99",
-        description: "Best for professional workshops.",
-        features: ["All Growth features", "White-label reports", "SMS Notifications", "Early access to new features"],
+        description: "Save 16% with the annual plan.",
+        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: true,
-        tag: "Recommended"
+        tag: "Best Value"
     }
 ];
 

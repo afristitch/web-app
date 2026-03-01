@@ -9,53 +9,78 @@ export function Hero() {
     };
 
     return (
-        <section className="relative h-[90vh] flex items-center md:items-center justify-center overflow-hidden pt-20 md:pt-0">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
             {/* Cinematic Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598501479155-006c6270e501?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center animate-slow-zoom" />
+            <div className="absolute inset-0 z-0 bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
+
+                {/* Digital Thread Background Effect */}
+                <div className="absolute inset-0 opacity-40">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        {[...Array(15)].map((_, i) => (
+                            <path
+                                key={i}
+                                d={`M ${-50 + i * 12} 0 C ${i * 8} 40, ${100 - i * 8} 60, ${150 - i * 12} 100`}
+                                stroke="white"
+                                strokeWidth="0.03"
+                                fill="none"
+                                className="opacity-10 animate-pulse"
+                                style={{
+                                    animationDelay: `${i * 0.15}s`,
+                                    animationDuration: `${4 + i % 4}s`
+                                }}
+                            />
+                        ))}
+                    </svg>
+                </div>
+
+                {/* Animated Light Orbs - Refined for Modern Black */}
+                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute top-1/2 -right-1/4 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+                <div className="absolute -bottom-1/4 left-1/3 w-[400px] h-[400px] bg-white/[0.03] rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
             {/* Content */}
             <div className="relative z-20 container mx-auto px-6 text-center">
-                <div className="inline-block px-4 py-1 mb-8 border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
+                <div className="inline-block px-4 py-1 mb-8 border border-white/10 rounded-full bg-white/[0.03] backdrop-blur-md">
                     <span
-                        className="text-white text-xs font-bold tracking-cinematic uppercase"
+                        className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
-                        Coming Soon
+                        The Future of Craft
                     </span>
                 </div>
 
                 <h1
-                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 max-w-5xl mx-auto leading-[0.9] text-balance uppercase"
+                    className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 max-w-6xl mx-auto leading-[0.85] text-balance uppercase"
                     style={{ fontFamily: 'var(--font-termina)' }}
                 >
-                    SEWING THE <span className="text-white">NEW WAY</span>
+                    SEWING THE <br className="hidden md:block" /><span className="text-white">NEW WAY</span>
                 </h1>
 
-                <p className="text-stone-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium">
-                    The ultimate digital companion for modern tailors. Manage orders, clients, and measurements with cinematic elegance.
+                <p className="text-stone-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium tracking-tight">
+                    Next-generation management for the modern workshop. <br className="hidden md:block" />
+                    Built for the hands that create.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <button
                         onClick={openWaitlist}
-                        className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-lg shadow-white/5"
+                        className="group relative px-10 py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] cursor-pointer"
                     >
                         <span className="relative z-10 flex items-center gap-2">
-                            Join the Waitlist <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            Join the Waitlist <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </span>
                     </button>
 
-                    <Link href="/how-it-works" className="px-8 py-4 border border-white/10 hover:bg-white/5 backdrop-blur-md text-white font-bold rounded-full transition-all">
-                        See how it works
+                    <Link href="/how-it-works" className="px-10 py-5 border border-white/5 hover:bg-white/5 hover:border-white/20 backdrop-blur-md text-white/50 hover:text-white font-bold rounded-full transition-all cursor-pointer">
+                        Experience the Platform
                     </Link>
                 </div>
             </div>
 
             {/* Bottom Gradient Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20" />
+            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none" />
         </section>
     );
 }

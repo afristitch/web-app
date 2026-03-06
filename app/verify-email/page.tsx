@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { SectionWrapper } from "@/components/landing/SectionWrapper";
 
 function VerifyEmailContent() {
     const searchParams = useSearchParams();
@@ -19,12 +20,8 @@ function VerifyEmailContent() {
             }
 
             try {
-                // The user said "makes a get request to everything apart from the main domain"
-                // Interpretation: Make a GET request to the backend URL with the same path and query
                 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000/api/v1";
 
-                // Constructing the backend endpoint based on the requested logic
-                // Path + Search is /verify-email?token=...
                 const response = await fetch(`${baseUrl}/auth/verify-email/${token}`, {
                     method: "GET",
                     headers: {
@@ -50,51 +47,53 @@ function VerifyEmailContent() {
     }, [token]);
 
     if (!token) {
-        return <div className="bg-white min-h-screen whitespace-pre" />;
+        return <div className="min-h-screen bg-black" />;
     }
 
     return (
-        <div className="flex min-h-screen flex-col items-center pt-24 px-6 bg-white">
-            <div className="w-full max-w-lg text-left">
-                <div className="mb-12">
-                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-1">SewDigital</h1>
-                    <p className="text-slate-500 font-medium text-sm">Sewing the new way</p>
-                </div>
+        <main className="min-h-screen pt-32 pb-20 overflow-hidden bg-black text-white">
+            <SectionWrapper>
+                <div className="container mx-auto max-w-7xl px-6">
+                    <div className="max-w-xl">
+                        <div className="flex items-center gap-4 mb-8">
+                            {status === "loading" && <Loader2 className="h-8 w-8 animate-spin text-stone-500" />}
+                            {status === "success" && <CheckCircle2 className="h-8 w-8 text-[#FDDA0D]" />}
+                            {status === "error" && <XCircle className="h-8 w-8 text-rose-500" />}
 
-                <div className="flex items-center gap-4 mb-8">
-                    {status === "loading" && <Loader2 className="h-6 w-6 animate-spin text-slate-400" />}
-                    {status === "success" && <CheckCircle2 className="h-6 w-6 text-emerald-500" />}
-                    {status === "error" && <XCircle className="h-6 w-6 text-rose-500" />}
+                            <h1
+                                className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
+                                style={{ fontFamily: 'var(--font-termina)' }}
+                            >
+                                {status === "loading" && "Verification <span class='opacity-40'>In Progress.</span>"}
+                                {status === "success" && "Verification <span class='opacity-40'>Successful.</span>"}
+                                {status === "error" && "Verification <span class='opacity-40'>Failed.</span>"}
+                            </h1>
+                        </div>
 
-                    <h2 className="text-xl font-bold tracking-tight text-slate-900 border-l border-slate-200 pl-4">
-                        {status === "loading" && "Verification in progress..."}
-                        {status === "success" && "Verification successful"}
-                        {status === "error" && "Verification failed"}
-                    </h2>
-                </div>
+                        <p className="text-xl text-stone-500 font-medium leading-relaxed mb-12">
+                            {message || "We are currently processing your verification request. This usually takes just a few seconds."}
+                        </p>
 
-                <p className="text-slate-600 leading-relaxed max-w-md">
-                    {message || "We are currently processing your verification request. This usually takes just a few seconds."}
-                </p>
-
-                <div className="pt-12 border-t border-slate-100 mt-24">
-                    <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-medium text-slate-400">
-                        <span>© 2026 SewDigital</span>
-                        <a href="#" className="hover:text-slate-900 transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-slate-900 transition-colors">Terms of Service</a>
-                        <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
+                        <div className="pt-12 border-t border-white/5 mt-24">
+                            <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-bold tracking-cinematic uppercase text-stone-500">
+                                <span>© 2026 SewDigital</span>
+                                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                                <a href="#" className="hover:text-white transition-colors">Support</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </SectionWrapper>
+        </main>
     );
 }
 
 export default function VerifyEmailPage() {
     return (
         <Suspense fallback={
-            <div className="flex min-h-screen items-center justify-center bg-slate-50">
-                <Loader2 className="h-10 w-10 animate-spin text-slate-900" />
+            <div className="flex min-h-screen items-center justify-center bg-black">
+                <Loader2 className="h-10 w-10 animate-spin text-white" />
             </div>
         }>
             <VerifyEmailContent />

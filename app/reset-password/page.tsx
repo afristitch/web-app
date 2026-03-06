@@ -114,7 +114,7 @@ function ResetPasswordContent() {
 
                             <button
                                 onClick={() => router.push("/")}
-                                className="flex items-center justify-center gap-2 w-full max-w-md bg-[#FDDA0D] text-black py-5 rounded-full font-bold hover:scale-[1.02] transition-all shadow-lg"
+                                className="flex items-center justify-center gap-2 w-full max-w-md bg-white text-black py-5 rounded-full font-bold hover:scale-[1.02] transition-all shadow-lg"
                             >
                                 Go to login
                                 <ArrowRight className="h-5 w-5" />
@@ -198,7 +198,7 @@ function ResetPasswordContent() {
                             <button
                                 type="submit"
                                 disabled={status === "loading"}
-                                className="flex items-center justify-center gap-2 w-full bg-[#FDDA0D] text-black py-5 rounded-full font-bold hover:scale-[1.02] disabled:opacity-50 disabled:scale-100 transition-all shadow-lg"
+                                className="flex items-center justify-center gap-2 w-full bg-white text-black py-5 rounded-full font-bold hover:scale-[1.02] disabled:opacity-50 disabled:scale-100 transition-all shadow-lg"
                             >
                                 {status === "loading" ? (
                                     <Loader2 className="h-6 w-6 animate-spin" />

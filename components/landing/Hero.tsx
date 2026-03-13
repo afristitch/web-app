@@ -12,7 +12,7 @@ export function Hero() {
     };
 
     return (
-        <section className="relative min-h-[110vh] flex flex-col items-center justify-center overflow-hidden pt-32 pb-20">
+        <section className="relative min-h-screen lg:min-h-[110vh] flex flex-col items-center justify-center pt-32 pb-20">
             {/* Cinematic Background */}
             <div className="absolute inset-0 z-0 bg-black overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
@@ -44,10 +44,10 @@ export function Hero() {
 
             {/* Content Container */}
             <div className="relative z-20 container mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
 
-                    {/* Left Column: Text Content */}
-                    <div className="lg:col-span-7 text-left order-2 lg:order-1 animate-in fade-in slide-in-from-left-8 duration-1000">
+                    {/* Text Content (Left on Desktop, Top on Mobile) */}
+                    <div className="lg:col-span-7 text-center lg:text-left animate-in fade-in slide-in-from-left-8 duration-1000">
                         <div className="inline-block px-4 py-1 mb-8 border border-white/10 rounded-full bg-white/[0.03] backdrop-blur-md">
                             <span
                                 className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase"
@@ -66,12 +66,12 @@ export function Hero() {
                             <span className="text-white">NEW WAY</span>
                         </h1>
 
-                        <p className="text-stone-500 text-lg md:text-xl max-w-xl mb-12 font-medium tracking-tight leading-relaxed">
+                        <p className="text-stone-500 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 mb-12 font-medium tracking-tight leading-relaxed">
                             Next-generation management for the modern workshop.
                             Built for the hands that create, refined for the minds that lead.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row items-start justify-start gap-6">
+                        <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-6">
                             <button
                                 onClick={openWaitlist}
                                 className="group relative px-10 py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] cursor-pointer"
@@ -83,15 +83,15 @@ export function Hero() {
                         </div>
                     </div>
 
-                    {/* Right Column: QR Code Visual */}
-                    <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
-                        <div className="relative group p-1 w-full max-w-md aspect-[4/5] rounded-[48px] overflow-hidden">
+                    {/* QR Code Visual (Right on Desktop, Bottom on Mobile) */}
+                    <div className="lg:col-span-5 flex justify-center lg:justify-end animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
+                        <div className="relative group p-1 w-full max-w-[340px] md:max-w-md aspect-[4/5] rounded-[48px] overflow-hidden">
                             {/* Card Glow Background */}
                             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 rounded-[48px] blur-sm transition-all group-hover:from-white/20" />
 
-                            <div className="relative h-full w-full bg-black/40 backdrop-blur-3xl border border-white/10 rounded-[46px] p-8 md:p-12 flex flex-col items-center justify-between text-center">
+                            <div className="relative h-full w-full bg-black/40 backdrop-blur-3xl border border-white/10 rounded-[46px] p-6 md:p-12 flex flex-col items-center justify-between text-center">
                                 {/* Top Badge */}
-                                <div className="w-full flex justify-between items-center mb-12">
+                                <div className="w-full flex justify-between items-center mb-8 md:mb-12">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                                         <span className="text-[8px] font-bold tracking-[0.2em] uppercase text-white/40">System Active</span>
@@ -100,19 +100,35 @@ export function Hero() {
                                 </div>
 
                                 {/* QR Code Container */}
-                                <div className="relative mb-12">
+                                <div className="relative mb-8 md:mb-12">
                                     {/* Tech Borders */}
                                     <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-white/20 rounded-tl-lg group-hover:border-white/40 transition-colors" />
                                     <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-white/20 rounded-tr-lg group-hover:border-white/40 transition-colors" />
                                     <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-white/20 rounded-bl-lg group-hover:border-white/40 transition-colors" />
                                     <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-white/20 rounded-br-lg group-hover:border-white/40 transition-colors" />
 
-                                    <div className="p-6 bg-white rounded-3xl shadow-[0_0_80px_rgba(255,255,255,0.05)] shadow-inner transition-transform group-hover:scale-[1.02]">
+                                    <div className="p-4 md:p-6 bg-white rounded-3xl shadow-[0_0_80px_rgba(255,255,255,0.05)] shadow-inner transition-transform group-hover:scale-[1.02]">
+                                        <QRCodeSVG
+                                            value={testingFormUrl}
+                                            size={160}
+                                            level="H"
+                                            includeMargin={false}
+                                            className="md:hidden"
+                                            imageSettings={{
+                                                src: "/favicon.ico",
+                                                x: undefined,
+                                                y: undefined,
+                                                height: 24,
+                                                width: 24,
+                                                excavate: true,
+                                            }}
+                                        />
                                         <QRCodeSVG
                                             value={testingFormUrl}
                                             size={200}
                                             level="H"
                                             includeMargin={false}
+                                            className="hidden md:block"
                                             imageSettings={{
                                                 src: "/favicon.ico",
                                                 x: undefined,
@@ -126,7 +142,7 @@ export function Hero() {
                                 </div>
 
                                 {/* Card Footer */}
-                                <div className="space-y-4">
+                                <div className="space-y-4 w-full">
                                     <div className="space-y-4 w-full">
                                         <button
                                             onClick={openWaitlist}
@@ -135,7 +151,7 @@ export function Hero() {
                                         >
                                             Join Beta Now
                                         </button>
-                                        <p className="text-stone-500 text-xs font-medium tracking-tight">
+                                        <p className="text-stone-500 text-[10px] md:text-xs font-medium tracking-tight">
                                             Scan to verify or tap button <br /> to join our early-access community
                                         </p>
                                     </div>

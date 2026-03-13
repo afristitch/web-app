@@ -4,7 +4,6 @@ import { SectionWrapper } from "@/components/landing/SectionWrapper";
 import { Play, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { VideoPlayer } from "@/components/landing/VideoPlayer";
 
 const steps = [
     {
@@ -49,17 +48,6 @@ export default function HowItWorksPage() {
                 </div>
             </SectionWrapper>
 
-            {/* Video Section */}
-            <SectionWrapper>
-                <div className="container mx-auto max-w-7xl px-6 mb-32">
-                    <VideoPlayer
-                        youtubeId="dQw4w9WgXcQ"
-                        thumbnailUrl="/tour.png"
-                        title="SewDigital in Action."
-                        subtitle="Product Tour"
-                    />
-                </div>
-            </SectionWrapper>
 
             {/* Steps Section */}
             <SectionWrapper>

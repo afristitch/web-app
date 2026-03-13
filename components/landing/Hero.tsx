@@ -127,17 +127,17 @@ export function Hero() {
 
                                 {/* Card Footer */}
                                 <div className="space-y-4">
-                                    <div className="space-y-1">
-                                        <h3 className="text-lg font-bold tracking-[0.1em] uppercase text-white" style={{ fontFamily: 'var(--font-termina)' }}>
-                                            Beta Access
-                                        </h3>
-                                        <p className="text-stone-500 text-sm font-medium tracking-tight">
-                                            Scan to verify and join <br /> our early-access community
+                                    <div className="space-y-4 w-full">
+                                        <button
+                                            onClick={openWaitlist}
+                                            className="w-full py-4 bg-white text-black font-bold rounded-2xl text-[11px] tracking-[0.2em] uppercase hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-pointer"
+                                            style={{ fontFamily: 'var(--font-termina)' }}
+                                        >
+                                            Join Beta Now
+                                        </button>
+                                        <p className="text-stone-500 text-xs font-medium tracking-tight">
+                                            Scan to verify or tap button <br /> to join our early-access community
                                         </p>
-                                    </div>
-
-                                    <div className="pt-4 border-t border-white/5">
-                                        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/20">Digital Handshake</span>
                                     </div>
                                 </div>
                             </div>

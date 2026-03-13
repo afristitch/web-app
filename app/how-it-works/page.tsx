@@ -4,6 +4,7 @@ import { SectionWrapper } from "@/components/landing/SectionWrapper";
 import { Play, Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { VideoPlayer } from "@/components/landing/VideoPlayer";
 
 const steps = [
     {
@@ -51,24 +52,12 @@ export default function HowItWorksPage() {
             {/* Video Section */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
-                    <div className="relative group aspect-video md:rounded-[40px] overflow-hidden border border-white/10 bg-white/5 cursor-pointer">
-                        <Image
-                            src="/tour.png"
-                            alt="Product Tour"
-                            fill
-                            className="object-cover grayscale opacity-40 transition-transform duration-1000 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-24 h-24 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
-                                <Play fill="black" size={32} />
-                            </div>
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
-                            <p className="text-xs font-bold tracking-cinematic uppercase text-white/40 mb-2">Product Tour</p>
-                            <h3 className="text-2xl md:text-4xl font-bold uppercase" style={{ fontFamily: 'var(--font-termina)' }}>SEWDIGITAL IN ACTION.</h3>
-                        </div>
-                    </div>
+                    <VideoPlayer
+                        youtubeId="dQw4w9WgXcQ"
+                        thumbnailUrl="/tour.png"
+                        title="SewDigital in Action."
+                        subtitle="Product Tour"
+                    />
                 </div>
             </SectionWrapper>
 

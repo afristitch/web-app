@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { VideoPlayer } from "./VideoPlayer";
 
 export function Hero() {
     const openWaitlist = () => {
@@ -9,7 +10,7 @@ export function Hero() {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20">
             {/* Cinematic Background */}
             <div className="absolute inset-0 z-0 bg-black overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
@@ -47,7 +48,7 @@ export function Hero() {
                         className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase"
                         style={{ fontFamily: 'var(--font-termina)' }}
                     >
-                        The Future of Craft
+                        Launching Soon
                     </span>
                 </div>
 
@@ -63,7 +64,7 @@ export function Hero() {
                     Built for the hands that create.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
                     <button
                         onClick={openWaitlist}
                         className="group relative px-10 py-5 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] cursor-pointer"
@@ -77,6 +78,22 @@ export function Hero() {
                         Experience the Platform
                     </Link>
                 </div>
+
+                {/* Video Player Integration */}
+                <div className="max-w-4xl mx-auto mt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+                    <VideoPlayer
+                        youtubeId="dQw4w9WgXcQ" // Placeholder, user will provide real ID or I'll use a generic one
+                        thumbnailUrl="/tour.png" // Reusing existing tour image as hero picture
+                        title="The Product Vision"
+                        subtitle="A look inside"
+                    />
+                </div>
+            </div>
+
+            {/* Scroll Down Indicator */}
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+                <span className="text-[10px] font-bold tracking-widest uppercase text-white/40">Scroll</span>
+                <ChevronDown size={20} className="text-white/40" />
             </div>
 
             {/* Bottom Gradient Fade */}

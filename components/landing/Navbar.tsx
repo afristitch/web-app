@@ -48,7 +48,7 @@ export function Navbar() {
                 >
                     <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-                    <Link href="/stories" className="hover:text-white transition-colors">Stories</Link>
+                    {/* <Link href="/stories" className="hover:text-white transition-colors">Stories</Link> */}
                     <a
                         href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
                         target="_blank"
@@ -73,7 +73,7 @@ export function Navbar() {
                 <div className="absolute top-full left-0 right-0 bg-black border-b border-white/5 p-8 flex flex-col gap-6 text-sm font-bold tracking-cinematic uppercase animate-in fade-in slide-in-from-top-4" style={{ fontFamily: 'var(--font-termina)' }}>
                     <Link href="/how-it-works" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
-                    <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
+                    {/* <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link> */}
                     <a
                         href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
                         target="_blank"

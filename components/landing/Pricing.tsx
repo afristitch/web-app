@@ -6,7 +6,7 @@ const plans = [
     {
         name: "Monthly",
         duration: "1 Month",
-        price: "$3.99",
+        price: "₵50",
         description: "Essential features for your shop.",
         features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: false
@@ -14,7 +14,7 @@ const plans = [
     {
         name: "6 Months",
         duration: "6 Months",
-        price: "$19.99",
+        price: "₵250",
         description: "Save 16% with the 6-month plan.",
         features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: false
@@ -22,7 +22,7 @@ const plans = [
     {
         name: "Yearly",
         duration: "12 Months",
-        price: "$35.99",
+        price: "₵450",
         description: "Save 25% with the annual plan.",
         features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
         isPopular: true,

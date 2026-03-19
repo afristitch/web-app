@@ -48,11 +48,11 @@ export function Pricing() {
                         CHOOSE THE <span className="text-stone-500">PERFECT PLAN.</span>
                     </h3>
                     <p className="text-stone-500 text-lg max-w-2xl mx-auto">
-                        Transparent pricing designed to scale with your tailoring business. No hidden fees.
+                        Transparent pricing with a 21-day free trial included. No hidden fees.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     {plans.map((plan, idx) => (
                         <div
                             key={idx}
@@ -86,6 +86,9 @@ export function Pricing() {
                                         / {plan.duration}
                                     </span>
                                 </div>
+                                <div className="mt-3 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                                    <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">21-Day Free Trial</span>
+                                </div>
                                 <p className="mt-4 text-stone-500 text-sm font-medium">{plan.description}</p>
                             </div>
 
@@ -113,6 +116,12 @@ export function Pricing() {
                             </a>
                         </div>
                     ))}
+                </div>
+
+                <div className="text-center">
+                    <p className="text-stone-600 text-[10px] font-medium tracking-wider uppercase">
+                        * Bulk SMS and Style Gallery not included in 21-day free trial
+                    </p>
                 </div>
             </div>
         </section>

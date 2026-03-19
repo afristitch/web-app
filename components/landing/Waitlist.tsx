@@ -37,7 +37,7 @@ export function Waitlist() {
                 </div>
 
                 <p className="mt-8 text-stone-400 text-sm font-medium">
-                    No credit card required. Private beta starting soon.
+                    No credit card required. Launching soon. 21 days free trial included.
                 </p>
             </div>
         </section>

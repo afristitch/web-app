@@ -11,19 +11,20 @@ export function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
 
                 {/* Digital Thread Background Effect */}
-                <div className="absolute inset-0 opacity-40">
+                <div className="absolute inset-0 opacity-40 pointer-events-none">
                     <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        {[...Array(15)].map((_, i) => (
+                        {[...Array(8)].map((_, i) => (
                             <path
                                 key={i}
-                                d={`M ${-50 + i * 12} 0 C ${i * 8} 40, ${100 - i * 8} 60, ${150 - i * 12} 100`}
+                                d={`M ${-50 + i * 25} 0 C ${i * 15} 40, ${100 - i * 15} 60, ${150 - i * 25} 100`}
                                 stroke="white"
-                                strokeWidth="0.03"
+                                strokeWidth="0.05"
                                 fill="none"
                                 className="opacity-10 animate-pulse"
                                 style={{
-                                    animationDelay: `${i * 0.15}s`,
-                                    animationDuration: `${4 + i % 4}s`
+                                    animationDelay: `${i * 0.3}s`,
+                                    animationDuration: `${5 + i % 3}s`,
+                                    willChange: 'opacity'
                                 }}
                             />
                         ))}
@@ -31,8 +32,8 @@ export function Hero() {
                 </div>
 
                 {/* Animated Light Orbs */}
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute top-1/2 -right-1/4 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none" style={{ willChange: 'opacity, transform' }} />
+                <div className="absolute top-1/2 -right-1/4 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[150px] animate-pulse pointer-events-none" style={{ animationDelay: '2s', willChange: 'opacity, transform' }} />
             </div>
 
             {/* Content Container */}
@@ -43,7 +44,7 @@ export function Hero() {
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
                         {/* Badge & Trial Info */}
                         <div className="flex flex-col items-center lg:items-start gap-4 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                            <div className="inline-block px-4 py-1 border border-white/10 rounded-full bg-white/[0.03] backdrop-blur-md">
+                            <div className="inline-block px-4 py-1 border border-white/10 rounded-full bg-white/10">
                                 <span
                                     className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase"
                                     style={{ fontFamily: 'var(--font-termina)' }}
@@ -87,7 +88,7 @@ export function Hero() {
                                 alt="SewDigital Mobile App Mockup"
                                 width={800}
                                 height={1200}
-                                className="object-contain drop-shadow-[0_0_80px_rgba(255,255,255,0.05)] transition-transform duration-700 group-hover:scale-[1.02]"
+                                className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                                 priority
                             />
                         </div>

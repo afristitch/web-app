@@ -51,7 +51,7 @@ function VerifyEmailContent() {
     }
 
     return (
-        <main className="min-h-screen pt-32 pb-20 overflow-hidden bg-black text-white">
+        <main className="min-h-screen pt-32 pb-20 overflow-x-hidden bg-black text-white">
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6">
                     <div className="max-w-xl">

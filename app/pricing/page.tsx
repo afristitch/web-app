@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function PricingPage() {
     return (
-        <main className="min-vh-100 pt-32 pb-20">
+        <main className="min-h-screen pt-32 pb-20">
             {/* Extended Pricing Hero */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-24">

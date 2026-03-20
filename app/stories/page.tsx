@@ -102,7 +102,7 @@ const WorkshopVisual = ({ className = "", variant = "default" }: { className?: s
 
 export default function StoriesPage() {
     return (
-        <main className="min-h-screen pt-32 pb-20 overflow-hidden">
+        <main className="min-h-screen pt-32 pb-20 overflow-x-hidden">
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
                     <div className="max-w-4xl">

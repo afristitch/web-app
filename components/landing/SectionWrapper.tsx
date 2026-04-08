@@ -1,13 +1,17 @@
 "use client";
 
-import { useFadeUp } from "@/hooks/useFadeUp";
+import { motion } from "framer-motion";
 
 export function SectionWrapper({ children, className = "" }: { children: React.ReactNode, className?: string }) {
-    const { ref, className: animationClass } = useFadeUp();
-
     return (
-        <div ref={ref} className={`${animationClass} ${className}`}>
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className={className}
+        >
             {children}
-        </div>
+        </motion.div>
     );
 }

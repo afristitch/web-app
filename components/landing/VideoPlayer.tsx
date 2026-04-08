@@ -34,7 +34,7 @@ export function VideoPlayer({ youtubeId, thumbnailUrl, title, subtitle }: VideoP
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 text-left">
                     {subtitle && <p className="text-[10px] font-bold tracking-cinematic uppercase text-white/40 mb-2">{subtitle}</p>}
-                    <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tight" style={{ fontFamily: 'var(--font-termina)' }}>{title}</h3>
+                    <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>{title}</h3>
                 </div>
             </div>
 

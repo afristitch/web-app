@@ -108,7 +108,7 @@ export default function StoriesPage() {
                     <div className="max-w-4xl">
                         <h1
                             className="text-4xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
-                            style={{ fontFamily: 'var(--font-termina)' }}
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             Success <span className="opacity-40">By Design.</span>
                         </h1>
@@ -140,7 +140,7 @@ export default function StoriesPage() {
                             </div>
                             <h2
                                 className="text-2xl md:text-5xl font-bold tracking-tighter uppercase mb-6 leading-none"
-                                style={{ fontFamily: 'var(--font-termina)' }}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 &quot;THE MOST IMPORTANT TOOL IN MY WORKSHOP AFTER MY SEWING MACHINE.&quot;
                             </h2>
@@ -169,7 +169,7 @@ export default function StoriesPage() {
                                 </div>
                                 <h3
                                     className="text-xl font-bold uppercase mb-2"
-                                    style={{ fontFamily: 'var(--font-termina)' }}
+                                    style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     {story.name}
                                 </h3>
@@ -188,7 +188,7 @@ export default function StoriesPage() {
                 <div className="container mx-auto max-w-7xl px-6 py-24 text-center border-t border-white/5">
                     <h2
                         className="text-3xl md:text-6xl font-bold tracking-tighter uppercase mb-12"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         WRITE YOUR <span className="opacity-40">OWN STORY.</span>
                     </h2>

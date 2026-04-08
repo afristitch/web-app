@@ -37,13 +37,13 @@ export function Pricing() {
                 <div className="text-center mb-20">
                     <h2
                         className="text-xs font-bold tracking-cinematic uppercase text-white/40 mb-4"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         Simple Pricing
                     </h2>
                     <h3
                         className="text-3xl md:text-6xl font-bold tracking-tighter leading-none mb-6 uppercase"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         CHOOSE THE <span className="text-stone-500">PERFECT PLAN.</span>
                     </h3>
@@ -57,7 +57,7 @@ export function Pricing() {
                         <div
                             key={idx}
                             className={`relative p-8 rounded-3xl border ${plan.isPopular ? 'border-white bg-white/[0.02]' : 'border-white/5 bg-black'
-                                } flex flex-col transition-all hover:scale-[1.02]`}
+                                } flex flex-col items-center text-center transition-all hover:scale-[1.02]`}
                         >
                             {plan.isPopular && (
                                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-bold rounded-full tracking-wider uppercase">
@@ -65,37 +65,37 @@ export function Pricing() {
                                 </div>
                             )}
 
-                            <div className="mb-8">
+                            <div className="mb-8 flex flex-col items-center">
                                 <h4
                                     className="text-stone-500 font-bold uppercase tracking-widest text-sm mb-2"
-                                    style={{ fontFamily: 'var(--font-termina)' }}
+                                    style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     {plan.name}
                                 </h4>
-                                <div className="flex items-baseline gap-2">
+                                <div className="flex items-baseline justify-center gap-2">
                                     <span
                                         className="text-4xl font-bold"
-                                        style={{ fontFamily: 'var(--font-termina)' }}
+                                        style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
                                         {plan.price}
                                     </span>
                                     <span
                                         className="text-stone-500 font-medium"
-                                        style={{ fontFamily: 'var(--font-termina)' }}
+                                        style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
                                         / {plan.duration}
                                     </span>
                                 </div>
-                                <div className="mt-3 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                                <div className="mt-3 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 mx-auto">
                                     <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">21-Day Free Trial</span>
                                 </div>
                                 <p className="mt-4 text-stone-500 text-sm font-medium">{plan.description}</p>
                             </div>
 
-                            <div className="space-y-4 mb-10 flex-grow">
+                            <div className="space-y-4 mb-10 flex-grow w-full">
                                 {plan.features.map((feature, fIdx) => (
-                                    <div key={fIdx} className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                                    <div key={fIdx} className="flex items-center justify-center gap-3">
+                                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                             <Check className="text-white" size={12} />
                                         </div>
                                         <span className="text-sm font-medium">{feature}</span>
@@ -104,7 +104,7 @@ export function Pricing() {
                             </div>
 
                             <a
-                                href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                                href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`w-full py-4 rounded-full font-bold transition-all text-center ${plan.isPopular
@@ -112,7 +112,7 @@ export function Pricing() {
                                     : 'bg-white/5 text-white hover:bg-white/10'
                                     }`}
                             >
-                                Coming Soon
+                                Download Now
                             </a>
                         </div>
                     ))}

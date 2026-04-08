@@ -1,29 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Termina';
-  src: url('/fonts/TerminaTest-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Termina';
-  src: url('/fonts/TerminaTest-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Termina';
-  src: url('/fonts/TerminaTest-Heavy.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --color-accent: #FFFFFF;
   --color-deep-black: #000000;
@@ -31,7 +7,8 @@
   --color-stone: #F2F0EB;
   --color-stone-500: #78716C;
 
-  --font-headlines: var(--font-termina), 'Termina', system-ui, sans-serif;
+  --font-headlines: var(--font-varela-round), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
 }
 
 :root {
@@ -45,16 +22,16 @@
 }
 
 html {
-  height: 100%;
   background-color: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
+  scrollbar-gutter: stable;
 }
 
 body {
-  height: 100%;
   overflow-x: hidden;
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  min-height: 100vh;
 }
 
 section {
@@ -63,7 +40,7 @@ section {
 }
 
 .font-headlines-forced {
-  font-family: 'Termina', system-ui, sans-serif !important;
+  font-family: var(--font-varela-round), system-ui, sans-serif !important;
 }
 
 

@@ -73,7 +73,7 @@ function ResetPasswordContent() {
                         <XCircle className="h-12 w-12 text-rose-500 mb-6" />
                         <h1
                             className="text-3xl md:text-6xl font-bold tracking-tighter uppercase mb-6"
-                            style={{ fontFamily: 'var(--font-termina)' }}
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             Invalid <span className="opacity-40">Reset Link.</span>
                         </h1>
@@ -102,7 +102,7 @@ function ResetPasswordContent() {
                                 <CheckCircle2 className="h-8 w-8 text-[#FDDA0D]" />
                                 <h1
                                     className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
-                                    style={{ fontFamily: 'var(--font-termina)' }}
+                                    style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     Reset <span className="opacity-40">Successful.</span>
                                 </h1>
@@ -144,7 +144,7 @@ function ResetPasswordContent() {
                             <Lock className="h-8 w-8 text-stone-500" />
                             <h1
                                 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
-                                style={{ fontFamily: 'var(--font-termina)' }}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 Reset <span className="opacity-40">Password.</span>
                             </h1>

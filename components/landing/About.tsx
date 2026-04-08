@@ -28,17 +28,17 @@ const features = [
 export function About() {
     return (
         <section className="py-28 md:py-48 px-6 bg-surface-gray">
-            <div className="container mx-auto max-w-7xl">
+            <div className="container mx-auto max-w-7xl text-center">
                 <div className="mb-20">
                     <h2
                         className="text-xs font-bold tracking-cinematic uppercase text-white/40 mb-4"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         The Platform
                     </h2>
                     <h3
-                        className="text-3xl md:text-6xl font-bold tracking-tighter max-w-3xl leading-none uppercase"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        className="text-3xl md:text-6xl font-bold tracking-tighter mx-auto max-w-3xl leading-none uppercase"
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         EVERYTHING YOU NEED TO <span className="text-stone-500">DIGITIZE YOUR WORKSHOP.</span>
                     </h3>
@@ -48,14 +48,14 @@ export function About() {
                     {features.map((feature, idx) => (
                         <div
                             key={idx}
-                            className="group p-8 rounded-2xl border border-white/5 bg-black/40 hover:border-white/20 transition-all hover:-translate-y-2"
+                            className="group p-8 rounded-2xl border border-white/5 bg-black/40 hover:border-white/20 transition-all hover:-translate-y-2 flex flex-col items-center text-center"
                         >
                             <div className="mb-6 p-3 rounded-xl bg-white/5 inline-block group-hover:bg-white text-white group-hover:text-black transition-colors">
                                 {feature.icon}
                             </div>
                             <h4
                                 className="text-xl font-bold mb-4 tracking-tight uppercase"
-                                style={{ fontFamily: 'var(--font-termina)' }}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 {feature.title}
                             </h4>

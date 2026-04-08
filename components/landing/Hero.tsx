@@ -1,109 +1,134 @@
 "use client";
 
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function Hero() {
+    const fadeUp = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }
+    };
+
+    const float = {
+        animate: {
+            y: [0, -12, 0],
+            rotate: [-0.5, 0.5, -0.5]
+        },
+        transition: {
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+        }
+    };
+
+    const mockupWidths = "w-[180px] md:w-[260px] lg:w-[320px]";
+
     return (
-        <section className="relative min-h-screen lg:min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden">
-            {/* Cinematic Background */}
-            <div className="absolute inset-0 z-0 bg-black">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black z-10" />
-
-                {/* Digital Thread Background Effect */}
-                <div className="absolute inset-0 opacity-40 pointer-events-none">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        {[...Array(8)].map((_, i) => (
-                            <path
-                                key={i}
-                                d={`M ${-50 + i * 25} 0 C ${i * 15} 40, ${100 - i * 15} 60, ${150 - i * 25} 100`}
-                                stroke="white"
-                                strokeWidth="0.05"
-                                fill="none"
-                                className="opacity-10 animate-pulse"
-                                style={{
-                                    animationDelay: `${i * 0.3}s`,
-                                    animationDuration: `${5 + i % 3}s`,
-                                    willChange: 'opacity'
-                                }}
-                            />
-                        ))}
-                    </svg>
-                </div>
-
-                {/* Animated Light Orbs */}
-                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] animate-pulse pointer-events-none" style={{ willChange: 'opacity, transform' }} />
-                <div className="absolute top-1/2 -right-1/4 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[150px] animate-pulse pointer-events-none" style={{ animationDelay: '2s', willChange: 'opacity, transform' }} />
+        <section className="relative min-h-screen pt-40 pb-20 overflow-hidden bg-white">
+            {/* Top Background (Black Section) */}
+            <div className="absolute top-0 left-0 right-0 h-[650px] lg:h-[750px] bg-black z-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-transparent shadow-[inset_0_-150px_250px_rgba(0,0,0,0.8)]" />
+                
+                {/* Subtle Decorative Elements */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] border border-white/[0.03] rounded-full pointer-events-none" />
             </div>
 
-            {/* Content Container */}
-            <div className="relative z-20 container mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+            {/* Main Content Container - Centered Column */}
+            <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center">
+                
+                {/* Header Content */}
+                <div className="max-w-4xl w-full flex flex-col items-center mb-16">
+                    <motion.div 
+                        {...fadeUp}
+                        className="flex items-center gap-3 mb-8 px-4 py-2 bg-white/5 border border-white/10 rounded-full"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-[#FDDA0D] animate-pulse" />
+                        <span className="text-white/60 text-[9px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-varela-round)' }}>Professional Operating System</span>
+                    </motion.div>
 
-                    {/* Left Column: Text Content */}
-                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                        {/* Badge & Trial Info */}
-                        <div className="flex flex-col items-center lg:items-start gap-4 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                            <div className="inline-block px-4 py-1 border border-white/10 rounded-full bg-white/10">
-                                <span
-                                    className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase"
-                                    style={{ fontFamily: 'var(--font-termina)' }}
-                                >
-                                    Launching Soon
-                                </span>
-                            </div>
-                            <span className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-termina)' }}>
-                                21 Days Free Trial
-                            </span>
-                        </div>
+                    <motion.h1
+                        {...fadeUp}
+                        transition={{ ...fadeUp.transition, delay: 0.1 }}
+                        className="text-4xl md:text-5xl lg:text-[60px] font-bold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-8 max-w-3xl"
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
+                    >
+                        Sewing The <span className="text-[#FDDA0D]">New</span> <br />
+                        Professional Way.
+                    </motion.h1>
 
-                        {/* Headline */}
-                        <h1
-                            className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-tighter mb-10 leading-[0.85] text-balance uppercase animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100"
-                            style={{ fontFamily: 'var(--font-termina)' }}
+                    <motion.p
+                        {...fadeUp}
+                        transition={{ ...fadeUp.transition, delay: 0.2 }}
+                        className="text-white/30 text-base md:text-lg max-w-2xl mb-12 font-medium leading-relaxed"
+                    >
+                        The all-in-one platform for modern tailoring workshops. <br className="hidden md:block" />
+                        Manage clients, measurements, and production with precision.
+                    </motion.p>
+
+                    {/* App Store Buttons - Centered */}
+                    <motion.div 
+                        {...fadeUp}
+                        transition={{ ...fadeUp.transition, delay: 0.3 }}
+                        className="flex flex-wrap justify-center gap-6"
+                    >
+                        <a 
+                            href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 bg-white text-black px-6 py-3 rounded-xl hover:bg-[#FDDA0D] transition-all hover:scale-105 shadow-2xl shadow-black/40 group"
                         >
-                            SEWING <br />
-                            <span className="text-white/40">THE</span> <br />
-                            <span className="text-white">NEW WAY</span>
-                        </h1>
-
-                        {/* Subheadline */}
-                        <p className="text-stone-500 text-lg md:text-xl max-w-xl mb-12 font-medium tracking-tight leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-                            The modern workshop operating system. <br className="hidden md:block" />
-                            Built for hands that create, refined for minds that lead.
-                        </p>
-                    </div>
-
-                    {/* Right Column: Device Mockup */}
-                    <div className="flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
-                        <div className="relative group w-full max-w-[400px]">
-                            {/* Mockup Glow */}
-                            <div className="absolute inset-0 bg-white/[0.05] rounded-full blur-[120px] -z-10" />
-
-                            {/* Reflection effect */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none rounded-[3rem]" />
-
-                            <Image
-                                src="/phonemockup.png"
-                                alt="SewDigital Mobile App Mockup"
-                                width={800}
-                                height={1200}
-                                className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-                                priority
-                            />
+                            <Image src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width={120} height={36} className="h-8 w-auto" />
+                        </a>
+                        <div className="flex items-center gap-3 bg-white/5 border border-white/15 text-white/30 px-6 py-3 rounded-xl cursor-not-allowed opacity-40 grayscale flex-shrink-0">
+                            <Image src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" width={120} height={36} className="h-8 w-auto" />
                         </div>
-                    </div>
+                    </motion.div>
+                </div>
 
+                {/* Screenshots Showcase - Spaced Out Row */}
+                <div className="w-full max-w-6xl relative h-[450px] md:h-[550px] lg:h-[650px] mt-10">
+                    
+                    {/* Mockup 1 (Center) */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 1.2, delay: 0.4 }}
+                        className="absolute top-0 left-1/2 -translate-x-1/2 z-20 w-[180px] md:w-[240px] lg:w-[300px]"
+                    >
+                        <Image src="/phoneloginmockup.png" alt="SewDigital App" width={800} height={1600} className="w-full h-auto drop-shadow-3xl" />
+                    </motion.div>
+
+                    {/* Mockup 2 (Floating Left - Static & Clear) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.6 }}
+                        className="absolute top-10 left-0 md:left-[2%] lg:left-[5%] z-10 w-[160px] md:w-[220px] lg:w-[280px]"
+                    >
+                        <Image src="/phonewelcomemockup.png" alt="SewDigital App" width={800} height={1600} className="w-full h-auto drop-shadow-2xl" />
+                    </motion.div>
+
+                    {/* Mockup 3 (Floating Right - Static & Clear) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                        className="absolute top-10 right-0 md:right-[2%] lg:right-[5%] z-10 w-[160px] md:w-[220px] lg:w-[280px]"
+                    >
+                        <Image src="/phonetemplatemockup.png" alt="SewDigital App" width={800} height={1600} className="w-full h-auto drop-shadow-2xl" />
+                        
+                        
+                    </motion.div>
                 </div>
             </div>
 
-            {/* Scroll Down Indicator */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-30">
-                <ChevronDown size={20} className="text-white animate-bounce" />
-            </div>
-
-            {/* Bottom Gradient Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pointer-events-none" />
+            {/* Bottom Section Fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
         </section>
     );
 }

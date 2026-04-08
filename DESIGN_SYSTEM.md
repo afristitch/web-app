@@ -15,9 +15,9 @@ This document outlines the visual and interactive design system used for the **T
 - **Text Secondary**: `#78716C` (Stone 500).
 
 ### Typography
-- **Headlines**: **Termina Test** (Local Font)
+- **Headlines**: **Plus Jakarta Sans** (Google Font)
   - Style: Bold/Heavy, All-caps, High tracking (`tracking-[0.2em]` or `tracking-tighter` depending on size).
-- **Body**: **DM Sans** (Google Font)
+- **Body**: **Inter** (Google Font)
   - Style: Clean, modern, Medium weight for subheaders.
 
 ---

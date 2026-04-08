@@ -62,7 +62,7 @@ function VerifyEmailContent() {
 
                             <h1
                                 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
-                                style={{ fontFamily: 'var(--font-termina)' }}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 {status === "loading" && <>Verification <span className="opacity-40">In Progress.</span></>}
                                 {status === "success" && <>Verification <span className="opacity-40">Successful.</span></>}

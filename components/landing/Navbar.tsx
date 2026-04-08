@@ -36,7 +36,7 @@ export function Navbar() {
                     />
                     <span
                         className="text-2xl font-bold tracking-tighter uppercase group-hover:text-white/70 transition-colors"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         SewDigital
                     </span>
@@ -44,18 +44,18 @@ export function Navbar() {
                 {/* Desktop Menu */}
                 <div
                     className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-cinematic uppercase text-stone-400"
-                    style={{ fontFamily: 'var(--font-termina)' }}
+                    style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
                     <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                     {/* <Link href="/stories" className="hover:text-white transition-colors">Stories</Link> */}
                     <a
-                        href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                        href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-2 bg-white text-black rounded-full hover:bg-stone-100 transition-all active:scale-95"
                     >
-                        Join Waitlist
+                        Download
                     </a>
                 </div>
 
@@ -70,18 +70,18 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 right-0 bg-black border-b border-white/5 p-8 flex flex-col gap-6 text-sm font-bold tracking-cinematic uppercase animate-in fade-in slide-in-from-top-4" style={{ fontFamily: 'var(--font-termina)' }}>
+                <div className="absolute top-full left-0 right-0 bg-black border-b border-white/5 p-8 flex flex-col gap-6 text-sm font-bold tracking-cinematic uppercase animate-in fade-in slide-in-from-top-4" style={{ fontFamily: 'var(--font-varela-round)' }}>
                     <Link href="/how-it-works" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                     {/* <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link> */}
                     <a
-                        href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=TY8KsmoNLk-Dohgclo-Iglc37NZ_n5FBjVuVuC_TfvBUNjhHS1AxN1c4Wkk4T05GWFJCUk1EWkxTWi4u&route=shorturl"
+                        href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="w-full py-4 bg-white text-black rounded-full font-bold text-center"
                     >
-                        Join Waitlist
+                        Download App
                     </a>
                 </div>
             )}

@@ -20,7 +20,7 @@ export function Footer() {
                             />
                             <span
                                 className="text-2xl font-bold tracking-tighter uppercase group-hover:text-white/70 transition-colors"
-                                style={{ fontFamily: 'var(--font-termina)' }}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 SewDigital
                             </span>
@@ -47,12 +47,20 @@ export function Footer() {
 
                     <div
                         className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-12 text-[11px] font-bold tracking-cinematic uppercase text-stone-500"
-                        style={{ fontFamily: 'var(--font-termina)' }}
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
-                        {/* <Link href="/stories" className="hover:text-white transition-colors">Stories</Link> */}
+                        <Link href="/help" className="hover:text-white transition-colors">Help</Link>
                         <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                         <Link href="/support" className="hover:text-white transition-colors">Contact</Link>
+                        <a 
+                            href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-white transition-colors"
+                        >
+                            Android
+                        </a>
                     </div>
                 </div>
 

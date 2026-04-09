@@ -27,7 +27,7 @@ export function Hero() {
     const mockupWidths = "w-[180px] md:w-[260px] lg:w-[320px]";
 
     return (
-        <section className="relative min-h-[90vh] md:min-h-screen pt-24 md:pt-32 pb-4 md:pb-20 overflow-hidden bg-white">
+        <section className="relative min-h-[90vh] md:min-h-screen pt-24 md:pt-32 pb-4 md:pb-20 overflow-x-hidden bg-white">
             {/* White Background Pattern */}
             <div className="absolute inset-0 z-0 opacity-[0.12] pointer-events-none" 
                  style={{ 
@@ -91,14 +91,22 @@ export function Hero() {
                         >
                             <Image src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width={140} height={42} className="h-10 w-auto" />
                         </a>
-                        <div className="w-[200px] sm:w-auto flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-xl cursor-not-allowed transition-all opacity-95 shadow-2xl shadow-black/40 sm:min-w-[180px] group">
-                            <Image src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" width={140} height={42} className="h-10 w-auto" />
+                        <div className="relative group">
+                            <div className="w-[200px] sm:w-auto flex items-center justify-center bg-white/90 text-black px-4 py-1.5 rounded-xl cursor-not-allowed transition-all opacity-80 shadow-2xl shadow-black/40 sm:min-w-[180px]">
+                                <Image src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" width={140} height={42} className="h-10 w-auto opacity-50 grayscale" />
+                            </div>
+                            <span 
+                                className="absolute -top-2 -right-2 bg-[#FDDA0D] text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter shadow-xl transform rotate-3 z-20"
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
+                            >
+                                Coming Soon
+                            </span>
                         </div>
                     </motion.div>
                 </div>
 
                 {/* Screenshots Showcase - Spaced Out Row */}
-                <div className="w-full max-w-6xl relative h-[320px] md:h-[550px] lg:h-[650px] mt-4 md:mt-10">
+                <div className="w-full max-w-6xl relative h-[320px] md:h-[550px] lg:h-[650px] mt-4 md:mt-10 pointer-events-none">
                     
                     {/* Mockup 1 (Center) */}
                     <motion.div

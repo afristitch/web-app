@@ -70,7 +70,7 @@ const faqs = [
     },
     {
         question: "Who can I contact for business inquiries?",
-        answer: "For all business and partnership inquiries, please reach out to us via email at jimmykodwoessel@gmail.com.",
+        answer: "For all business and partnership inquiries, please reach out to us via email at support@sewdigital.app.",
         category: "Payments"
     }
 ];

@@ -19,7 +19,7 @@ const faqs = [
     },
     {
         question: "Who can I contact for business inquiries?",
-        answer: "For all business and partnership inquiries, please reach out to us via email at jimmykodwoessel@gmail.com."
+        answer: "For all business and partnership inquiries, please reach out to us via email at support@sewdigital.app."
     }
 ];
 
@@ -55,7 +55,7 @@ export default function SupportPage() {
                                 Send us an email and we&apos;ll get back to you within 24 hours.
                             </p>
                             <a
-                                href="mailto:jimmykodwoessel@gmail.com"
+                                href="mailto:support@sewdigital.app"
                                 className="inline-flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs group/link"
                                 style={{ fontFamily: 'var(--font-varela-round)' }}
                             >

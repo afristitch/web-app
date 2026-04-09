@@ -27,7 +27,7 @@ export function Hero() {
     const mockupWidths = "w-[180px] md:w-[260px] lg:w-[320px]";
 
     return (
-        <section className="relative min-h-[90vh] md:min-h-screen pt-24 md:pt-32 pb-4 md:pb-20 overflow-x-hidden bg-white">
+        <section className="relative min-h-[90vh] md:min-h-screen pt-32 md:pt-40 pb-4 md:pb-20 overflow-x-clip bg-white">
             {/* White Background Pattern */}
             <div className="absolute inset-0 z-0 opacity-[0.12] pointer-events-none" 
                  style={{ 
@@ -51,7 +51,9 @@ export function Hero() {
                 {/* Header Content */}
                 <div className="max-w-4xl w-full flex flex-col items-center mb-6 md:mb-16">
                     <motion.div 
-                        {...fadeUp}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 bg-white/5 border border-white/10 rounded-full"
                     >
                         <span className="w-2 h-2 rounded-full bg-[#FDDA0D] animate-pulse" />
@@ -59,8 +61,9 @@ export function Hero() {
                     </motion.div>
 
                     <motion.h1
-                        {...fadeUp}
-                        transition={{ ...fadeUp.transition, delay: 0.1 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                         className="text-4xl md:text-5xl lg:text-[60px] font-bold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-3xl"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
@@ -69,8 +72,9 @@ export function Hero() {
                     </motion.h1>
 
                     <motion.p
-                        {...fadeUp}
-                        transition={{ ...fadeUp.transition, delay: 0.2 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                         className="text-white/30 text-xs md:text-lg max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
                     >
                         The all-in-one platform for modern tailoring workshops. <br className="hidden md:block" />
@@ -79,8 +83,9 @@ export function Hero() {
 
                     {/* App Store Buttons - Centered */}
                     <motion.div 
-                        {...fadeUp}
-                        transition={{ ...fadeUp.transition, delay: 0.3 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
                         className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 w-full sm:w-auto"
                     >
                         <a 
@@ -106,7 +111,7 @@ export function Hero() {
                 </div>
 
                 {/* Screenshots Showcase - Spaced Out Row */}
-                <div className="w-full max-w-6xl relative h-[320px] md:h-[550px] lg:h-[650px] mt-4 md:mt-10 pointer-events-none">
+                <div className="w-full max-w-6xl relative h-[280px] md:h-[550px] lg:h-[650px] mt-10 md:mt-20 pointer-events-none">
                     
                     {/* Mockup 1 (Center) */}
                     <motion.div

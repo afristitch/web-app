@@ -81,7 +81,7 @@ export function Footer() {
                     <p>© 2026 SewDigital. All rights reserved.</p>
                     <div className="flex gap-6">
                         <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                        <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
                     </div>
                 </div>
             </div>

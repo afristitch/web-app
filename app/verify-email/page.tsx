@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
 
 function VerifyEmailContent() {
@@ -77,9 +78,9 @@ function VerifyEmailContent() {
                         <div className="pt-12 border-t border-white/5 mt-24">
                             <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-bold tracking-cinematic uppercase text-stone-500">
                                 <span>© 2026 SewDigital</span>
-                                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                                <a href="#" className="hover:text-white transition-colors">Support</a>
+                                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                                <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+                                <Link href="/support" className="hover:text-white transition-colors">Support</Link>
                             </div>
                         </div>
                     </div>

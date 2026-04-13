@@ -3,6 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2, Lock, Eye, EyeOff, CheckCircle2, XCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
 
 function ResetPasswordContent() {
@@ -123,9 +124,9 @@ function ResetPasswordContent() {
                             <div className="pt-12 border-t border-white/5 mt-24">
                                 <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-bold tracking-cinematic uppercase text-stone-500">
                                     <span>© 2026 SewDigital</span>
-                                    <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                                    <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                                    <a href="#" className="hover:text-white transition-colors">Support</a>
+                                    <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                                    <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+                                    <Link href="/support" className="hover:text-white transition-colors">Support</Link>
                                 </div>
                             </div>
                         </div>
@@ -211,9 +212,9 @@ function ResetPasswordContent() {
                         <div className="pt-12 border-t border-white/5 mt-24">
                             <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-bold tracking-cinematic uppercase text-stone-500">
                                 <span>© 2026 SewDigital</span>
-                                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                                <a href="#" className="hover:text-white transition-colors">Support</a>
+                                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                                <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+                                <Link href="/support" className="hover:text-white transition-colors">Support</Link>
                             </div>
                         </div>
                     </div>

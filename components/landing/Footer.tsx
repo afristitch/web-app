@@ -31,18 +31,18 @@ export function Footer() {
                         </p>
                         <div className="flex items-center justify-center gap-4">
                             <div className="relative">
-                                <a href="#" className="flex items-center gap-2 border border-white/10 px-4 py-2 rounded-xl group hover:bg-white hover:text-black transition-all opacity-50 cursor-not-allowed">
+                                <a href="https://apps.apple.com/us/app/sew-digital/id6760103170" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-white/10 px-4 py-2 rounded-xl group hover:bg-white hover:text-black transition-all cursor-pointer">
                                     <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M17.05 20.28c-.96.95-2.04 1.9-3.26 1.9-1.2 0-1.59-.74-3-.74-1.42 0-1.87.72-3 .74-1.16.03-2.35-.98-3.35-1.99a11.1 11.1 0 0 1-2.15-5.8c0-3.3 2.14-5.06 4.2-5.06 1.1 0 2.06.7 2.62.7.55 0 1.76-.74 3.03-.74a4.8 4.8 0 0 1 3.52 1.9c-2.84 1.66-2.39 5.5.4 6.7-.63 1.57-1.44 3.12-2.3 4.29zM13.2 2c1.08.06 2.07.69 2.65 1.4.63.77.8 1.83.65 2.82-1.03.07-2.06-.57-2.65-1.3-.67-.84-.87-1.92-.65-2.92z" />
                                     </svg>
                                     <span className="text-[10px] font-bold font-termina tracking-widest uppercase">iOS</span>
                                 </a>
-                                <span 
+                                {/* <span 
                                     className="absolute -top-2 -right-1 bg-[#FDDA0D] text-black text-[7px] font-black px-1 py-0.5 rounded-full uppercase tracking-tighter shadow-lg transform rotate-3"
                                     style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     Soon
-                                </span>
+                                </span> */}
                             </div>
                             <a 
                                 href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en" 

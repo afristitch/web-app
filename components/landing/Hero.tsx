@@ -3,6 +3,7 @@
 import { ArrowRight, ChevronDown, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { handleStoreClick } from "@/lib/store";
 
 export function Hero() {
     const fadeUp = {
@@ -64,21 +65,20 @@ export function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                        className="text-4xl md:text-5xl lg:text-[60px] font-bold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-3xl"
+                        className="text-4xl md:text-5xl lg:text-[52px] font-bold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-4xl"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
-                        Sewing The <span className="text-[#FDDA0D]">New</span> <br />
-                        Professional Way.
+                        Stop running your tailoring business from a <span className="text-[#FDDA0D]">chaotic notebook</span>.
                     </motion.h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                        className="text-white/30 text-xs md:text-lg max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
+                        className="text-white/40 text-xs md:text-lg max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
                     >
-                        The all-in-one platform for modern tailoring workshops. <br className="hidden md:block" />
-                        Manage clients, measurements, and production with precision.
+                        SewDigital keeps your clients, measurements, and orders <br className="hidden md:block" />
+                        perfectly organized in one place.
                     </motion.p>
 
                     {/* App Store Buttons - Centered */}
@@ -88,25 +88,16 @@ export function Hero() {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
                         className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 w-full sm:w-auto"
                     >
-                        <a 
-                            href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-[200px] sm:w-auto flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-xl hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-black/40 group sm:min-w-[180px]"
+                        <button 
+                            onClick={handleStoreClick}
+                            className="w-[240px] sm:w-auto flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-2xl hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-black/40 font-bold tracking-widest uppercase text-sm"
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
-                            <Image src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width={140} height={42} className="h-10 w-auto" />
-                        </a>
-                        <div className="relative group">
-                            <a href="https://apps.apple.com/us/app/sew-digital/id6760103170" target="_blank" rel="noopener noreferrer" className="w-[200px] sm:w-auto flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-xl hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-black/40 group sm:min-w-[180px]">
-                                <Image src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" width={140} height={42} className="h-10 w-auto" />
-                            </a>
-                            {/* <span 
-                                className="absolute -top-2 -right-2 bg-[#FDDA0D] text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter shadow-xl transform rotate-3 z-20"
-                                style={{ fontFamily: 'var(--font-varela-round)' }}
-                            >
-                                Coming Soon
-                            </span> */}
-                        </div>
+                            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+                            </svg>
+                            Download for Free
+                        </button>
                     </motion.div>
                 </div>
 

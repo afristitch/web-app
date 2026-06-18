@@ -1,30 +1,31 @@
 "use client";
 
 import { Check } from "lucide-react";
+import { handleStoreClick } from "@/lib/store";
 
 const plans = [
     {
-        name: "Monthly",
+        name: "Free Forever",
+        duration: "Forever",
+        price: "₵0",
+        description: "Everything you need to get started.",
+        features: ["Unlimited Clients", "Order Management", "Client Grouping", "Invoices", "Basic Reporting"],
+        isPopular: false
+    },
+    {
+        name: "Monthly Pro",
         duration: "1 Month",
         price: "₵50",
-        description: "Essential features for your shop.",
-        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
+        description: "Advanced features for growing shops.",
+        features: ["Everything in Free", "Bulk SMS", "Style Portfolio", "Team Management", "Priority Support"],
         isPopular: false
     },
     {
-        name: "6 Months",
-        duration: "6 Months",
-        price: "₵250",
-        description: "Save 16% with the 6-month plan.",
-        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
-        isPopular: false
-    },
-    {
-        name: "Yearly",
+        name: "Yearly Pro",
         duration: "12 Months",
         price: "₵450",
         description: "Save 25% with the annual plan.",
-        features: ["Unlimited Clients", "Order Management", "Advanced Reports", "Cloud Backup", "SMS Notifications", "Priority Support"],
+        features: ["Everything in Free", "Bulk SMS", "Style Portfolio", "Team Management", "Priority Support"],
         isPopular: true,
         tag: "Best Value"
     }
@@ -48,7 +49,7 @@ export function Pricing() {
                         CHOOSE THE <span className="text-stone-500">PERFECT PLAN.</span>
                     </h3>
                     <p className="text-stone-500 text-lg max-w-2xl mx-auto">
-                        Transparent pricing with a 21-day free trial included. No hidden fees.
+                        We've made the core features completely free. Upgrade when your shop needs it. No hidden fees.
                     </p>
                 </div>
 
@@ -87,7 +88,9 @@ export function Pricing() {
                                     </span>
                                 </div>
                                 <div className="mt-3 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 mx-auto">
-                                    <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">21-Day Free Trial</span>
+                                    <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">
+                                        {plan.name === "Free Forever" ? "No Credit Card Needed" : "Upgrade Anytime"}
+                                    </span>
                                 </div>
                                 <p className="mt-4 text-stone-500 text-sm font-medium">{plan.description}</p>
                             </div>
@@ -103,24 +106,23 @@ export function Pricing() {
                                 ))}
                             </div>
 
-                            <a
-                                href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`w-full py-4 rounded-full font-bold transition-all text-center ${plan.isPopular
-                                    ? 'bg-white text-black hover:bg-white/90'
-                                    : 'bg-white/5 text-white hover:bg-white/10'
+                            <button
+                                onClick={handleStoreClick}
+                                className={`w-full py-4 rounded-full font-bold tracking-widest uppercase text-sm transition-all hover:scale-[1.02] active:scale-95 ${plan.isPopular
+                                    ? 'bg-white text-black hover:bg-[#FDDA0D]'
+                                    : 'bg-white/5 text-white hover:bg-[#FDDA0D] hover:text-black'
                                     }`}
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
-                                Download Now
-                            </a>
+                                Download for Free
+                            </button>
                         </div>
                     ))}
                 </div>
 
                 <div className="text-center">
                     <p className="text-stone-600 text-[10px] font-medium tracking-wider uppercase">
-                        * Bulk SMS and Style Gallery not included in 21-day free trial
+                        * Bulk SMS, Team Management, and Style Gallery are Pro features.
                     </p>
                 </div>
             </div>

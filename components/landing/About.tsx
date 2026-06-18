@@ -1,27 +1,27 @@
 "use client";
 
-import { Ruler, ClipboardList, BarChart3, Shield } from "lucide-react";
+import { Ruler, ClipboardList, Receipt, Gift } from "lucide-react";
 
 const features = [
     {
         icon: <ClipboardList size={24} />,
-        title: "Order Management",
-        description: "Track every stitch from request to delivery. Visual progress bars and automated status updates."
+        title: "Order & Client Grouping",
+        description: "Organize your clients and orders into custom groups. Track progress visually and delight clients with timely deliveries."
     },
     {
         icon: <Ruler size={24} />,
-        title: "Client Measurements",
-        description: "Store precise measurements with custom templates. Never lose a client's fit again."
+        title: "Digital Measurements",
+        description: "Say goodbye to scattered notebooks. Store precise measurements with custom templates and never lose a client's fit again."
     },
     {
-        icon: <BarChart3 size={24} />,
-        title: "Business Analytics",
-        description: "Understand your revenue, popular styles, and busy periods with beautiful insights."
+        icon: <Receipt size={24} />,
+        title: "Professional Invoicing",
+        description: "Generate and share professional invoices directly from the app to look like the pro you are."
     },
     {
-        icon: <Shield size={24} />,
-        title: "Premium Security",
-        description: "Your data is isolated and protected. Access your workshop from anywhere, securely."
+        icon: <Gift size={24} />,
+        title: "100% Free Core Features",
+        description: "We've removed the trial restrictions so you can manage your core business operations entirely for free."
     }
 ];
 

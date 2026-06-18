@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { handleStoreClick, getStoreLink } from "@/lib/store";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -47,16 +48,15 @@ export function Navbar() {
                     style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
                     <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
+                    <Link href="/demo" className="hover:text-white transition-colors">Demo</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-                    {/* <Link href="/stories" className="hover:text-white transition-colors">Stories</Link> */}
-                    <a
-                        href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-2 bg-white text-black rounded-full hover:bg-stone-100 transition-all active:scale-95"
+                    <Link href="/feedback" className="hover:text-white transition-colors">Feedback</Link>
+                    <button
+                        onClick={handleStoreClick}
+                        className="px-6 py-2 bg-white text-black rounded-full hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 font-bold tracking-widest uppercase text-[11px]"
                     >
-                        Download
-                    </a>
+                        Download for Free
+                    </button>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -72,17 +72,18 @@ export function Navbar() {
             {isMobileMenuOpen && (
                 <div className="absolute top-full left-0 right-0 bg-black border-b border-white/5 p-8 flex flex-col gap-6 text-sm font-bold tracking-cinematic uppercase animate-in fade-in slide-in-from-top-4" style={{ fontFamily: 'var(--font-varela-round)' }}>
                     <Link href="/how-it-works" onClick={() => setIsMobileMenuOpen(false)}>Platform</Link>
+                    <Link href="/demo" onClick={() => setIsMobileMenuOpen(false)}>Demo</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
-                    {/* <Link href="/stories" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link> */}
-                    <a
-                        href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="w-full py-4 bg-white text-black rounded-full font-bold text-center"
+                    <Link href="/feedback" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
+                    <button
+                        onClick={(e) => {
+                            setIsMobileMenuOpen(false);
+                            handleStoreClick(e as any);
+                        }}
+                        className="w-full py-4 bg-white text-black rounded-full hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 font-bold tracking-widest uppercase text-sm text-center"
                     >
-                        Download App
-                    </a>
+                        Download for Free
+                    </button>
                 </div>
             )}
         </nav>

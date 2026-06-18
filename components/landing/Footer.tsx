@@ -63,9 +63,10 @@ export function Footer() {
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         <Link href="/how-it-works" className="hover:text-white transition-colors">Platform</Link>
-                        <Link href="/help" className="hover:text-white transition-colors">Help</Link>
+                        <Link href="/demo" className="hover:text-white transition-colors">Demo</Link>
                         <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-                        <Link href="/support" className="hover:text-white transition-colors">Contact</Link>
+                        <Link href="/feedback" className="hover:text-white transition-colors">Feedback</Link>
+                        <Link href="/help" className="hover:text-white transition-colors">Help</Link>
                         <a 
                             href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en" 
                             target="_blank" 

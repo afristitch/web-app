@@ -11,7 +11,7 @@ export function getStoreLink(): string {
     return "https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en";
 }
 
-export function handleStoreClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+export function handleStoreClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault();
     const link = getStoreLink();
     window.open(link, '_blank');

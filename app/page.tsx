@@ -2,6 +2,7 @@ import { Hero } from "@/components/landing/Hero";
 import { About } from "@/components/landing/About";
 import { Pricing } from "@/components/landing/Pricing";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
+import { Testimonials } from "@/components/landing/Testimonials";
 
 export default function Home() {
   return (
@@ -10,6 +11,10 @@ export default function Home() {
 
       <SectionWrapper>
         <About />
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <Testimonials />
       </SectionWrapper>
 
       <SectionWrapper>

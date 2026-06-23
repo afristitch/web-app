@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /*.png
+Allow: /*.ico
+Allow: /*.svg
+Allow: /stitchlogo.png
+
+Sitemap: https://sewdigital.com/sitemap.xml

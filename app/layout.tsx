@@ -25,15 +25,22 @@ const varelaRound = Varela_Round({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sewdigital.com"),
-  title: "SewDigital",
-  description: "Next-generation tailor management",
+  title: {
+    default: "SewDigital | Next-generation Tailor Management Software",
+    template: "%s | SewDigital",
+  },
+  description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
+  keywords: ["tailor software", "tailoring management", "measurement app", "fashion tech", "SewDigital", "tailor POS"],
+  authors: [{ name: "SewDigital" }],
+  creator: "SewDigital",
+  publisher: "SewDigital",
   icons: {
     icon: "/stitchlogo.png",
     apple: "/stitchlogo.png",
   },
   openGraph: {
-    title: "SewDigital",
-    description: "Next-generation tailor management",
+    title: "SewDigital | Next-generation Tailor Management",
+    description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
     url: "https://sewdigital.com",
     siteName: "SewDigital",
     images: [
@@ -41,7 +48,7 @@ export const metadata: Metadata = {
         url: "/tour.png", // Hero image
         width: 1200,
         height: 630,
-        alt: "SewDigital Hero Image",
+        alt: "SewDigital Dashboard Preview",
       },
     ],
     locale: "en_US",
@@ -49,9 +56,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SewDigital",
-    description: "Next-generation tailor management",
+    title: "SewDigital | Next-generation Tailor Management",
+    description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
     images: ["/tour.png"], // Hero image
+    creator: "@sewdigital", // Assuming a handle, safe placeholder
+  },
+  alternates: {
+    canonical: "https://sewdigital.com",
   },
 };
 

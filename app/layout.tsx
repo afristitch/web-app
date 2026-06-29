@@ -24,7 +24,7 @@ const varelaRound = Varela_Round({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sewdigital.com"),
+  metadataBase: new URL("https://www.sewdigital.app"),
   title: {
     default: "SewDigital | Next-generation Tailor Management Software",
     template: "%s | SewDigital",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SewDigital | Next-generation Tailor Management",
     description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
-    url: "https://sewdigital.com",
+    url: "https://www.sewdigital.app",
     siteName: "SewDigital",
     locale: "en_US",
     type: "website",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     creator: "@sewdigital",
   },
   alternates: {
-    canonical: "https://sewdigital.com",
+    canonical: "https://www.sewdigital.app",
   },
 };
 

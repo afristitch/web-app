@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     default: "SewDigital | Next-generation Tailor Management Software",
     template: "%s | SewDigital",
   },
-  description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
+  description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
   keywords: ["tailor software", "tailoring management", "measurement app", "fashion tech", "SewDigital", "tailor POS"],
   authors: [{ name: "SewDigital" }],
   creator: "SewDigital",
@@ -40,26 +40,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "SewDigital | Next-generation Tailor Management",
-    description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
+    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
     url: "https://sewdigital.com",
     siteName: "SewDigital",
-    images: [
-      {
-        url: "/tour.png", // Hero image
-        width: 1200,
-        height: 630,
-        alt: "SewDigital Dashboard Preview",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "SewDigital | Next-generation Tailor Management",
-    description: "Empower your tailoring business with SewDigital. Manage measurements, orders, and clients seamlessly in one professional platform.",
-    images: ["/tour.png"], // Hero image
-    creator: "@sewdigital", // Assuming a handle, safe placeholder
+    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
+    creator: "@sewdigital",
   },
   alternates: {
     canonical: "https://sewdigital.com",

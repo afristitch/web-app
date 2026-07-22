@@ -56,12 +56,33 @@ export function Navbar() {
 
                     {user ? (
                         <>
-                            <Link href="/subscription" className="text-[#FDDA0D] hover:text-white transition-colors flex items-center gap-1 font-extrabold">
-                                Subscription
+                            <Link href="/subscription" className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all text-white group">
+                                {user.photoUrl ? (
+                                    <Image
+                                        src={user.photoUrl}
+                                        alt={user.name || "User Avatar"}
+                                        width={24}
+                                        height={24}
+                                        className="w-6 h-6 rounded-full object-cover shrink-0 border border-white/20"
+                                        unoptimized
+                                    />
+                                ) : (
+                                    <div className="w-6 h-6 rounded-full bg-[#FDDA0D] text-black font-extrabold flex items-center justify-center text-[10px] uppercase shrink-0">
+                                        {user.name ? user.name.charAt(0) : "U"}
+                                    </div>
+                                )}
+                                <div className="flex flex-col text-left">
+                                    <span className="text-[11px] font-bold tracking-tight text-white group-hover:text-[#FDDA0D] transition-colors leading-none">
+                                        {user.name || "My Account"}
+                                    </span>
+                                    <span className="text-[9px] text-stone-400 font-normal tracking-wider lowercase">
+                                        Subscription
+                                    </span>
+                                </div>
                             </Link>
                             <button
                                 onClick={logout}
-                                className="px-5 py-2 border border-white/20 text-stone-300 rounded-full hover:bg-white/10 hover:text-white transition-all text-[11px] uppercase tracking-wider"
+                                className="px-4 py-2 border border-white/20 text-stone-300 rounded-full hover:bg-white/10 hover:text-white transition-all text-[11px] uppercase tracking-wider"
                             >
                                 Sign Out
                             </button>
@@ -102,7 +123,27 @@ export function Navbar() {
 
                     {user ? (
                         <>
-                            <Link href="/subscription" className="text-[#FDDA0D]" onClick={() => setIsMobileMenuOpen(false)}>Manage Subscription</Link>
+                            <Link
+                                href="/subscription"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center gap-3 text-[#FDDA0D]"
+                            >
+                                {user.photoUrl ? (
+                                    <Image
+                                        src={user.photoUrl}
+                                        alt={user.name || "User Avatar"}
+                                        width={28}
+                                        height={28}
+                                        className="w-7 h-7 rounded-full object-cover shrink-0 border border-white/20"
+                                        unoptimized
+                                    />
+                                ) : (
+                                    <div className="w-7 h-7 rounded-full bg-[#FDDA0D] text-black font-extrabold flex items-center justify-center text-xs uppercase shrink-0">
+                                        {user.name ? user.name.charAt(0) : "U"}
+                                    </div>
+                                )}
+                                <span>{user.name || "Manage Subscription"}</span>
+                            </Link>
                             <button
                                 onClick={() => {
                                     setIsMobileMenuOpen(false);

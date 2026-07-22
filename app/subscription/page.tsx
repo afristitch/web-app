@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -195,32 +196,45 @@ function SubscriptionContent() {
                 <div className="container mx-auto max-w-5xl px-6">
                     {/* Header Info */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-8 border-b border-white/10">
-                        <div>
-                            <div className="flex items-center gap-3 mb-2">
-                                <Building2 className="w-5 h-5 text-stone-400" />
-                                <h1
-                                    className="text-2xl md:text-3xl font-bold uppercase tracking-tight"
-                                    style={{ fontFamily: "var(--font-varela-round)" }}
-                                >
-                                    {organization?.name || "Your Tailor Shop"}
-                                </h1>
-                            </div>
-                            <div className="flex items-center gap-4 text-xs text-stone-400">
-                                <span className="flex items-center gap-1.5">
-                                    <UserIcon size={14} /> {user.email}
-                                </span>
-                                <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 uppercase tracking-wider font-bold">
-                                    {user.role}
-                                </span>
+                        <div className="flex items-center gap-4">
+                            {user.photoUrl ? (
+                                <Image
+                                    src={user.photoUrl}
+                                    alt={user.name || "User Photo"}
+                                    width={56}
+                                    height={56}
+                                    className="w-14 h-14 rounded-full object-cover border-2 border-white/20 shrink-0 shadow-lg"
+                                    unoptimized
+                                />
+                            ) : (
+                                <div className="w-14 h-14 rounded-full bg-[#FDDA0D] text-black font-extrabold text-xl flex items-center justify-center shrink-0 uppercase shadow-lg">
+                                    {user.name ? user.name.charAt(0) : "U"}
+                                </div>
+                            )}
+
+                            <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <h1
+                                        className="text-2xl md:text-3xl font-bold uppercase tracking-tight"
+                                        style={{ fontFamily: "var(--font-varela-round)" }}
+                                    >
+                                        {user.name || "Tailor Account"}
+                                    </h1>
+                                </div>
+                                <div className="flex flex-wrap items-center gap-3 text-xs text-stone-400">
+                                    <span className="flex items-center gap-1.5 font-medium text-stone-300">
+                                        <Building2 size={14} className="text-stone-500" /> {organization?.name || "Tailor Shop"}
+                                    </span>
+                                    <span className="text-stone-600">•</span>
+                                    <span className="flex items-center gap-1.5 text-stone-400">
+                                        <UserIcon size={14} /> {user.email}
+                                    </span>
+                                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 uppercase tracking-wider font-bold text-[10px]">
+                                        {user.role}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-
-                        <button
-                            onClick={logout}
-                            className="self-start md:self-auto px-4 py-2 rounded-full border border-white/10 bg-stone-900/50 hover:bg-stone-800 text-stone-400 hover:text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors"
-                        >
-                            <LogOut size={14} /> Sign Out
-                        </button>
                     </div>
 
                     {/* Alert Notices */}
@@ -265,20 +279,34 @@ function SubscriptionContent() {
                                 </p>
                             </div>
 
-                            <div className="md:text-right border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-8 flex flex-col justify-center">
-                                <div className="text-xs text-stone-500 uppercase font-bold tracking-wider mb-1">
-                                    Days Remaining
-                                </div>
-                                <div className="text-4xl font-extrabold text-white">
-                                    {subStatus?.daysLeft ?? 0}{" "}
-                                    <span className="text-stone-500 text-lg font-normal">days</span>
-                                </div>
-                                {subStatus?.subscriptionEndsAt && (
-                                    <div className="text-[11px] text-stone-500 mt-1">
-                                        Ends: {new Date(subStatus.subscriptionEndsAt).toLocaleDateString()}
+                            {subStatus?.isPremium ? (
+                                <div className="md:text-right border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-8 flex flex-col justify-center">
+                                    <div className="text-xs text-stone-500 uppercase font-bold tracking-wider mb-1">
+                                        Days Remaining
                                     </div>
-                                )}
-                            </div>
+                                    <div className="text-4xl font-extrabold text-white">
+                                        {subStatus?.daysLeft ?? 0}{" "}
+                                        <span className="text-stone-500 text-lg font-normal">days</span>
+                                    </div>
+                                    {subStatus?.subscriptionEndsAt && (
+                                        <div className="text-[11px] text-stone-500 mt-1">
+                                            Ends: {new Date(subStatus.subscriptionEndsAt).toLocaleDateString()}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="md:text-right border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-8 flex flex-col justify-center">
+                                    <div className="text-xs text-stone-500 uppercase font-bold tracking-wider mb-1">
+                                        Plan Access
+                                    </div>
+                                    <div className="text-lg font-bold text-white uppercase tracking-wider">
+                                        Free Forever
+                                    </div>
+                                    <div className="text-[11px] text-stone-500 mt-1">
+                                        No Expiration Date
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 

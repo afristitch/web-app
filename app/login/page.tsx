@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
@@ -9,7 +10,22 @@ import { SectionWrapper } from "@/components/landing/SectionWrapper";
 import { ArrowRight, Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-black">
+                <Loader2 className="w-8 h-8 animate-spin text-white" />
+            </div>
+        }>
+            <LoginForm />
+        </Suspense>
+    );
+}
+
+function LoginForm() {
     const { login } = useAuth();
+    const searchParams = useSearchParams();
+    const redirectUrl = searchParams.get("redirectUrl") || "/subscription";
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +39,7 @@ export default function LoginPage() {
         try {
             const res = await api.post("/auth/login", { email, password });
             if (res.success && res.data) {
-                login(res.data, "/subscription");
+                login(res.data, redirectUrl);
             } else {
                 setError(res.message || "Failed to log in. Please check your credentials.");
             }

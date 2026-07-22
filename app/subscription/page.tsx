@@ -17,7 +17,6 @@ import {
     User as UserIcon,
     ShieldCheck,
     ArrowRight,
-    Zap,
     Lock
 } from "lucide-react";
 
@@ -27,15 +26,6 @@ interface SubscriptionStatus {
     subscriptionEndsAt?: string;
     isPremium: boolean;
     daysLeft: number;
-}
-
-interface Plan {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    currency: string;
-    interval: string;
 }
 
 const DURATION_OPTIONS = [
@@ -92,12 +82,8 @@ function SubscriptionContent() {
     const searchParams = useSearchParams();
 
     const [subStatus, setSubStatus] = useState<SubscriptionStatus | null>(null);
-    const [plans, setPlans] = useState<Plan[]>([]);
-    const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-    const [selectedMonths, setSelectedMonths] = useState<number>(12);
-
     const [loadingStatus, setLoadingStatus] = useState(true);
-    const [initializingPayment, setInitializingPayment] = useState(false);
+    const [initializingMonths, setInitializingMonths] = useState<number | null>(null);
     const [paymentSuccessMsg, setPaymentSuccessMsg] = useState<string | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -118,21 +104,6 @@ function SubscriptionContent() {
         }
     }, []);
 
-    const fetchPlans = useCallback(async () => {
-        try {
-            const plansRes = await api.get("/plans");
-            if (plansRes.success && Array.isArray(plansRes.data)) {
-                setPlans(plansRes.data);
-                const premium = plansRes.data.find((p: Plan) => p.name === "premium") || plansRes.data[0];
-                if (premium) {
-                    setSelectedPlan(premium);
-                }
-            }
-        } catch (err) {
-            console.error("Failed to load plans:", err);
-        }
-    }, []);
-
     useEffect(() => {
         if (!authLoading && !user) {
             router.push("/login");
@@ -141,9 +112,8 @@ function SubscriptionContent() {
 
         if (user) {
             fetchSubscriptionData();
-            fetchPlans();
         }
-    }, [authLoading, user, router, fetchSubscriptionData, fetchPlans]);
+    }, [authLoading, user, router, fetchSubscriptionData]);
 
     useEffect(() => {
         if (isPaymentComplete) {
@@ -155,20 +125,15 @@ function SubscriptionContent() {
         }
     }, [isPaymentComplete, fetchSubscriptionData]);
 
-    const handlePaystackPayment = async () => {
-        if (!selectedPlan) {
-            setErrorMsg("Please select a subscription plan.");
-            return;
-        }
-
-        setInitializingPayment(true);
+    const handlePaystackPayment = async (months: number) => {
+        setInitializingMonths(months);
         setErrorMsg(null);
 
         try {
             const callbackUrl = `${window.location.origin}/subscription?payment=complete`;
             const payload = {
-                planId: selectedPlan._id,
-                months: selectedMonths,
+                planId: "premium",
+                months,
                 callbackUrl,
             };
 
@@ -178,12 +143,12 @@ function SubscriptionContent() {
                 window.location.href = res.data.authorization_url;
             } else {
                 setErrorMsg(res.message || "Could not initialize Paystack payment.");
-                setInitializingPayment(false);
+                setInitializingMonths(null);
             }
         } catch (err: any) {
             console.error("Payment initialization error:", err);
             setErrorMsg(err.message || "Error starting payment process. Please try again.");
-            setInitializingPayment(false);
+            setInitializingMonths(null);
         }
     };
 
@@ -200,12 +165,7 @@ function SubscriptionContent() {
 
     if (!user) return null;
 
-    const basePrice = selectedPlan ? selectedPlan.price : 50;
-    const selectedOption = DURATION_OPTIONS.find((o) => o.months === selectedMonths) || DURATION_OPTIONS[2];
-    const discountFraction = selectedOption.discount;
-    const rawTotal = basePrice * selectedMonths;
-    const finalTotal = Number((rawTotal * (1 - discountFraction)).toFixed(2));
-    const totalSavings = Number((rawTotal - finalTotal).toFixed(2));
+    const basePrice = 50;
 
     const statusBadge = () => {
         if (!subStatus) return null;
@@ -363,24 +323,23 @@ function SubscriptionContent() {
                             CHOOSE YOUR <span className="text-stone-500">BILLING DURATION.</span>
                         </h3>
                         <p className="text-stone-400 text-base max-w-2xl mx-auto">
-                            Extend or upgrade your tailoring business subscription. Select a duration below to pay securely with Paystack.
+                            Extend or upgrade your tailoring business subscription. Pay securely with Paystack on any plan below.
                         </p>
                     </div>
 
-                    {/* Plan Cards Grid (Matching Pricing Aesthetics) */}
+                    {/* Plan Cards Grid (Paystack Button on Cards) */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                         {DURATION_OPTIONS.map((opt) => {
-                            const isSelected = selectedMonths === opt.months;
                             const optTotal = Number((basePrice * opt.months * (1 - opt.discount)).toFixed(2));
                             const perMonth = Number((optTotal / opt.months).toFixed(2));
+                            const isInitializingThisCard = initializingMonths === opt.months;
 
                             return (
                                 <div
                                     key={opt.months}
-                                    onClick={() => setSelectedMonths(opt.months)}
-                                    className={`relative p-8 rounded-3xl border cursor-pointer transition-all duration-300 flex flex-col justify-between ${
-                                        isSelected
-                                            ? 'border-white bg-white/[0.04] shadow-2xl ring-2 ring-white/30 scale-[1.02]'
+                                    className={`relative p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
+                                        opt.isPopular
+                                            ? 'border-white bg-white/[0.03] shadow-2xl ring-1 ring-white/20'
                                             : 'border-white/10 bg-stone-950 hover:border-white/30 hover:bg-white/[0.01]'
                                     }`}
                                 >
@@ -437,85 +396,43 @@ function SubscriptionContent() {
                                         </div>
                                     </div>
 
+                                    {/* Pay with Paystack Button Directly on Card */}
                                     <button
                                         type="button"
-                                        className={`w-full py-4 rounded-full font-bold tracking-widest uppercase text-xs transition-all ${
-                                            isSelected
+                                        onClick={() => handlePaystackPayment(opt.months)}
+                                        disabled={initializingMonths !== null}
+                                        className={`w-full py-4 rounded-full font-bold tracking-widest uppercase text-xs transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 ${
+                                            opt.isPopular
                                                 ? 'bg-white text-black hover:bg-[#FDDA0D]'
-                                                : 'bg-white/5 text-stone-300 hover:bg-white/10 hover:text-white border border-white/10'
-                                        }`}
+                                                : 'bg-white/10 text-white hover:bg-[#FDDA0D] hover:text-black border border-white/10'
+                                        } disabled:opacity-50 disabled:pointer-events-none`}
                                         style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
-                                        {isSelected ? "Selected Plan" : "Select Duration"}
+                                        {isInitializingThisCard ? (
+                                            <>
+                                                <Loader2 className="w-4 h-4 animate-spin" />
+                                                Initializing...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <CreditCard className="w-4 h-4" />
+                                                Pay ₵{optTotal} with Paystack
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             );
                         })}
                     </div>
 
-                    {/* Paystack Summary & Checkout Section */}
-                    <div className="p-8 md:p-10 rounded-3xl bg-stone-950 border border-white/10 shadow-2xl relative">
-                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                            <div className="space-y-2">
-                                <div className="text-xs font-bold uppercase tracking-widest text-[#FDDA0D] flex items-center gap-2">
-                                    <Zap size={14} /> Checkout Summary
-                                </div>
-                                <h3
-                                    className="text-2xl md:text-3xl font-bold uppercase tracking-tight"
-                                    style={{ fontFamily: 'var(--font-varela-round)' }}
-                                >
-                                    SewDigital Premium ({selectedOption.durationLabel})
-                                </h3>
-                                {totalSavings > 0 ? (
-                                    <div className="text-sm text-emerald-400 font-semibold flex items-center gap-2">
-                                        <CheckCircle2 size={16} /> Saved ₵{totalSavings} with {selectedOption.tag}!
-                                    </div>
-                                ) : (
-                                    <p className="text-stone-400 text-xs">Standard monthly rate with full premium access.</p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 shrink-0">
-                                <div className="text-left sm:text-right border-t sm:border-t-0 sm:border-l border-white/10 pt-4 sm:pt-0 sm:pl-6">
-                                    <div className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">
-                                        Total Amount
-                                    </div>
-                                    <div
-                                        className="text-3xl sm:text-4xl font-extrabold text-white"
-                                        style={{ fontFamily: 'var(--font-varela-round)' }}
-                                    >
-                                        ₵{finalTotal} <span className="text-xs text-stone-500 font-normal">GHS</span>
-                                    </div>
-                                </div>
-
-                                <button
-                                    type="button"
-                                    onClick={handlePaystackPayment}
-                                    disabled={initializingPayment}
-                                    className="px-8 py-5 rounded-full bg-white text-black font-bold tracking-widest uppercase text-xs hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:pointer-events-none shadow-2xl"
-                                    style={{ fontFamily: "var(--font-varela-round)" }}
-                                >
-                                    {initializingPayment ? (
-                                        <>
-                                            <Loader2 className="w-4 h-4 animate-spin" />
-                                            Initializing Paystack...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <CreditCard className="w-4 h-4" />
-                                            Pay ₵{finalTotal} with Paystack <ArrowRight className="w-4 h-4" />
-                                        </>
-                                    )}
-                                </button>
-                            </div>
+                    {/* Paystack Security Notice */}
+                    <div className="p-6 rounded-2xl bg-stone-950 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+                        <div className="flex items-center gap-3">
+                            <Lock className="w-4 h-4 text-stone-400 shrink-0" />
+                            <span>Secured by Paystack. Supports MTN Mobile Money, Telecel Cash, Visa, & Mastercard.</span>
                         </div>
-
-                        <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between text-xs text-stone-500 gap-4">
-                            <div className="flex items-center gap-2">
-                                <Lock className="w-4 h-4 text-stone-400" />
-                                <span>Secured by Paystack. Supports MTN Mobile Money, Telecel Cash, Visa, & Mastercard.</span>
-                            </div>
-                            <div className="text-stone-400 font-medium">Instant activation upon payment completion.</div>
+                        <div className="flex items-center gap-2 text-stone-300 font-medium">
+                            <ArrowRight size={14} className="text-[#FDDA0D]" /> Instant automatic activation upon payment.
                         </div>
                     </div>
                 </div>

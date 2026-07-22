@@ -72,8 +72,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${plusJakarta.variable} ${varelaRound.variable} antialiased font-inter bg-black text-white selection:bg-accent selection:text-black`}>
         <div className="grain-overlay" />
         <SmoothScroll>
-          <Navbar />
           <AuthProvider>
+            <Navbar />
             {children}
           </AuthProvider>
           <Footer />

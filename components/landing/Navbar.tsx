@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { handleStoreClick, getStoreLink } from "@/lib/store";
+import { handleStoreClick } from "@/lib/store";
+import { useAuth } from "@/context/AuthContext";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { user, logout } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,11 +53,33 @@ export function Navbar() {
                     <Link href="/demo" className="hover:text-white transition-colors">Demo</Link>
                     <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
                     <Link href="/feedback" className="hover:text-white transition-colors">Feedback</Link>
+
+                    {user ? (
+                        <>
+                            <Link href="/subscription" className="text-[#FDDA0D] hover:text-white transition-colors flex items-center gap-1 font-extrabold">
+                                Subscription
+                            </Link>
+                            <button
+                                onClick={logout}
+                                className="px-5 py-2 border border-white/20 text-stone-300 rounded-full hover:bg-white/10 hover:text-white transition-all text-[11px] uppercase tracking-wider"
+                            >
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <Link
+                            href="/login"
+                            className="px-5 py-2 border border-white/20 text-white rounded-full hover:bg-white/10 transition-all text-[11px] uppercase tracking-wider flex items-center gap-1.5"
+                        >
+                            <User size={13} /> Sign In
+                        </Link>
+                    )}
+
                     <button
                         onClick={handleStoreClick}
                         className="px-6 py-2 bg-white text-black rounded-full hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 font-bold tracking-widest uppercase text-[11px]"
                     >
-                        Download for Free
+                        Download App
                     </button>
                 </div>
 
@@ -75,6 +99,24 @@ export function Navbar() {
                     <Link href="/demo" onClick={() => setIsMobileMenuOpen(false)}>Demo</Link>
                     <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                     <Link href="/feedback" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
+
+                    {user ? (
+                        <>
+                            <Link href="/subscription" className="text-[#FDDA0D]" onClick={() => setIsMobileMenuOpen(false)}>Manage Subscription</Link>
+                            <button
+                                onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    logout();
+                                }}
+                                className="text-stone-400 text-left uppercase"
+                            >
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <Link href="/login" className="text-white" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
+                    )}
+
                     <button
                         onClick={(e) => {
                             setIsMobileMenuOpen(false);
@@ -82,7 +124,7 @@ export function Navbar() {
                         }}
                         className="w-full py-4 bg-white text-black rounded-full hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 font-bold tracking-widest uppercase text-sm text-center"
                     >
-                        Download for Free
+                        Download App
                     </button>
                 </div>
             )}

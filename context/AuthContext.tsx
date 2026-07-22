@@ -23,7 +23,7 @@ interface AuthContextType {
     user: User | null;
     organization: Organization | null;
     loading: boolean;
-    login: (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }) => void;
+    login: (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }, redirectUrl?: string) => void;
     logout: () => void;
 }
 
@@ -72,14 +72,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         initializeAuth();
     }, []);
 
-    const login = (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }) => {
+    const login = (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }, redirectUrl: string = "/subscription") => {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("organization", JSON.stringify(data.organization));
         setUser(data.user);
         setOrganization(data.organization);
-        router.push("/dashboard");
+        router.push(redirectUrl);
     };
 
     const logout = () => {

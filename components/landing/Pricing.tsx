@@ -2,6 +2,8 @@
 
 import { Check } from "lucide-react";
 import { handleStoreClick } from "@/lib/store";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const plans = [
     {
@@ -18,20 +20,38 @@ const plans = [
         price: "₵50",
         description: "Advanced features for growing shops.",
         features: ["Everything in Free", "Bulk SMS", "Style Portfolio", "Team Management", "Priority Support"],
-        isPopular: false
+        isPopular: false,
+        isPro: true
     },
     {
         name: "Yearly Pro",
         duration: "12 Months",
         price: "₵450",
-        description: "Save 25% with the annual plan.",
+        description: "Save 20% with the annual plan.",
         features: ["Everything in Free", "Bulk SMS", "Style Portfolio", "Team Management", "Priority Support"],
         isPopular: true,
-        tag: "Best Value"
+        tag: "Best Value",
+        isPro: true
     }
 ];
 
 export function Pricing() {
+    const { user } = useAuth();
+    const router = useRouter();
+
+    const handlePlanClick = (plan: typeof plans[0], e: React.MouseEvent) => {
+        if (plan.isPro) {
+            e.preventDefault();
+            if (user) {
+                router.push("/subscription");
+            } else {
+                router.push("/login");
+            }
+        } else {
+            handleStoreClick(e as any);
+        }
+    };
+
     return (
         <section className="py-28 md:py-48 px-6 bg-black">
             <div className="container mx-auto max-w-7xl">
@@ -107,14 +127,14 @@ export function Pricing() {
                             </div>
 
                             <button
-                                onClick={handleStoreClick}
+                                onClick={(e) => handlePlanClick(plan, e)}
                                 className={`w-full py-4 rounded-full font-bold tracking-widest uppercase text-sm transition-all hover:scale-[1.02] active:scale-95 ${plan.isPopular
                                     ? 'bg-white text-black hover:bg-[#FDDA0D]'
                                     : 'bg-white/5 text-white hover:bg-[#FDDA0D] hover:text-black'
                                     }`}
                                 style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
-                                Download for Free
+                                {plan.isPro ? (user ? "Manage Subscription" : "Subscribe with Paystack") : "Download for Free"}
                             </button>
                         </div>
                     ))}

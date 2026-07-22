@@ -416,7 +416,7 @@ function SubscriptionContent() {
                                         ) : (
                                             <>
                                                 <CreditCard className="w-4 h-4" />
-                                                Pay ₵{optTotal} 
+                                                Pay ₵{optTotal}
                                             </>
                                         )}
                                     </button>

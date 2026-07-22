@@ -198,7 +198,7 @@ function SubscriptionContent() {
                     {/* User Header Profile */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 pb-8 border-b border-white/10">
                         <div className="flex items-center gap-4">
-                            {user.photoUrl ? (
+                            {user.photoUrl && (user.photoUrl.startsWith("http://") || user.photoUrl.startsWith("https://")) ? (
                                 <Image
                                     src={user.photoUrl}
                                     alt={user.name || "User Photo"}

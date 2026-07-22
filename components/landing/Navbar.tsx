@@ -74,7 +74,7 @@ export function Navbar() {
                                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                                 className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-stone-900/90 border border-white/10 hover:border-white/30 transition-all text-white group"
                             >
-                                {user.photoUrl ? (
+                                {user.photoUrl && (user.photoUrl.startsWith("http://") || user.photoUrl.startsWith("https://")) ? (
                                     <Image
                                         src={user.photoUrl}
                                         alt={user.name || "User Avatar"}
@@ -177,7 +177,7 @@ export function Navbar() {
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="flex items-center gap-3 text-[#FDDA0D]"
                             >
-                                {user.photoUrl ? (
+                                {user.photoUrl && (user.photoUrl.startsWith("http://") || user.photoUrl.startsWith("https://")) ? (
                                     <Image
                                         src={user.photoUrl}
                                         alt={user.name || "User Avatar"}

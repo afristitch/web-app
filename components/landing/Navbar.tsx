@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from "react";
-import { Menu, X, User } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, User, LogOut, CreditCard, ChevronDown, Building2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { handleStoreClick } from "@/lib/store";
@@ -10,7 +10,10 @@ import { useAuth } from "@/context/AuthContext";
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { user, logout } = useAuth();
+    const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const { user, organization, logout } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -18,6 +21,16 @@ export function Navbar() {
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsProfileDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     return (
@@ -55,8 +68,12 @@ export function Navbar() {
                     <Link href="/feedback" className="hover:text-white transition-colors">Feedback</Link>
 
                     {user ? (
-                        <>
-                            <Link href="/subscription" className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all text-white group">
+                        <div className="relative" ref={dropdownRef}>
+                            <button
+                                type="button"
+                                onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                                className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-stone-900/90 border border-white/10 hover:border-white/30 transition-all text-white group"
+                            >
                                 {user.photoUrl ? (
                                     <Image
                                         src={user.photoUrl}
@@ -71,22 +88,54 @@ export function Navbar() {
                                         {user.name ? user.name.charAt(0) : "U"}
                                     </div>
                                 )}
-                                <div className="flex flex-col text-left">
-                                    <span className="text-[11px] font-bold tracking-tight text-white group-hover:text-[#FDDA0D] transition-colors leading-none">
-                                        {user.name || "My Account"}
-                                    </span>
-                                    <span className="text-[9px] text-stone-400 font-normal tracking-wider lowercase">
-                                        Subscription
-                                    </span>
-                                </div>
-                            </Link>
-                            <button
-                                onClick={logout}
-                                className="px-4 py-2 border border-white/20 text-stone-300 rounded-full hover:bg-white/10 hover:text-white transition-all text-[11px] uppercase tracking-wider"
-                            >
-                                Sign Out
+                                <span className="text-[11px] font-bold tracking-tight text-white group-hover:text-[#FDDA0D] transition-colors">
+                                    {user.name || "Account"}
+                                </span>
+                                <ChevronDown size={12} className={`text-stone-400 transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
                             </button>
-                        </>
+
+                            {/* Profile Dropdown Menu */}
+                            {isProfileDropdownOpen && (
+                                <div className="absolute right-0 mt-3 w-56 p-2 rounded-2xl bg-stone-950 border border-white/10 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 text-left normal-case font-normal z-50">
+                                    <div className="px-3 py-2.5 border-b border-white/10">
+                                        <div className="font-bold text-sm text-white truncate" style={{ fontFamily: 'var(--font-varela-round)' }}>
+                                            {user.name || "User"}
+                                        </div>
+                                        <div className="text-xs text-stone-400 truncate">{user.email}</div>
+                                        {organization?.name && (
+                                            <div className="mt-1 text-[10px] text-stone-500 uppercase font-bold tracking-wider flex items-center gap-1">
+                                                <Building2 size={10} /> {organization.name}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="py-1">
+                                        <Link
+                                            href="/subscription"
+                                            onClick={() => setIsProfileDropdownOpen(false)}
+                                            className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-stone-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                                        >
+                                            <CreditCard size={14} className="text-[#FDDA0D]" />
+                                            <span>Manage Subscription</span>
+                                        </Link>
+                                    </div>
+
+                                    <div className="pt-1 border-t border-white/10">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setIsProfileDropdownOpen(false);
+                                                logout();
+                                            }}
+                                            className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded-xl transition-colors"
+                                        >
+                                            <LogOut size={14} />
+                                            <span>Sign Out</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <Link
                             href="/login"
@@ -149,9 +198,9 @@ export function Navbar() {
                                     setIsMobileMenuOpen(false);
                                     logout();
                                 }}
-                                className="text-stone-400 text-left uppercase"
+                                className="text-red-400 text-left uppercase flex items-center gap-2"
                             >
-                                Sign Out
+                                <LogOut size={16} /> Sign Out
                             </button>
                         </>
                     ) : (

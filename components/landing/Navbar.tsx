@@ -37,16 +37,17 @@ export function Navbar() {
         <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
             {/* Top Advertising Announcement Banner - Balanced font size using Varela Round */}
             <div
-                className="bg-white/80 backdrop-blur-md border-b border-white/10 text-black text-xs sm:text-sm font-semibold py-2 px-6 text-center flex flex-wrap items-center justify-center gap-2 shadow-xs"
+                className="bg-white/90 backdrop-blur-md border-b border-white/10 text-black text-[10px] sm:text-xs font-semibold py-2 px-4 sm:px-6 text-center flex flex-row items-center justify-center gap-1 sm:gap-2 shadow-xs"
                 style={{ fontFamily: 'var(--font-varela-round)' }}
             >
-                <div className="flex items-center gap-2">
-                    <Smartphone size={15} className="shrink-0 text-black" />
-                    <span>Take SewDigital anywhere — Download our official Mobile App on iOS & Android</span>
+                <div className="flex items-center gap-1 sm:gap-1.5">
+                    <Smartphone size={12} className="shrink-0 text-black sm:w-[14px] sm:h-[14px]" />
+                    <span className="hidden sm:inline">Take SewDigital anywhere — Download our official Mobile App on iOS & Android</span>
+                    <span className="sm:hidden leading-none pt-0.5">Download the SewDigital Mobile App</span>
                 </div>
                 <button
                     onClick={handleStoreClick}
-                    className="bg-black text-white px-3 py-1 rounded-full text-xs font-bold hover:bg-stone-800 transition-all shadow-xs cursor-pointer ml-1 inline-flex items-center gap-1"
+                    className="bg-black text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-xs font-bold hover:bg-stone-800 transition-all shadow-xs cursor-pointer ml-1 inline-flex items-center gap-1"
                     style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
                     Get App →

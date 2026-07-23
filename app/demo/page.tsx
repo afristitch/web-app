@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function DemoPage() {
     return (
-        <main className="min-h-screen bg-black overflow-x-hidden pt-32 px-6 pb-20">
+        <main className="relative min-h-screen bg-black overflow-x-hidden pt-32 px-6 pb-20">
             <div className="container mx-auto max-w-6xl text-center md:text-left relative z-10">
                 <h1 
                     className="text-3xl md:text-5xl font-bold text-white uppercase mb-6 text-center"

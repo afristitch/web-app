@@ -15,7 +15,7 @@ export function Hero() {
     };
 
     return (
-        <section className="relative min-h-[90vh] md:min-h-screen pt-32 md:pt-40 pb-4 md:pb-20 overflow-x-clip bg-black text-white">
+        <section className="relative min-h-[90vh] md:min-h-screen pt-40 sm:pt-48 md:pt-40 pb-4 md:pb-20 overflow-x-clip bg-black text-white">
             {/* Grid Radial Background Pattern */}
             <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none" 
                  style={{ 
@@ -34,7 +34,7 @@ export function Hero() {
             <div className="relative z-10 container mx-auto max-w-7xl px-6 flex flex-col items-center text-center">
                 
                 {/* Header Content */}
-                <div className="max-w-4xl w-full flex flex-col items-center mb-6 md:mb-16">
+                <div className="max-w-4xl w-full flex flex-col items-center mb-10 md:mb-16">
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export function Hero() {
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-stone-800 bg-stone-950/80 backdrop-blur-md mb-8 shadow-xs"
                     >
                         <span className="flex h-2 w-2 rounded-full bg-white animate-pulse" />
-                        <span className="text-xs sm:text-sm font-semibold tracking-wide text-stone-300">
+                        <span className="text-[10px] sm:text-sm font-semibold tracking-wide text-stone-300">
                             Built Specifically for Modern Tailors & Designers
                         </span>
                     </motion.div>
@@ -51,17 +51,17 @@ export function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                        className="text-4xl md:text-5xl lg:text-[56px] font-extrabold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-4xl"
+                        className="text-[28px] sm:text-4xl md:text-5xl lg:text-[56px] font-extrabold tracking-[-0.03em] text-white leading-[1.2] sm:leading-[1.1] uppercase mb-5 md:mb-8 max-w-4xl px-2"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
-                        Stop running your tailoring business from a <span className="opacity-40">chaotic notebook</span>.
+                        Stop running your tailoring business from a <span className="opacity-40 block sm:inline mt-1 sm:mt-0">chaotic notebook</span>.
                     </motion.h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                        className="text-stone-300 text-sm md:text-xl max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
+                        className="text-stone-300 text-xs sm:text-sm md:text-xl max-w-2xl mb-8 md:mb-12 font-medium leading-relaxed px-4"
                     >
                         SewDigital keeps your clients, measurements, and orders <br className="hidden md:block" />
                         synced across all devices in real-time.

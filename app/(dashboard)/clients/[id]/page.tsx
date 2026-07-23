@@ -55,7 +55,9 @@ export default function ClientDetailsPage() {
 
   // ── Add Measurement modal ─────────────────────────────────────────────────
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [measValues, setMeasValues] = useState<Record<string, string>>(DEFAULT_MEAS_VALUES);
+  const [templates, setTemplates] = useState<any[]>([]);
+  const [selectedTemplate, setSelectedTemplate] = useState<any | null>(null);
+  const [measValues, setMeasValues] = useState<Record<string, string>>({});
   const [measNotes, setMeasNotes] = useState("");
   const [addSaving, setAddSaving] = useState(false);
 
@@ -74,8 +76,9 @@ export default function ClientDetailsPage() {
         clientService.getById(id),
         measurementService.getByClient(id),
         orderService.getAll(),
+        measurementService.getTemplates(),
       ])
-        .then(([cData, mData, oData]) => {
+        .then(([cData, mData, oData, tData]) => {
           setClient(cData);
           if (cData) {
             setEditName(cData.name || "");
@@ -87,6 +90,7 @@ export default function ClientDetailsPage() {
           setMeasurements(Array.isArray(mData) ? mData : []);
           const allOrders = Array.isArray(oData) ? oData : [];
           setOrders(allOrders.filter((o) => o.client?._id === id || (o.client as any) === id));
+          setTemplates(Array.isArray(tData) ? tData : []);
         })
         .finally(() => setLoading(false));
     }
@@ -143,14 +147,15 @@ export default function ClientDetailsPage() {
   // ── Add Measurement ───────────────────────────────────────────────────────
   const handleSaveMeasurement = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!id) return;
+    if (!id || !selectedTemplate) return;
     setAddSaving(true);
     try {
-      await measurementService.create({ clientId: id, values: measValues, notes: measNotes });
+      await measurementService.create({ clientId: id, templateId: selectedTemplate._id, values: measValues, notes: measNotes });
       const updated = await measurementService.getByClient(id);
       setMeasurements(Array.isArray(updated) ? updated : []);
       setIsAddModalOpen(false);
-      setMeasValues(DEFAULT_MEAS_VALUES);
+      setSelectedTemplate(null);
+      setMeasValues({});
       setMeasNotes("");
     } catch (err) {
       console.error(err);
@@ -392,7 +397,7 @@ export default function ClientDetailsPage() {
                 onClick={() => setIsAddModalOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer"
               >
-                <Plus className="h-3.5 w-3.5" /> Log Measurements
+                <Plus className="h-3.5 w-3.5" /> Add Measurements
               </button>
             </div>
           )}
@@ -412,7 +417,7 @@ export default function ClientDetailsPage() {
               onClick={() => setIsAddModalOpen(true)}
               className="text-xs font-bold text-white hover:underline cursor-pointer"
             >
-              + Add Log
+              + Add Measurement
             </button>
           </div>
 
@@ -510,44 +515,91 @@ export default function ClientDetailsPage() {
       {/* ── Add Measurement Modal ─────────────────────────────────────────── */}
       <Modal
         isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        title={`Log Measurements — ${client.name}`}
-        subtitle="Enter body dimensions in inches."
+        onClose={() => { setIsAddModalOpen(false); setSelectedTemplate(null); }}
+        title={selectedTemplate ? `Log Measurements — ${selectedTemplate.name}` : `Select Template — ${client.name}`}
+        subtitle={selectedTemplate ? "Enter body dimensions in inches." : "Choose a measurement profile format."}
       >
-        <form onSubmit={handleSaveMeasurement} className="space-y-4 pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
-          <div className="grid grid-cols-2 gap-3">
-            {Object.entries(measValues).map(([key, val]) => (
-              <div key={key}>
-                <label className="block text-[11px] font-bold text-stone-300 mb-1">{key} (in)</label>
+        <div className="pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
+          {!selectedTemplate ? (
+            <div className="space-y-4">
+              {templates.length === 0 ? (
+                <div className="py-6 text-center text-xs text-stone-400 font-medium border border-dashed border-white/20 rounded-xl">
+                  No templates available. Please create templates in Settings.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {templates.map((t) => (
+                    <button
+                      key={t._id}
+                      onClick={() => {
+                        setSelectedTemplate(t);
+                        const initialVals: Record<string, string> = {};
+                        if (t.fields && Array.isArray(t.fields)) {
+                          t.fields.forEach((f: any) => initialVals[f.name] = "");
+                        }
+                        setMeasValues(initialVals);
+                      }}
+                      className="flex flex-col items-center justify-center gap-3 rounded-xl border border-white/10 bg-stone-900 p-5 text-center hover:bg-white/5 transition-colors cursor-pointer group"
+                    >
+                      {t.iconUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={t.iconUrl} alt={t.name} className="h-10 w-10 object-contain flex-shrink-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+                      ) : (
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10 border border-white/10 text-white">
+                          <Ruler className="h-5 w-5" />
+                        </div>
+                      )}
+                      <div className="w-full">
+                        <span className="block text-xs font-bold text-white group-hover:text-white truncate">{t.name}</span>
+                        <span className="block text-[10px] text-stone-400 mt-1 line-clamp-2">{t.description || `${t.fields?.length || 0} fields`}</span>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-stone-500 group-hover:text-white flex-shrink-0" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <form onSubmit={handleSaveMeasurement} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                {Object.entries(measValues).map(([key, val]) => (
+                  <div key={key}>
+                    <label className="block text-[11px] font-bold text-stone-300 mb-1">{key} (in)</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 16.5"
+                      value={val}
+                      onChange={(e) => setMeasValues({ ...measValues, [key]: e.target.value })}
+                      className="w-full rounded-xl border border-white/10 bg-stone-900 px-3 py-2 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold text-stone-300 mb-1">Fitting Notes</label>
                 <input
                   type="text"
-                  placeholder="e.g. 16.5"
-                  value={val}
-                  onChange={(e) => setMeasValues({ ...measValues, [key]: e.target.value })}
+                  placeholder="e.g. High waist cut preference..."
+                  value={measNotes}
+                  onChange={(e) => setMeasNotes(e.target.value)}
                   className="w-full rounded-xl border border-white/10 bg-stone-900 px-3 py-2 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
                 />
               </div>
-            ))}
-          </div>
-          <div>
-            <label className="block text-[11px] font-bold text-stone-300 mb-1">Fitting Notes</label>
-            <input
-              type="text"
-              placeholder="e.g. High waist cut preference..."
-              value={measNotes}
-              onChange={(e) => setMeasNotes(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3 py-2 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
-            />
-          </div>
-          <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-4">
-            <button type="button" onClick={() => setIsAddModalOpen(false)} className="rounded-full border border-white/10 px-5 py-2 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white cursor-pointer">
-              Cancel
-            </button>
-            <button type="submit" disabled={addSaving} className="rounded-full bg-white px-6 py-2 text-xs font-extrabold text-black hover:bg-stone-200 shadow-xs disabled:opacity-50 cursor-pointer">
-              {addSaving ? "Saving..." : "Save Measurements"}
-            </button>
-          </div>
-        </form>
+              <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-4">
+                <button
+                  type="button"
+                  onClick={() => setSelectedTemplate(null)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-stone-400 hover:text-white cursor-pointer"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" /> Back to Templates
+                </button>
+                <button type="submit" disabled={addSaving} className="rounded-full bg-white px-6 py-2 text-xs font-extrabold text-black hover:bg-stone-200 shadow-xs disabled:opacity-50 cursor-pointer">
+                  {addSaving ? "Saving..." : "Save Measurements"}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </Modal>
 
       {/* ── Measurement Detail / Edit Modal ───────────────────────────────── */}

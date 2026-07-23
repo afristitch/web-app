@@ -13,37 +13,21 @@ export function Hero() {
         transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as any }
     };
 
-    const float = {
-        animate: {
-            y: [0, -12, 0],
-            rotate: [-0.5, 0.5, -0.5]
-        },
-        transition: {
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-        }
-    };
-
-    const mockupWidths = "w-[180px] md:w-[260px] lg:w-[320px]";
-
     return (
-        <section className="relative min-h-[90vh] md:min-h-screen pt-32 md:pt-40 pb-4 md:pb-20 overflow-x-clip bg-white">
-            {/* White Background Pattern */}
-            <div className="absolute inset-0 z-0 opacity-[0.12] pointer-events-none" 
+        <section className="relative min-h-[90vh] md:min-h-screen pt-32 md:pt-40 pb-4 md:pb-20 overflow-x-clip bg-black text-white">
+            {/* Grid Radial Background Pattern */}
+            <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none" 
                  style={{ 
-                     backgroundImage: `radial-gradient(#000 1.5px, transparent 1.5px), linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+                     backgroundImage: `radial-gradient(#fff 1.5px, transparent 1.5px), linear-gradient(to right, #ffffff10 1px, transparent 1px), linear-gradient(to bottom, #ffffff10 1px, transparent 1px)`,
                      backgroundSize: '40px 40px, 200px 200px, 200px 200px',
                      backgroundPosition: 'center center'
                  }} 
             />
 
-            {/* Top Background (Black Section) */}
+            {/* Top Background Glow */}
             <div className="absolute top-0 left-0 right-0 h-[620px] md:h-[650px] lg:h-[750px] bg-black z-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-transparent shadow-[inset_0_-80px_120px_rgba(0,0,0,0.95)]" />
-                
-                {/* Subtle Decorative Elements */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] border border-white/[0.03] rounded-full pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black/80" />
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] border border-white/[0.05] rounded-full pointer-events-none" />
             </div>
 
             {/* Main Content Container - Centered Column */}
@@ -57,25 +41,25 @@ export function Hero() {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 bg-white/5 border border-white/10 rounded-full"
                     >
-                        <span className="w-2 h-2 rounded-full bg-[#FDDA0D] animate-pulse" />
-                        <span className="text-white/60 text-[9px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-varela-round)' }}>Professional Operating System</span>
+                        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                        <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-varela-round)' }}>Professional Operating System</span>
                     </motion.div>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                        className="text-4xl md:text-5xl lg:text-[52px] font-bold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-4xl"
+                        className="text-4xl md:text-5xl lg:text-[56px] font-extrabold tracking-[-0.03em] text-white leading-[1.1] uppercase mb-4 md:mb-8 max-w-4xl"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
-                        Stop running your tailoring business from a <span className="text-[#FDDA0D]">chaotic notebook</span>.
+                        Stop running your tailoring business from a <span className="opacity-40">chaotic notebook</span>.
                     </motion.h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                        className="text-white/40 text-xs md:text-lg max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
+                        className="text-stone-300 text-sm md:text-xl max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
                     >
                         SewDigital keeps your clients, measurements, and orders <br className="hidden md:block" />
                         perfectly organized in one place.
@@ -90,13 +74,10 @@ export function Hero() {
                     >
                         <button 
                             onClick={handleStoreClick}
-                            className="w-[240px] sm:w-auto flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-2xl hover:bg-[#FDDA0D] transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-black/40 font-bold tracking-widest uppercase text-sm"
+                            className="flex items-center justify-center gap-2 bg-white text-black px-10 py-5 rounded-full hover:bg-stone-200 transition-all hover:scale-105 active:scale-95 shadow-2xl font-extrabold text-base sm:text-lg tracking-wider"
                             style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
-                            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
-                            </svg>
-                            Download for Free
+                            Get Started Free
                         </button>
                     </motion.div>
                 </div>
@@ -114,7 +95,7 @@ export function Hero() {
                         <Image src="/phoneloginmockup.png" alt="SewDigital App" width={800} height={1600} className="w-full h-auto drop-shadow-3xl" />
                     </motion.div>
 
-                    {/* Mockup 2 (Floating Left - Static & Clear) */}
+                    {/* Mockup 2 (Floating Left) */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -125,7 +106,7 @@ export function Hero() {
                         <Image src="/phonewelcomemockup.png" alt="SewDigital App" width={800} height={1600} className="w-full h-auto drop-shadow-2xl" />
                     </motion.div>
 
-                    {/* Mockup 3 (Floating Right - Static & Clear) */}
+                    {/* Mockup 3 (Floating Right) */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -139,9 +120,7 @@ export function Hero() {
             </div>
 
             {/* Bottom Section Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
-
-
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
         </section>
     );
 }

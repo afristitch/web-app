@@ -34,6 +34,11 @@ body {
   min-height: 100vh;
 }
 
+/* Global Varela Round Rule for all Headings, Titles & Brand Elements */
+h1, h2, h3, h4, h5, h6, .font-varela {
+  font-family: var(--font-varela-round), system-ui, sans-serif !important;
+}
+
 section {
   content-visibility: auto;
   contain-intrinsic-size: 1px 1000px;
@@ -42,7 +47,6 @@ section {
 .font-headlines-forced {
   font-family: var(--font-varela-round), system-ui, sans-serif !important;
 }
-
 
 /* Cinematic Grain Overlay */
 .grain-overlay {

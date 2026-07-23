@@ -32,13 +32,13 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-28 md:py-48 px-6 bg-black relative overflow-hidden">
+    <section className="py-24 md:py-36 px-6 bg-black relative overflow-hidden">
       {/* Background glowing effects */}
       <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="mb-24 text-center">
+        <div className="mb-16 text-center">
           <h2
             className="text-xs font-bold tracking-cinematic uppercase text-white/40 mb-4"
             style={{ fontFamily: 'var(--font-varela-round)' }}
@@ -46,10 +46,10 @@ export function Testimonials() {
             Community
           </h2>
           <h3
-            className="text-4xl md:text-7xl font-bold tracking-tighter mx-auto max-w-4xl leading-none uppercase"
+            className="text-3xl md:text-6xl font-bold tracking-tighter mx-auto max-w-4xl leading-none uppercase"
             style={{ fontFamily: 'var(--font-varela-round)' }}
           >
-            SUCCESS <span className="text-stone-500">STORIES.</span>
+            SUCCESS <span className="opacity-40">STORIES.</span>
           </h3>
         </div>
 
@@ -59,20 +59,23 @@ export function Testimonials() {
               key={idx}
               className="group relative p-1 rounded-3xl bg-gradient-to-b from-white/10 to-transparent hover:from-white/20 transition-all duration-500"
             >
-              <div className="bg-black/60 backdrop-blur-xl h-full rounded-[23px] p-8 md:p-10 border border-white/5 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500">
+              <div className="bg-black/60 backdrop-blur-xl h-full rounded-[23px] p-6 md:p-8 border border-white/5 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500">
                 <div>
-                  <div className="flex gap-1 mb-8">
+                  <div className="flex gap-1 mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={18} className="fill-white text-white" />
+                      <Star key={i} size={14} className="fill-white text-white" />
                     ))}
                   </div>
-                  <p className="text-xl md:text-2xl font-medium leading-relaxed tracking-tight mb-10 text-stone-300">
+                  <p 
+                    className="text-sm md:text-base font-medium leading-relaxed mb-8 text-stone-300"
+                    style={{ fontFamily: 'var(--font-varela-round)' }}
+                  >
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div className="flex items-center gap-5 pt-8 border-t border-white/10 mt-auto">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/20">
+                <div className="flex items-center gap-4 pt-6 border-t border-white/10 mt-auto">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20 shrink-0">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.name}
@@ -81,10 +84,16 @@ export function Testimonials() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold uppercase tracking-tight text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
+                    <h4 
+                      className="text-sm font-bold uppercase tracking-tight text-white" 
+                      style={{ fontFamily: 'var(--font-varela-round)' }}
+                    >
                       {testimonial.name}
                     </h4>
-                    <p className="text-stone-500 text-sm font-medium">
+                    <p 
+                      className="text-stone-400 text-xs font-medium"
+                      style={{ fontFamily: 'var(--font-varela-round)' }}
+                    >
                       {testimonial.role} <span className="text-white/30 px-1">•</span> {testimonial.shop}
                     </p>
                   </div>

@@ -77,7 +77,7 @@ const faqs = [
 
 export default function HelpPage() {
     return (
-        <main className="min-h-screen pt-32 pb-20 bg-black">
+        <main className="min-h-screen pt-32 pb-20 bg-black text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
             <SectionWrapper>
                 <div className="container mx-auto max-w-5xl px-6">
                     {/* Hero Section */}
@@ -88,21 +88,9 @@ export default function HelpPage() {
                         >
                             Help <span className="opacity-40">Center.</span>
                         </h1>
-                        <p className="text-stone-400 text-xl max-w-2xl font-medium mb-12 mx-auto">
+                        <p className="text-stone-400 text-xl max-w-2xl font-medium mx-auto" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             Explore our resources and find answers to all your questions about digital tailoring.
                         </p>
-
-                        {/* Search Bar (Visual Only) */}
-                        <div className="relative max-w-2xl w-full group">
-                            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                                <Search className="w-5 h-5 text-stone-500 group-focus-within:text-white transition-colors" />
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="Search for help articles..."
-                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 pl-14 pr-6 text-white placeholder-stone-600 focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-white/30 transition-all text-lg font-medium"
-                            />
-                        </div>
                     </div>
 
                     {/* Categories Grid */}
@@ -112,6 +100,7 @@ export default function HelpPage() {
                                 href={cat.link}
                                 key={i}
                                 className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all group relative overflow-hidden flex flex-col items-center text-center"
+                                style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <ArrowRight className="w-5 h-5 text-white" />
@@ -122,7 +111,7 @@ export default function HelpPage() {
                                 <h3 className="text-xl font-bold text-white mb-2 uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                     {cat.title}
                                 </h3>
-                                <p className="text-stone-400 text-sm font-medium leading-relaxed">
+                                <p className="text-stone-400 text-sm font-medium leading-relaxed" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                     {cat.description}
                                 </p>
                             </Link>
@@ -157,7 +146,7 @@ export default function HelpPage() {
                                     >
                                         {faq.question}
                                     </h4>
-                                    <p className="text-stone-400 text-lg font-medium leading-relaxed max-w-3xl mx-auto">
+                                    <p className="text-stone-400 text-lg font-medium leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                         {faq.answer}
                                     </p>
                                 </div>
@@ -166,12 +155,12 @@ export default function HelpPage() {
                     </div>
 
                     {/* Still Need Help CTA */}
-                    <div className="p-12 rounded-[2.5rem] bg-gradient-to-br from-stone-900 to-black border border-white/5 relative overflow-hidden text-center">
+                    <div className="p-12 rounded-[2.5rem] bg-gradient-to-br from-stone-900 to-black border border-white/5 relative overflow-hidden text-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
                         <div className="absolute top-0 left-0 w-full h-full bg-[url('/grain.png')] opacity-[0.03] pointer-events-none" />
                         <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4 tracking-tighter" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             Still Have <span className="opacity-40">Questions?</span>
                         </h2>
-                        <p className="text-stone-400 text-lg mb-10 max-w-xl mx-auto font-medium">
+                        <p className="text-stone-400 text-lg mb-10 max-w-xl mx-auto font-medium" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             If you couldn't find what you're looking for, our support team is ready to help you with your inquiry.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

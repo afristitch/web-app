@@ -25,7 +25,7 @@ const faqs = [
 
 export default function SupportPage() {
     return (
-        <main className="min-h-screen pt-32 pb-20 bg-black">
+        <main className="min-h-screen pt-32 pb-20 bg-black text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
             <SectionWrapper>
                 <div className="container mx-auto max-w-5xl px-6">
                     {/* Header */}
@@ -36,7 +36,7 @@ export default function SupportPage() {
                         >
                             Support <span className="opacity-40">& Assistance.</span>
                         </h1>
-                        <p className="text-stone-400 text-xl max-w-2xl font-medium mx-auto">
+                        <p className="text-stone-400 text-xl max-w-2xl font-medium mx-auto" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             Need help with your sewing projects or have questions about the platform?
                             We&apos;re here to help you every step of the way.
                         </p>
@@ -44,14 +44,14 @@ export default function SupportPage() {
 
                     {/* Contact Cards */}
                     <div className="grid md:grid-cols-2 gap-6 mb-32">
-                        <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group flex flex-col items-center text-center">
+                        <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group flex flex-col items-center text-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10">
                                 <Mail className="text-white w-6 h-6" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-2 uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 Email Us
                             </h3>
-                            <p className="text-stone-400 mb-8 font-medium">
+                            <p className="text-stone-400 mb-8 font-medium" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 Send us an email and we&apos;ll get back to you within 24 hours.
                             </p>
                             <a
@@ -63,14 +63,14 @@ export default function SupportPage() {
                             </a>
                         </div>
 
-                        <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group flex flex-col items-center text-center">
+                        <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group flex flex-col items-center text-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
                             <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10">
                                 <MessageCircle className="text-white w-6 h-6" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-2 uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 WhatsApp
                             </h3>
-                            <p className="text-stone-400 mb-8 font-medium">
+                            <p className="text-stone-400 mb-8 font-medium" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 Chat with us directly for quick support and inquiries.
                             </p>
                             <a
@@ -96,14 +96,14 @@ export default function SupportPage() {
 
                         <div className="grid gap-8 w-full max-w-3xl">
                             {faqs.map((faq, index) => (
-                                <div key={index} className="pb-8 border-b border-white/5 group flex flex-col items-center">
+                                <div key={index} className="pb-8 border-b border-white/5 group flex flex-col items-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                     <h4
                                         className="text-lg font-bold text-white mb-4 uppercase tracking-tight"
                                         style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
                                         {faq.question}
                                     </h4>
-                                    <p className="text-stone-400 font-medium leading-relaxed">
+                                    <p className="text-stone-400 font-medium leading-relaxed" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                         {faq.answer}
                                     </p>
                                 </div>

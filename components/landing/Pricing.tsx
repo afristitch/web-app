@@ -53,22 +53,25 @@ export function Pricing() {
     };
 
     return (
-        <section className="py-28 md:py-48 px-6 bg-black">
+        <section className="py-28 md:py-40 px-6 bg-black text-white border-t border-white/10">
             <div className="container mx-auto max-w-7xl">
                 <div className="text-center mb-20">
                     <h2
-                        className="text-xs font-bold tracking-cinematic uppercase text-white/40 mb-4"
+                        className="text-xs font-bold tracking-cinematic uppercase text-stone-400 mb-4"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
                         Simple Pricing
                     </h2>
                     <h3
-                        className="text-3xl md:text-6xl font-bold tracking-tighter leading-none mb-6 uppercase"
+                        className="text-3xl md:text-6xl font-bold tracking-tighter leading-none mb-6 uppercase text-white"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
-                        CHOOSE THE <span className="text-stone-500">PERFECT PLAN.</span>
+                        CHOOSE THE <span className="opacity-40">PERFECT PLAN.</span>
                     </h3>
-                    <p className="text-stone-500 text-lg max-w-2xl mx-auto">
+                    <p 
+                        className="text-stone-300 text-lg max-w-2xl mx-auto font-medium"
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
+                    >
                         We've made the core features completely free. Upgrade when your shop needs it. No hidden fees.
                     </p>
                 </div>
@@ -77,71 +80,80 @@ export function Pricing() {
                     {plans.map((plan, idx) => (
                         <div
                             key={idx}
-                            className={`relative p-8 rounded-3xl border ${plan.isPopular ? 'border-white bg-white/[0.02]' : 'border-white/5 bg-black'
-                                } flex flex-col items-center text-center transition-all hover:scale-[1.02]`}
+                            className={`relative py-12 px-8 rounded-3xl transition-all duration-300 bg-black ${plan.isPopular ? 'border-2 border-white shadow-2xl ring-1 ring-white/40 hover:scale-[1.02]' : 'border border-white/25 hover:border-white/50'
+                                } flex flex-col items-center text-center`}
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             {plan.isPopular && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-bold rounded-full tracking-wider uppercase">
+                                <div 
+                                    className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-black text-xs font-bold rounded-full tracking-wider uppercase shadow-lg"
+                                    style={{ fontFamily: 'var(--font-varela-round)' }}
+                                >
                                     {plan.tag}
                                 </div>
                             )}
 
                             <div className="mb-8 flex flex-col items-center">
                                 <h4
-                                    className="text-stone-500 font-bold uppercase tracking-widest text-sm mb-2"
+                                    className="text-stone-300 font-bold uppercase tracking-widest text-sm mb-2"
                                     style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     {plan.name}
                                 </h4>
                                 <div className="flex items-baseline justify-center gap-2">
                                     <span
-                                        className="text-4xl font-bold"
+                                        className="text-4xl font-extrabold text-white"
                                         style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
                                         {plan.price}
                                     </span>
                                     <span
-                                        className="text-stone-500 font-medium"
+                                        className="text-stone-400 font-medium"
                                         style={{ fontFamily: 'var(--font-varela-round)' }}
                                     >
                                         / {plan.duration}
                                     </span>
                                 </div>
                                 <div className="mt-3 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 mx-auto">
-                                    <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase">
+                                    <span 
+                                        className="text-[10px] font-bold text-stone-300 tracking-wider uppercase"
+                                        style={{ fontFamily: 'var(--font-varela-round)' }}
+                                    >
                                         {plan.name === "Free Forever" ? "No Credit Card Needed" : "Upgrade Anytime"}
                                     </span>
                                 </div>
-                                <p className="mt-4 text-stone-500 text-sm font-medium">{plan.description}</p>
+                                <p 
+                                    className="mt-4 text-stone-300 text-sm font-medium"
+                                    style={{ fontFamily: 'var(--font-varela-round)' }}
+                                >
+                                    {plan.description}
+                                </p>
                             </div>
 
-                            <div className="space-y-4 mb-10 flex-grow w-full">
+                            <div className="space-y-4 flex-grow w-full border-t border-white/10 pt-6">
                                 {plan.features.map((feature, fIdx) => (
                                     <div key={fIdx} className="flex items-center justify-center gap-3">
                                         <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                             <Check className="text-white" size={12} />
                                         </div>
-                                        <span className="text-sm font-medium">{feature}</span>
+                                        <span 
+                                            className="text-sm font-medium text-stone-200"
+                                            style={{ fontFamily: 'var(--font-varela-round)' }}
+                                        >
+                                            {feature}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
-
-                            <button
-                                onClick={(e) => handlePlanClick(plan, e)}
-                                className={`w-full py-4 rounded-full font-bold tracking-widest uppercase text-sm transition-all hover:scale-[1.02] active:scale-95 ${plan.isPopular
-                                    ? 'bg-white text-black hover:bg-[#FDDA0D]'
-                                    : 'bg-white/5 text-white hover:bg-[#FDDA0D] hover:text-black'
-                                    }`}
-                                style={{ fontFamily: 'var(--font-varela-round)' }}
-                            >
-                                {plan.isPro ? (user ? "Manage Subscription" : "Subscribe with Paystack") : "Download for Free"}
-                            </button>
                         </div>
                     ))}
                 </div>
 
                 <div className="text-center">
-                    <p className="text-stone-600 text-[10px] font-medium tracking-wider uppercase">
+                    <p 
+                        className="text-stone-400 text-[11px] font-medium tracking-wider uppercase"
+                        style={{ fontFamily: 'var(--font-varela-round)' }}
+                    >
                         * Bulk SMS, Team Management, and Style Gallery are Pro features.
                     </p>
                 </div>

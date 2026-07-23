@@ -6,7 +6,10 @@ export default function TermsPage() {
     const headerFade = useFadeUp();
 
     return (
-        <main className="min-h-screen bg-black text-white pt-32 pb-20 selection:bg-white selection:text-black overflow-x-hidden">
+        <main 
+            className="min-h-screen bg-black text-white pt-32 pb-20 selection:bg-white selection:text-black overflow-x-hidden"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
+        >
             <div className="grain-overlay" />
 
             <div className="container mx-auto max-w-7xl px-6">
@@ -15,18 +18,21 @@ export default function TermsPage() {
                         className="text-3xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase mb-20 leading-[0.9] text-balance"
                         style={{ fontFamily: 'var(--font-varela-round)' }}
                     >
-                        Terms of Use <span className="text-stone-500">& End User License Agreement (EULA)</span>
+                        Terms of Use <span className="opacity-40">& End User License Agreement (EULA)</span>
                     </h1>
                 </div>
 
                 <div className="space-y-48 max-w-5xl mx-auto">
                     <section className="prose prose-invert prose-stone max-w-none text-center">
-                        <div className="text-stone-400 leading-relaxed text-lg md:text-2xl font-medium">
-                            <p className="text-white font-bold mb-10 italic">Effective Date: April 13, 2026</p>
-                            <p className="text-balance">
+                        <div 
+                            className="text-stone-400 leading-relaxed text-lg md:text-2xl font-medium"
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
+                        >
+                            <p className="text-white font-bold mb-10 italic" style={{ fontFamily: 'var(--font-varela-round)' }}>Effective Date: April 13, 2026</p>
+                            <p className="text-balance" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 This Terms of Use and End User License Agreement (“Agreement”) is a legal agreement between you (“User” or “End-User”) and SewDigital (“Developer”, “we”, “us”, or “our”) governing your use of the SewDigital application, website, and related services (“Service”).
                             </p>
-                            <p className="mt-8 text-balance">
+                            <p className="mt-8 text-balance" style={{ fontFamily: 'var(--font-varela-round)' }}>
                                 By downloading, installing, accessing, or using the Service, you agree to be bound by this Agreement.
                             </p>
                         </div>
@@ -110,37 +116,32 @@ export default function TermsPage() {
                         </Section>
 
                         <Section title="Contact Information">
-                            <p className="text-white font-bold text-center mb-10">If you have any questions about this Agreement, contact:</p>
-                            <div className="p-8 md:p-16 bg-white/[0.02] border border-white/5 rounded-[2rem] md:rounded-[3rem] space-y-12 text-stone-300 text-center">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
-                                    <div>
-                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-4 opacity-30">Developer</strong>
-                                        <p className="text-2xl font-black">SewDigital</p>
+                            <p className="text-white font-bold text-center mb-10" style={{ fontFamily: 'var(--font-varela-round)' }}>If you have any questions about this Agreement, contact:</p>
+                            <div className="p-8 md:p-12 bg-white/[0.02] border border-white/10 rounded-3xl text-stone-300 text-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 items-start">
+                                    <div className="flex flex-col items-center">
+                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-2.5 opacity-40">Developer</strong>
+                                        <p className="text-xl sm:text-2xl font-black text-white">SewDigital</p>
                                     </div>
-                                    <div>
-                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-4 opacity-30">Email</strong>
-                                        <p className="text-lg md:text-xl text-stone-300">support@sewdigital.app</p>
+                                    <div className="flex flex-col items-center">
+                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-2.5 opacity-40">Email</strong>
+                                        <p className="text-sm sm:text-base font-semibold text-stone-200 break-all">support@sewdigital.app</p>
                                     </div>
-                                    <div>
-                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-4 opacity-30">Address</strong>
-                                        <p className="text-lg md:text-xl text-stone-300">Ahodwo, Kumasi, Ghana</p>
+                                    <div className="flex flex-col items-center">
+                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-2.5 opacity-40">Address</strong>
+                                        <p className="text-sm sm:text-base font-semibold text-stone-200">Ahodwo, Kumasi, Ghana</p>
                                     </div>
-                                    <div>
-                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-4 opacity-30">Phone</strong>
-                                        <p className="text-lg md:text-xl text-stone-300">+233592407690</p>
+                                    <div className="flex flex-col items-center">
+                                        <strong className="text-white uppercase text-[10px] tracking-[0.3em] block mb-2.5 opacity-40">Phone</strong>
+                                        <p className="text-sm sm:text-base font-semibold text-stone-200">+233592407690</p>
                                     </div>
                                 </div>
                             </div>
                         </Section>
 
-                        <div className="pt-32 border-t border-white/5 text-center">
-                            <p className="text-stone-800 uppercase tracking-[0.4em] text-[10px] font-black">
-                                Acknowledgment & Acceptance
-                            </p>
-                            <p className="mt-8 text-stone-400 max-w-2xl mx-auto italic font-medium leading-relaxed text-lg md:text-xl">
-                                By using the Service, you confirm that you have read, understood, and agree to be bound by this Agreement.
-                            </p>
-                        </div>
+                        <Section title="Acceptance">
+                            <p>By using the Service, you confirm that you have read, understood, and agree to be bound by this Agreement.</p>
+                        </Section>
                     </div>
                 </div>
             </div>
@@ -150,7 +151,7 @@ export default function TermsPage() {
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <section className="group text-center">
+        <section className="group text-center" style={{ fontFamily: 'var(--font-varela-round)' }}>
             <div className="space-y-8">
                 <h2
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-white uppercase tracking-tight"
@@ -158,7 +159,10 @@ function Section({ title, children }: { title: string, children: React.ReactNode
                 >
                     {title}
                 </h2>
-                <div className="text-stone-400 leading-relaxed text-base md:text-xl font-medium mx-auto max-w-3xl space-y-6">
+                <div 
+                    className="text-stone-400 leading-relaxed text-base md:text-xl font-medium mx-auto max-w-3xl space-y-6"
+                    style={{ fontFamily: 'var(--font-varela-round)' }}
+                >
                     {children}
                 </div>
             </div>

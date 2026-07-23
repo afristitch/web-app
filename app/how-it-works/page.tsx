@@ -1,9 +1,8 @@
 "use client";
 
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
-import { Play, Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 const steps = [
     {
@@ -30,45 +29,49 @@ const steps = [
 
 export default function HowItWorksPage() {
     return (
-        <main className="min-h-screen bg-black pt-32 pb-20">
+        <main className="min-h-screen bg-black text-white pt-32 pb-20">
             {/* Hero Section */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-24 text-center flex flex-col items-center">
                     <div className="max-w-4xl">
                         <h1
-                            className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8"
+                            className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-8 text-white"
                             style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             The Art of <span className="opacity-40">Precision.</span>
                         </h1>
-                        <p className="text-xl text-stone-500 max-w-2xl font-medium mx-auto">
+                        <p className="text-lg md:text-xl text-stone-300 max-w-2xl font-medium mx-auto">
                             Experience the seamless fusion of traditional craftsmanship and modern digital efficiency.
                         </p>
                     </div>
                 </div>
             </SectionWrapper>
 
-
             {/* Steps Section */}
             <SectionWrapper>
                 <div className="container mx-auto max-w-7xl px-6 mb-32">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16">
                         {steps.map((step, idx) => (
-                            <div key={idx} className="relative pt-12 border-t border-white/10 flex flex-col items-center text-center">
-                                <span className="absolute top-4 left-1/2 -translate-x-1/2 text-xs font-bold tracking-cinematic text-stone-500 uppercase">0{idx + 1}</span>
+                            <div
+                                key={idx}
+                                className="relative p-8 sm:p-10 rounded-3xl border border-white/10 bg-stone-950/80 flex flex-col items-center text-center shadow-xl"
+                            >
+                                <span className="text-xs font-extrabold tracking-cinematic text-stone-500 uppercase mb-3">
+                                    STEP 0{idx + 1}
+                                </span>
                                 <h3
-                                    className="text-2xl sm:text-3xl font-bold uppercase mb-6"
+                                    className="text-2xl sm:text-3xl font-bold uppercase mb-4 text-white"
                                     style={{ fontFamily: 'var(--font-varela-round)' }}
                                 >
                                     {step.title}
                                 </h3>
-                                <p className="text-lg text-stone-500 font-medium mb-8 leading-relaxed max-w-md mx-auto">
+                                <p className="text-sm sm:text-base text-stone-300 font-medium mb-8 leading-relaxed max-w-md mx-auto">
                                     {step.description}
                                 </p>
-                                <ul className="space-y-4 w-full flex flex-col items-center">
+                                <ul className="space-y-3.5 w-full flex flex-col items-center border-t border-white/10 pt-6">
                                     {step.features.map((feature, fIdx) => (
-                                        <li key={fIdx} className="flex items-center justify-center gap-3 text-sm font-bold uppercase tracking-tight text-white/70">
-                                            <div className="w-5 h-5 rounded-md bg-white/5 flex items-center justify-center shrink-0">
+                                        <li key={fIdx} className="flex items-center justify-center gap-3 text-xs sm:text-sm font-bold uppercase tracking-tight text-white">
+                                            <div className="w-5 h-5 rounded-md bg-white/10 flex items-center justify-center shrink-0">
                                                 <Check size={12} className="text-white" />
                                             </div>
                                             {feature}
@@ -83,21 +86,25 @@ export default function HowItWorksPage() {
 
             {/* Final CTA */}
             <SectionWrapper>
-                <div className="container mx-auto max-w-7xl px-6 py-24 text-center border-t border-white/5">
-                    <h2
-                        className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-12 text-balance leading-none"
-                        style={{ fontFamily: 'var(--font-varela-round)' }}
-                    >
-                        READY TO REVOLUTIONIZE <span className="opacity-40">YOUR WORKSHOP?</span>
-                    </h2>
-                    <a
-                        href="https://play.google.com/store/apps/details?id=com.jimmy.sewdigital&hl=en"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-10 py-5 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform"
-                    >
-                        Download Now <ArrowRight size={20} />
-                    </a>
+                <div className="container mx-auto max-w-7xl px-6 py-20 text-center border-t border-white/10">
+                    <div className="p-12 sm:p-16 rounded-[40px] bg-stone-950 border border-white/10 text-white">
+                        <h2
+                            className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter uppercase mb-6 text-balance leading-none"
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
+                        >
+                            READY TO REVOLUTIONIZE <span className="opacity-40">YOUR WORKSHOP?</span>
+                        </h2>
+                        <p className="text-stone-300 text-base max-w-xl mx-auto font-medium mb-10">
+                            Create your tailor shop account today and elevate your client experience.
+                        </p>
+                        <Link
+                            href="/login"
+                            className="inline-flex items-center gap-2.5 px-10 py-5 bg-white text-black rounded-full font-extrabold text-base sm:text-lg hover:bg-stone-200 hover:scale-105 transition-all shadow-2xl"
+                            style={{ fontFamily: 'var(--font-varela-round)' }}
+                        >
+                            Get Started Free <ArrowRight size={20} />
+                        </Link>
+                    </div>
                 </div>
             </SectionWrapper>
         </main>

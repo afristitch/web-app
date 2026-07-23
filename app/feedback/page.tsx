@@ -8,7 +8,7 @@ export default function FeedbackPage() {
                     className="text-3xl md:text-5xl font-bold text-white uppercase mb-6 text-center"
                     style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
-                    We value your <span className="text-[#FDDA0D]">Feedback</span>
+                    We value your <span className="opacity-40">Feedback</span>
                 </h1>
                 <p className="text-stone-500 mb-12 text-lg text-center max-w-2xl mx-auto">
                     Tell us what you love, what needs improvement, or what features you want next.

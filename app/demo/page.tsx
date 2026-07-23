@@ -8,7 +8,7 @@ export default function DemoPage() {
                     className="text-3xl md:text-5xl font-bold text-white uppercase mb-6 text-center"
                     style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
-                    See SewDigital in <span className="text-[#FDDA0D]">Action</span>
+                    See SewDigital in <span className="opacity-40">Action</span>
                 </h1>
                 <p className="text-stone-500 mb-12 text-lg text-center max-w-2xl mx-auto">
                     Watch how you can completely transform your tailoring business.

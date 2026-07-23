@@ -296,7 +296,7 @@ function SubscriptionContent() {
                     {/* Plans Header */}
                     <div className="text-center mb-12 sm:mb-16">
                         <h2
-                            className="text-xs font-bold tracking-cinematic uppercase text-[#FDDA0D] mb-3 flex items-center justify-center gap-2"
+                            className="text-xs font-bold tracking-cinematic uppercase text-stone-400 mb-3 flex items-center justify-center gap-2"
                             style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             <Sparkles size={14} /> Instant Activation

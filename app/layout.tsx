@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter, Plus_Jakarta_Sans, Varela_Round } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Varela_Round } from "next/font/google";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-});
+import { ClientLayoutWrapper } from "@/components/ClientLayoutWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,8 +25,16 @@ export const metadata: Metadata = {
     default: "SewDigital | Next-generation Tailor Management Software",
     template: "%s | SewDigital",
   },
-  description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
-  keywords: ["tailor software", "tailoring management", "measurement app", "fashion tech", "SewDigital", "tailor POS"],
+  description:
+    "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
+  keywords: [
+    "tailor software",
+    "tailoring management",
+    "measurement app",
+    "fashion tech",
+    "SewDigital",
+    "tailor POS",
+  ],
   authors: [{ name: "SewDigital" }],
   creator: "SewDigital",
   publisher: "SewDigital",
@@ -38,29 +42,7 @@ export const metadata: Metadata = {
     icon: "/stitchlogo.png",
     apple: "/stitchlogo.png",
   },
-  openGraph: {
-    title: "SewDigital | Next-generation Tailor Management",
-    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
-    url: "https://www.sewdigital.app",
-    siteName: "SewDigital",
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "SewDigital | Next-generation Tailor Management",
-    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
-    creator: "@sewdigital",
-  },
-  alternates: {
-    canonical: "https://www.sewdigital.app",
-  },
 };
-
-import { AuthProvider } from "@/context/AuthContext";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 export default function RootLayout({
   children,
@@ -68,16 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${plusJakarta.variable} ${varelaRound.variable} antialiased font-inter bg-black text-white selection:bg-accent selection:text-black`}>
-        <div className="grain-overlay" />
-        <SmoothScroll>
-          <AuthProvider>
-            <Navbar />
-            {children}
-          </AuthProvider>
-          <Footer />
-        </SmoothScroll>
+    <html lang="en" className="bg-black text-white">
+      <body
+        className={`${inter.variable} ${plusJakarta.variable} ${varelaRound.variable} antialiased font-inter bg-black text-white selection:bg-white selection:text-black`}
+      >
+        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
       </body>
     </html>
   );

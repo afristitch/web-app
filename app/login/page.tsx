@@ -151,8 +151,8 @@ function LoginForm() {
 
                     <div className="mt-8 text-center text-xs text-stone-500">
                         Need an account for your tailor shop?{" "}
-                        <Link href="/pricing" className="text-white hover:underline font-bold">
-                            View Plans
+                        <Link href="/signup" className="text-white hover:underline font-bold">
+                            Sign Up
                         </Link>
                     </div>
                 </div>

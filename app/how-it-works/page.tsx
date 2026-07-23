@@ -98,7 +98,7 @@ export default function HowItWorksPage() {
                             Create your tailor shop account today and elevate your client experience.
                         </p>
                         <Link
-                            href="/login"
+                            href="/signup"
                             className="inline-flex items-center gap-2.5 px-10 py-5 bg-white text-black rounded-full font-extrabold text-base sm:text-lg hover:bg-stone-200 hover:scale-105 transition-all shadow-2xl"
                             style={{ fontFamily: 'var(--font-varela-round)' }}
                         >

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, ChevronDown, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -18,9 +19,8 @@ export function Hero() {
             {/* Grid Radial Background Pattern */}
             <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none" 
                  style={{ 
-                     backgroundImage: `radial-gradient(#fff 1.5px, transparent 1.5px), linear-gradient(to right, #ffffff10 1px, transparent 1px), linear-gradient(to bottom, #ffffff10 1px, transparent 1px)`,
-                     backgroundSize: '40px 40px, 200px 200px, 200px 200px',
-                     backgroundPosition: 'center center'
+                     backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`,
+                     backgroundSize: '32px 32px'
                  }} 
             />
 
@@ -31,7 +31,7 @@ export function Hero() {
             </div>
 
             {/* Main Content Container - Centered Column */}
-            <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center">
+            <div className="relative z-10 container mx-auto max-w-7xl px-6 flex flex-col items-center text-center">
                 
                 {/* Header Content */}
                 <div className="max-w-4xl w-full flex flex-col items-center mb-6 md:mb-16">
@@ -39,10 +39,12 @@ export function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        className="flex items-center gap-3 mb-6 md:mb-8 px-4 py-2 bg-white/5 border border-white/10 rounded-full"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-stone-800 bg-stone-950/80 backdrop-blur-md mb-8 shadow-xs"
                     >
-                        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                        <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: 'var(--font-varela-round)' }}>Professional Operating System</span>
+                        <span className="flex h-2 w-2 rounded-full bg-white animate-pulse" />
+                        <span className="text-xs sm:text-sm font-semibold tracking-wide text-stone-300">
+                            Built Specifically for Modern Tailors & Designers
+                        </span>
                     </motion.div>
 
                     <motion.h1
@@ -62,7 +64,7 @@ export function Hero() {
                         className="text-stone-300 text-sm md:text-xl max-w-2xl mb-6 md:mb-12 font-medium leading-relaxed"
                     >
                         SewDigital keeps your clients, measurements, and orders <br className="hidden md:block" />
-                        perfectly organized in one place.
+                        synced across all devices in real-time.
                     </motion.p>
 
                     {/* App Store Buttons - Centered */}
@@ -72,13 +74,13 @@ export function Hero() {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
                         className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 w-full sm:w-auto"
                     >
-                        <button 
-                            onClick={handleStoreClick}
+                        <Link 
+                            href="/signup"
                             className="flex items-center justify-center gap-2 bg-white text-black px-10 py-5 rounded-full hover:bg-stone-200 transition-all hover:scale-105 active:scale-95 shadow-2xl font-extrabold text-base sm:text-lg tracking-wider"
                             style={{ fontFamily: 'var(--font-varela-round)' }}
                         >
                             Get Started Free
-                        </button>
+                        </Link>
                     </motion.div>
                 </div>
 

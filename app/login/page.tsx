@@ -104,9 +104,17 @@ function LoginForm() {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold tracking-wider text-stone-400 uppercase mb-2">
-                                    Password
-                                </label>
+                                <div className="flex items-center justify-between mb-2">
+                                    <label className="block text-xs font-bold tracking-wider text-stone-400 uppercase">
+                                        Password
+                                    </label>
+                                    <Link
+                                        href="/forgot-password"
+                                        className="text-xs text-stone-400 hover:text-white underline transition-colors font-medium"
+                                    >
+                                        Forgot Password?
+                                    </Link>
+                                </div>
                                 <div className="relative">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" />
                                     <input
@@ -120,19 +128,10 @@ function LoginForm() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between text-xs pt-1">
-                                <Link
-                                    href="/reset-password"
-                                    className="text-stone-400 hover:text-white transition-colors"
-                                >
-                                    Forgot Password?
-                                </Link>
-                            </div>
-
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-4 bg-white text-black font-bold tracking-widest uppercase text-xs rounded-full hover:bg-[#FDDA0D] transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none mt-4"
+                                className="w-full py-4 bg-white text-black font-bold tracking-widest uppercase text-xs rounded-full hover:bg-stone-200 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none mt-4 cursor-pointer"
                                 style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 {loading ? (
@@ -151,7 +150,7 @@ function LoginForm() {
 
                     <div className="mt-8 text-center text-xs text-stone-500">
                         Need an account for your tailor shop?{" "}
-                        <Link href="/signup" className="text-white hover:underline font-bold">
+                        <Link href="/signup" className="text-white underline font-bold">
                             Sign Up
                         </Link>
                     </div>

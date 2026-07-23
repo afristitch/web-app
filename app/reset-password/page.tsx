@@ -100,7 +100,7 @@ function ResetPasswordContent() {
                     <div className="container mx-auto max-w-7xl px-6">
                         <div className="max-w-xl">
                             <div className="flex items-center gap-4 mb-8">
-                                <CheckCircle2 className="h-8 w-8 text-[#FDDA0D]" />
+                                <CheckCircle2 className="h-8 w-8 text-emerald-400" />
                                 <h1
                                     className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
                                     style={{ fontFamily: 'var(--font-varela-round)' }}
@@ -115,10 +115,10 @@ function ResetPasswordContent() {
 
                             <button
                                 onClick={() => router.push("/")}
-                                className="flex items-center justify-center gap-2 w-full max-w-md bg-white text-black py-5 rounded-full font-bold hover:scale-[1.02] transition-all shadow-lg"
+                                className="flex items-center justify-center gap-2 w-full max-w-md bg-white text-black py-5 rounded-full font-bold hover:bg-stone-200 transition-all shadow-lg"
                             >
                                 Go to login
-                                <ArrowRight className="h-5 w-5" />
+                                <ArrowRight className="h-5 w-5 text-black" />
                             </button>
 
                             <div className="pt-12 border-t border-white/5 mt-24">
@@ -163,7 +163,7 @@ function ResetPasswordContent() {
                                         type={showPassword ? "text" : "password"}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full bg-stone-900/50 border border-white/5 px-6 py-4 rounded-2xl focus:outline-none focus:border-[#FDDA0D]/50 focus:ring-1 focus:ring-[#FDDA0D]/20 transition-all pr-14 text-white font-medium"
+                                        className="w-full bg-stone-900/50 border border-white/10 px-6 py-4 rounded-2xl focus:outline-none focus:border-white/50 transition-all pr-14 text-white font-medium"
                                         placeholder="Min. 6 characters"
                                         required
                                     />
@@ -183,7 +183,7 @@ function ResetPasswordContent() {
                                     type={showPassword ? "text" : "password"}
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full bg-stone-900/50 border border-white/5 px-6 py-4 rounded-2xl focus:outline-none focus:border-[#FDDA0D]/50 focus:ring-1 focus:ring-[#FDDA0D]/20 transition-all text-white font-medium"
+                                    className="w-full bg-stone-900/50 border border-white/10 px-6 py-4 rounded-2xl focus:outline-none focus:border-white/50 transition-all text-white font-medium"
                                     placeholder="Repeat new password"
                                     required
                                 />

@@ -247,7 +247,7 @@ function SignUpForm() {
 
                     <div className="mt-8 text-center text-xs text-stone-500">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-white hover:underline font-bold">
+                        <Link href="/login" className="text-white underline font-bold">
                             Sign In
                         </Link>
                     </div>

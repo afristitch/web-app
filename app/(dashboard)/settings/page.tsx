@@ -295,8 +295,8 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   onClick={handleSaveUserProfile}
-                  disabled={userProfileSaving}
-                  className="rounded-full bg-white px-4 py-1.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer disabled:opacity-50"
+                  disabled={userProfileSaving || !editingProfile}
+                  className="rounded-full bg-white px-4 py-1.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
                   {userProfileSaving ? "Saving..." : "Save Profile"}
@@ -431,8 +431,8 @@ export default function SettingsPage() {
                 )}
                 <button
                   type="submit"
-                  disabled={profileLoading}
-                  className="rounded-full bg-white px-4 py-1.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer disabled:opacity-50"
+                  disabled={profileLoading || !editingStudio}
+                  className="rounded-full bg-white px-4 py-1.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'var(--font-varela-round)' }}
                 >
                   {profileLoading ? "Updating..." : "Save Studio Settings"}

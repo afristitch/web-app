@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Search,
   Bell,
@@ -9,12 +9,23 @@ import {
   Scissors,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { profileService } from "@/lib/services";
 import Link from "next/link";
 import Image from "next/image";
 
 export function Header() {
   const { user, logout } = useAuth();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(user?.photoUrl || null);
+
+  useEffect(() => {
+    // Fetch up-to-date profile photo
+    profileService.getMyProfile().then((res: any) => {
+      const data = res?.data || res;
+      const u = data?.user || data;
+      if (u?.photoUrl) setPhotoUrl(u.photoUrl);
+    }).catch(() => {});
+  }, []);
 
   return (
     <header
@@ -51,9 +62,20 @@ export function Header() {
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="flex items-center gap-2.5 rounded-full border border-white/20 bg-stone-950 p-1 pl-1.5 pr-2.5 hover:bg-white/10 transition-colors shadow-xs"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[11px] font-extrabold text-black uppercase">
-              {user?.name ? user.name.slice(0, 2).toUpperCase() : "SD"}
-            </div>
+            {photoUrl ? (
+              <Image
+                src={photoUrl}
+                alt={user?.name || "Profile"}
+                width={28}
+                height={28}
+                className="h-7 w-7 rounded-full object-cover border border-white/20"
+                unoptimized
+              />
+            ) : (
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[11px] font-extrabold text-black uppercase">
+                {user?.name ? user.name.slice(0, 2).toUpperCase() : "SD"}
+              </div>
+            )}
             <span className="text-xs font-bold text-white hidden sm:inline-block">
               {user?.name || "Master Tailor"}
             </span>

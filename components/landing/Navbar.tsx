@@ -37,7 +37,7 @@ export function Navbar() {
         <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
             {/* Top Advertising Announcement Banner - Balanced font size using Varela Round */}
             <div
-                className="bg-white border-b border-stone-200 text-black text-xs sm:text-sm font-semibold py-2 px-6 text-center flex flex-wrap items-center justify-center gap-2 shadow-xs"
+                className="bg-white/80 backdrop-blur-md border-b border-white/10 text-black text-xs sm:text-sm font-semibold py-2 px-6 text-center flex flex-wrap items-center justify-center gap-2 shadow-xs"
                 style={{ fontFamily: 'var(--font-varela-round)' }}
             >
                 <div className="flex items-center gap-2">

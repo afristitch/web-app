@@ -15,15 +15,18 @@ export default function DashboardLayout({
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-full bg-[#F4F6FA] font-sans overflow-hidden text-slate-900">
+    <div 
+      className="flex h-screen w-full bg-black text-white font-sans overflow-hidden selection:bg-white selection:text-black"
+      style={{ fontFamily: 'var(--font-varela-round)' }}
+    >
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden bg-black text-white">
         <Header />
 
-        <main className="flex-1 overflow-y-auto p-6 md:p-8">
+        <main className="flex-1 overflow-y-auto p-6 md:p-8 bg-black">
           <div className="mx-auto max-w-7xl space-y-6">{children}</div>
         </main>
       </div>

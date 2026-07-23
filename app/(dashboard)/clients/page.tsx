@@ -11,23 +11,35 @@ import {
   Eye,
   Trash2,
   MessageCircle,
+  FolderGit2,
 } from "lucide-react";
 import Link from "next/link";
-import { Client } from "@/lib/types";
-import { clientService } from "@/lib/services";
+import { Client, Group } from "@/lib/types";
+import { clientService, groupService } from "@/lib/services";
 import { ClientModal } from "@/components/clients/ClientModal";
+import { Modal } from "@/components/ui/Modal";
 
 export default function ClientsListPage() {
+  const [viewMode, setViewMode] = useState<"individual" | "groups">("individual");
   const [clients, setClients] = useState<Client[]>([]);
+  const [groups, setGroups] = useState<Group[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [isClientModalOpen, setIsClientModalOpen] = useState(false);
+  const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
+  const [groupName, setGroupName] = useState("");
+  const [groupDescription, setGroupDescription] = useState("");
 
-  const fetchClients = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      const data = await clientService.getAll();
-      setClients(data);
+      const [clientData, groupData] = await Promise.all([
+        clientService.getAll(),
+        groupService.getAll(),
+      ]);
+      setClients(Array.isArray(clientData) ? clientData : []);
+      setGroups(Array.isArray(groupData) ? groupData : []);
     } catch (err) {
       console.error(err);
     } finally {
@@ -36,7 +48,7 @@ export default function ClientsListPage() {
   };
 
   useEffect(() => {
-    fetchClients();
+    fetchData();
   }, []);
 
   const filteredClients = clients.filter(
@@ -46,177 +58,328 @@ export default function ClientsListPage() {
       (c.email && c.email.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteClient = async (id: string) => {
     if (confirm("Are you sure you want to delete this client record?")) {
       await clientService.delete(id);
-      fetchClients();
+      fetchData();
     }
   };
 
+  const handleCreateGroup = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!groupName) return;
+    const newG: Group = {
+      _id: `grp-${Date.now()}`,
+      name: groupName,
+      description: groupDescription,
+      memberCount: 0,
+      createdAt: new Date().toISOString(),
+    };
+    setGroups([newG, ...groups]);
+    setGroupName("");
+    setGroupDescription("");
+    setIsGroupModalOpen(false);
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
       {/* Header Bar */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-5">
         <div>
-          <h1 className="text-xl font-extrabold tracking-tight text-slate-900">
-            Clients Directory
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white uppercase" style={{ fontFamily: 'var(--font-varela-round)' }}>
+            Clients & Group Directory
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5 font-medium">
-            Manage your client profiles, contact numbers, and tailoring measurements.
+          <p className="text-xs text-stone-400 mt-1 font-medium">
+            Manage your client profiles, tailoring measurements, and bulk event group orders.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <Link
-            href="/clients/groups"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all"
-          >
-            Group Orders
-          </Link>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-slate-800 transition-all"
-          >
-            <Plus className="h-3.5 w-3.5 text-white" />
-            Add New Client
-          </button>
+        <div className="flex items-center gap-3">
+          {/* Toggle View Pills */}
+          <div className="flex items-center rounded-full bg-stone-900 border border-white/10 p-1">
+            <button
+              onClick={() => setViewMode("individual")}
+              className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                viewMode === "individual"
+                  ? "bg-white text-black font-extrabold shadow-sm"
+                  : "text-stone-400 hover:text-white"
+              }`}
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              Individual Clients ({clients.length})
+            </button>
+            <button
+              onClick={() => setViewMode("groups")}
+              className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                viewMode === "groups"
+                  ? "bg-white text-black font-extrabold shadow-sm"
+                  : "text-stone-400 hover:text-white"
+              }`}
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              Group Orders ({groups.length})
+            </button>
+          </div>
+
+          {viewMode === "individual" ? (
+            <button
+              onClick={() => setIsClientModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              <Plus className="h-3.5 w-3.5 text-black" />
+              Add Client
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsGroupModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              <Plus className="h-3.5 w-3.5 text-black" />
+              Create Group
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Filter / Search Bar */}
-      <div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search by client name, phone number, or email..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="h-9 w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-10 pr-4 text-xs font-medium text-slate-900 focus:border-slate-400 focus:bg-white focus:outline-none transition-all"
-          />
-        </div>
-        <div className="text-xs text-slate-500 font-semibold">
-          Total Clients: <span className="text-slate-900 font-bold">{filteredClients.length}</span>
-        </div>
-      </div>
+      {/* View Mode 1: Individual Clients Table */}
+      {viewMode === "individual" && (
+        <div className="space-y-6">
+          {/* Filter / Search Bar */}
+          <div className="flex items-center justify-between gap-4 rounded-3xl border border-white/10 bg-stone-950 p-4 shadow-xl">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
+              <input
+                type="text"
+                placeholder="Search by client name, phone number, or email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="h-9.5 w-full rounded-xl border border-white/10 bg-stone-900/80 pl-10 pr-4 text-xs font-medium text-white placeholder:text-stone-500 focus:border-white/30 focus:outline-none transition-all"
+                style={{ fontFamily: 'var(--font-varela-round)' }}
+              />
+            </div>
+            <div className="text-xs text-stone-400 font-bold">
+              Total Clients: <span className="text-white font-extrabold">{filteredClients.length}</span>
+            </div>
+          </div>
 
-      {/* Clean Table */}
-      <div className="rounded-2xl border border-slate-200/80 bg-white shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                <th className="px-6 py-3">Client Name</th>
-                <th className="px-6 py-3">Phone</th>
-                <th className="px-6 py-3">Email</th>
-                <th className="px-6 py-3">Address</th>
-                <th className="px-6 py-3">Notes</th>
-                <th className="px-6 py-3 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {loading ? (
-                <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-slate-400">
-                    Loading client directory...
-                  </td>
-                </tr>
-              ) : filteredClients.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-slate-400">
-                    No clients found matching your search.
-                  </td>
-                </tr>
-              ) : (
-                filteredClients.map((client) => (
-                  <tr
-                    key={client._id}
-                    className="group transition-colors hover:bg-slate-50/60"
-                  >
-                    <td className="px-6 py-3.5">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-900">
-                          {client.name.slice(0, 2).toUpperCase()}
-                        </div>
-                        <div>
-                          <Link
-                            href={`/clients/${client._id}`}
-                            className="font-bold text-slate-900 hover:underline"
-                          >
-                            {client.name}
-                          </Link>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-3.5 text-slate-600 font-medium">
-                      <div className="flex items-center gap-1.5">
-                        <Phone className="h-3 w-3 text-slate-400" />
-                        {client.phone}
-                      </div>
-                    </td>
-                    <td className="px-6 py-3.5 text-slate-500 font-medium">
-                      {client.email ? (
-                        <div className="flex items-center gap-1.5">
-                          <Mail className="h-3 w-3 text-slate-400" />
-                          {client.email}
-                        </div>
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-                    <td className="px-6 py-3.5 text-slate-500 font-medium max-w-xs truncate">
-                      {client.address ? (
-                        <div className="flex items-center gap-1.5">
-                          <MapPin className="h-3 w-3 text-slate-400 shrink-0" />
-                          <span className="truncate">{client.address}</span>
-                        </div>
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-                    <td className="px-6 py-3.5 text-slate-500 font-medium max-w-xs truncate">
-                      {client.notes || "-"}
-                    </td>
-                    <td className="px-6 py-3.5 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <a
-                          href={`https://wa.me/${client.phone.replace(/[^0-9]/g, "")}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          title="WhatsApp Chat"
-                          className="rounded-lg border border-emerald-200 bg-emerald-50 p-1.5 text-emerald-700 hover:bg-emerald-100 transition-colors"
-                        >
-                          <MessageCircle className="h-3.5 w-3.5" />
-                        </a>
-                        <Link
-                          href={`/clients/${client._id}`}
-                          className="rounded-lg border border-slate-200 p-1.5 text-slate-600 hover:bg-slate-100 transition-colors"
-                          title="View Client Details"
-                        >
-                          <Eye className="h-3.5 w-3.5" />
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(client._id)}
-                          className="rounded-lg border border-rose-100 bg-rose-50 p-1.5 text-rose-600 hover:bg-rose-100 transition-colors"
-                          title="Delete Client"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    </td>
+          {/* Clean Table */}
+          <div className="rounded-3xl border border-white/10 bg-stone-950 shadow-xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead>
+                  <tr className="border-b border-white/10 bg-stone-900/60 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
+                    <th className="px-6 py-4">Client Name</th>
+                    <th className="px-6 py-4">Phone</th>
+                    <th className="px-6 py-4">Email</th>
+                    <th className="px-6 py-4">Address</th>
+                    <th className="px-6 py-4">Notes</th>
+                    <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {loading ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-10 text-center text-stone-400 font-medium">
+                        Loading client directory...
+                      </td>
+                    </tr>
+                  ) : filteredClients.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-10 text-center text-stone-400 font-medium">
+                        No clients found matching your search.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredClients.map((client) => (
+                      <tr
+                        key={client._id}
+                        className="group transition-colors hover:bg-white/5"
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">
+                              {client.name.slice(0, 2).toUpperCase()}
+                            </div>
+                            <div>
+                              <Link
+                                href={`/clients/${client._id}`}
+                                className="font-bold text-white hover:underline"
+                              >
+                                {client.name}
+                              </Link>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-stone-300 font-medium">
+                          {client.phone}
+                        </td>
+                        <td className="px-6 py-4 text-stone-300 font-medium">
+                          {client.email || "-"}
+                        </td>
+                        <td className="px-6 py-4 text-stone-300 font-medium max-w-xs truncate">
+                          {client.address ? (
+                            <div className="flex items-center gap-1.5">
+                              <MapPin className="h-3 w-3 text-stone-400 shrink-0" />
+                              <span className="truncate">{client.address}</span>
+                            </div>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-stone-300 font-medium max-w-xs truncate">
+                          {client.notes || "-"}
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex items-center justify-end gap-3">
+                            <a
+                              href={`https://wa.me/${client.phone.replace(/[^0-9]/g, "")}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              title="WhatsApp Chat"
+                              className="group p-1.5 transition-colors cursor-pointer"
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img src="https://img.icons8.com/?size=100&id=Cq0bCO6BqKJw&format=png&color=000000" alt="WhatsApp" className="h-4 w-4 invert opacity-50 group-hover:opacity-100 transition-opacity" />
+                            </a>
+                            <Link
+                              href={`/clients/${client._id}`}
+                              className="p-1.5 text-stone-500 hover:text-white transition-colors cursor-pointer"
+                              title="View Client Details"
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Link>
+                            <button
+                              onClick={() => handleDeleteClient(client._id)}
+                              className="p-1.5 text-stone-500 hover:text-red-400 transition-colors cursor-pointer"
+                              title="Delete Client"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
+      {/* View Mode 2: Group Orders Grid */}
+      {viewMode === "groups" && (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {loading ? (
+            <div className="col-span-full py-12 text-center text-xs text-stone-400 font-medium">
+              Loading groups...
+            </div>
+          ) : groups.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-xs text-stone-400 font-medium">
+              No group orders created yet. Click "Create Group" to start.
+            </div>
+          ) : (
+            groups.map((group) => (
+              <div
+                key={group._id}
+                className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl space-y-4 flex flex-col justify-between"
+                style={{ fontFamily: 'var(--font-varela-round)' }}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-xs">
+                      <FolderGit2 className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-white/10 border border-white/10 px-3 py-1 rounded-full">
+                      <Users className="h-3.5 w-3.5" /> {group.memberCount || 0} Members
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
+                    {group.name}
+                  </h3>
+                  <p className="text-xs text-stone-400 mt-2 font-medium line-clamp-2">
+                    {group.description || "No group description provided."}
+                  </p>
+                </div>
+
+                <div className="mt-4 border-t border-white/10 pt-4 flex items-center justify-between text-xs">
+                  <span className="text-[11px] text-stone-400 font-medium">
+                    Created {group.createdAt?.split("T")[0] || "recently"}
+                  </span>
+                  <button className="font-extrabold text-white hover:underline cursor-pointer">
+                    Manage Group →
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {/* Modals */}
       <ClientModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={fetchClients}
+        isOpen={isClientModalOpen}
+        onClose={() => setIsClientModalOpen(false)}
+        onSuccess={fetchData}
       />
+
+      <Modal
+        isOpen={isGroupModalOpen}
+        onClose={() => setIsGroupModalOpen(false)}
+        title="Create Group Order"
+        subtitle="Group clients together for event outfits or bulk tailoring."
+      >
+        <form onSubmit={handleCreateGroup} className="space-y-4 pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
+          <div>
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
+              Group / Event Title *
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="e.g. Adeleke Wedding Aso-Ebi Train"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
+              Event Description & Notes
+            </label>
+            <textarea
+              rows={3}
+              placeholder="e.g. Emerald Green theme, fittings needed by September 15th."
+              value={groupDescription}
+              onChange={(e) => setGroupDescription(e.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none resize-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            />
+          </div>
+
+          <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-6">
+            <button
+              type="button"
+              onClick={() => setIsGroupModalOpen(false)}
+              className="rounded-full border border-white/10 px-5 py-2.5 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="rounded-full bg-white px-6 py-2.5 text-xs font-extrabold text-black hover:bg-stone-200 transition-all cursor-pointer shadow-xs"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
+            >
+              Create Group
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

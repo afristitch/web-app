@@ -17,15 +17,19 @@ export function Header() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-slate-200/80 bg-white px-6 backdrop-blur-md">
+    <header
+      className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/10 bg-black/90 px-6 backdrop-blur-md text-white"
+      style={{ fontFamily: 'var(--font-varela-round)' }}
+    >
       {/* Left: Global Search Bar */}
       <div className="flex items-center gap-4 flex-1 max-w-md">
         <div className="relative w-full">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
           <input
             type="text"
             placeholder="Search clients, order numbers, fabrics..."
-            className="h-9.5 w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-10 pr-4 text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:outline-none transition-all shadow-xs"
+            className="h-9.5 w-full rounded-xl border border-white/10 bg-stone-950/80 pl-10 pr-4 text-xs font-medium text-white placeholder:text-stone-500 focus:border-white/30 focus:bg-black focus:outline-none transition-all shadow-xs"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
       </div>
@@ -35,49 +39,49 @@ export function Header() {
         {/* Notifications Bell */}
         <Link
           href="/notifications"
-          className="relative rounded-xl border border-slate-200/80 bg-white p-2 text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-xs"
+          className="relative rounded-xl border border-white/10 bg-stone-950 p-2 text-stone-300 hover:bg-white/10 hover:text-white transition-colors shadow-xs"
         >
           <Bell className="h-4 w-4" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-slate-900 ring-2 ring-white" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-white ring-2 ring-black" />
         </Link>
 
         {/* User Profile Dropdown */}
         <div className="relative">
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-2.5 rounded-full border border-slate-200/80 p-1 pl-1.5 pr-2.5 hover:bg-slate-50 transition-colors shadow-xs"
+            className="flex items-center gap-2.5 rounded-full border border-white/20 bg-stone-950 p-1 pl-1.5 pr-2.5 hover:bg-white/10 transition-colors shadow-xs"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-900 text-[11px] font-bold text-white">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[11px] font-extrabold text-black uppercase">
               {user?.name ? user.name.slice(0, 2).toUpperCase() : "SD"}
             </div>
-            <span className="text-xs font-semibold text-slate-800 hidden sm:inline-block">
+            <span className="text-xs font-bold text-white hidden sm:inline-block">
               {user?.name || "Master Tailor"}
             </span>
-            <ChevronDown className="h-3 w-3 text-slate-400 hidden sm:block" />
+            <ChevronDown className="h-3 w-3 text-stone-400 hidden sm:block" />
           </button>
 
           {showProfileMenu && (
-            <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl z-40 animate-in fade-in zoom-in-95">
-              <div className="px-3 py-2 border-b border-slate-100 mb-1">
-                <p className="text-xs font-bold text-slate-900">{user?.name || "Master Tailor"}</p>
-                <p className="text-[11px] text-slate-500 truncate">{user?.email || "tailor@sewdigital.com"}</p>
+            <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-white/10 bg-stone-950 p-2 shadow-2xl z-40 animate-in fade-in zoom-in-95">
+              <div className="px-3 py-2 border-b border-white/10 mb-1">
+                <p className="text-xs font-bold text-white">{user?.name || "Master Tailor"}</p>
+                <p className="text-[11px] text-stone-400 truncate">{user?.email || "tailor@sewdigital.com"}</p>
               </div>
               <Link
                 href="/settings"
-                className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-stone-300 hover:text-white hover:bg-white/10"
               >
-                <User className="h-3.5 w-3.5 text-slate-400" /> Account Profile
+                <User className="h-3.5 w-3.5 text-stone-400" /> Account Profile
               </Link>
               <Link
                 href="/settings"
-                className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-stone-300 hover:text-white hover:bg-white/10"
               >
-                <Scissors className="h-3.5 w-3.5 text-slate-700" /> Subscription Plan
+                <Scissors className="h-3.5 w-3.5 text-white" /> Subscription Plan
               </Link>
-              <div className="my-1 border-t border-slate-100" />
+              <div className="my-1 border-t border-white/10" />
               <button
                 onClick={logout}
-                className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
+                className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-red-400 hover:bg-red-950/40 hover:text-red-300 transition-colors"
               >
                 Sign Out
               </button>

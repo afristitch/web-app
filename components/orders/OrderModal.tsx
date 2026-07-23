@@ -16,8 +16,8 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
   const [clients, setClients] = useState<Client[]>([]);
   const [formData, setFormData] = useState<CreateOrderRequest>({
     clientId: "",
-    amount: 50000,
-    amountPaid: 25000,
+    amount: 500,
+    amountPaid: 250,
     status: "pending",
     priority: "medium",
     dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
@@ -61,19 +61,20 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
       subtitle="Log a new order, set pricing, deposit, and delivery deadline."
       maxWidth="xl"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+      <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Select Client *
           </label>
           <select
             required
             value={formData.clientId}
             onChange={(e) => setFormData({ ...formData, clientId: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             {clients.map((c) => (
-              <option key={c._id} value={c._id}>
+              <option key={c._id} value={c._id} className="bg-stone-900 text-white">
                 {c.name} ({c.phone})
               </option>
             ))}
@@ -82,8 +83,8 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Total Order Amount (₦) *
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
+              Total Order Amount (₵) *
             </label>
             <input
               type="number"
@@ -91,13 +92,14 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
               min={0}
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })}
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Initial Deposit Paid (₦) *
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
+              Initial Deposit Paid (₵) *
             </label>
             <input
               type="number"
@@ -105,46 +107,49 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
               min={0}
               value={formData.amountPaid}
               onChange={(e) => setFormData({ ...formData, amountPaid: Number(e.target.value) })}
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Order Status
             </label>
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value as OrderStatus })}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             >
-              <option value="pending">Pending</option>
-              <option value="in-progress">In Progress</option>
-              <option value="fitting">Fitting</option>
-              <option value="completed">Completed</option>
+              <option value="pending" className="bg-stone-900 text-white">Pending</option>
+              <option value="in-progress" className="bg-stone-900 text-white">In Progress</option>
+              <option value="fitting" className="bg-stone-900 text-white">Fitting</option>
+              <option value="completed" className="bg-stone-900 text-white">Completed</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Priority Level
             </label>
             <select
               value={formData.priority}
               onChange={(e) => setFormData({ ...formData, priority: e.target.value as OrderPriority })}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>
+              <option value="low" className="bg-stone-900 text-white">Low</option>
+              <option value="medium" className="bg-stone-900 text-white">Medium</option>
+              <option value="high" className="bg-stone-900 text-white">High</option>
+              <option value="urgent" className="bg-stone-900 text-white">Urgent</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Due Date *
             </label>
             <input
@@ -152,13 +157,14 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
               required
               value={formData.dueDate}
               onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Fabric / Outfit Image URL (Optional)
           </label>
           <input
@@ -166,12 +172,13 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
             placeholder="https://images.unsplash.com/photo-..."
             value={formData.clothImageUrl}
             onChange={(e) => setFormData({ ...formData, clothImageUrl: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Design Description & Tailoring Notes
           </label>
           <textarea
@@ -179,22 +186,25 @@ export function OrderModal({ isOpen, onClose, onSuccess }: OrderModalProps) {
             placeholder="e.g. Royal blue senator suit with gold embroidery on collar and sleeve cuffs."
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none resize-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none resize-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-slate-100 pt-4 mt-6">
+        <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-6">
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+            className="rounded-full border border-white/10 px-5 py-2.5 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 disabled:opacity-50 transition-colors shadow-xs"
+            className="rounded-full bg-white px-6 py-2.5 text-xs font-extrabold text-black hover:bg-stone-200 disabled:opacity-50 transition-all cursor-pointer shadow-xs"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             {loading ? "Creating Order..." : "Create Order"}
           </button>

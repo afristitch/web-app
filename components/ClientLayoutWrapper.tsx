@@ -15,12 +15,14 @@ const DASHBOARD_ROUTES = [
   "/business",
   "/settings",
   "/notifications",
+  "/team",
+  "/subscription",
 ];
 
 export function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isDashboardRoute = DASHBOARD_ROUTES.some(
-    (route) => pathname === route || pathname?.startsWith(`${route}/`)
+    (route) => pathname === route || pathname?.startsWith(`${route}/`) || pathname?.startsWith(route)
   );
 
   return (

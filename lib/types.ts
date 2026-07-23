@@ -21,6 +21,13 @@ export interface Organization {
   logoUrl?: string;
   subscriptionPlan?: string;
   subscriptionStatus?: "active" | "inactive" | "trial";
+  subscriptionEndsAt?: string;
+  isPremium?: boolean;
+  portfolioUrls?: string[];
+  paymentInstructions?: {
+    momo?: { network: string; number: string; name: string }[];
+    bank?: { bankName: string; accountNumber: string; accountName: string; branch?: string }[];
+  };
   createdAt?: string;
 }
 
@@ -107,6 +114,7 @@ export interface MeasurementTemplate {
   name: string;
   description?: string;
   iconUrl?: string;
+  organizationId?: string;
   fields: MeasurementField[];
 }
 
@@ -172,4 +180,137 @@ export interface PaginatedResult<T> {
   page: number;
   limit: number;
   totalPages: number;
+}
+
+// Notification types (matching mobile notification.service.ts)
+export interface NotificationItem {
+  _id: string;
+  title: string;
+  message: string;
+  type: string;
+  isRead: boolean;
+  data?: Record<string, any>;
+  createdAt: string;
+}
+
+export interface NotificationHistoryResponse {
+  notifications: NotificationItem[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// Style / Outfit Catalog types (matching mobile style types)
+export interface Style {
+  _id: ID;
+  name: string;
+  description?: string;
+  gender?: "male" | "female" | "unisex";
+  imageUrls: string[];
+  organizationId?: ID;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CreateStyleRequest {
+  name: string;
+  description?: string;
+  gender?: "male" | "female" | "unisex";
+  imageUrls: string[];
+}
+
+export type UpdateStyleRequest = Partial<CreateStyleRequest>;
+
+// Template CRUD types (matching mobile measurement types)
+export interface CreateTemplateRequest {
+  name: string;
+  description?: string;
+  iconUrl?: string;
+  fields: MeasurementField[];
+}
+
+export type UpdateTemplateRequest = Partial<CreateTemplateRequest>;
+
+// Team / Staff User types (matching mobile user types)
+export interface TeamUser {
+  _id: ID;
+  name: string;
+  email: string;
+  phone?: string;
+  role: "ORG_ADMIN" | "STAFF";
+  photoUrl?: string;
+  organizationId?: ID;
+  isActive?: boolean;
+  createdAt?: string;
+}
+
+export interface CreateTeamUserRequest {
+  name: string;
+  email: string;
+  phone?: string;
+  role: "STAFF";
+  password: string;
+}
+
+export type UpdateTeamUserRequest = Partial<Omit<CreateTeamUserRequest, "password">>;
+
+// Payment Settings types (matching mobile payment-settings.tsx)
+export interface MomoPaymentMethod {
+  network: string;
+  number: string;
+  name: string;
+}
+
+export interface BankPaymentMethod {
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+  branch?: string;
+}
+
+export interface PaymentInstructions {
+  momo?: MomoPaymentMethod[];
+  bank?: BankPaymentMethod[];
+}
+
+// Subscription Plan types (matching mobile payment.service.ts)
+export interface Plan {
+  _id: string;
+  name: string;
+  price: number;
+  currency: string;
+  interval: "monthly" | "yearly";
+}
+
+export interface DiscountTier {
+  minMonths: number;
+  discount: number;
+  label: string;
+}
+
+export interface PriceBreakdown {
+  planName: string;
+  basePrice: number;
+  months: number;
+  baseTotal: number;
+  discountedTotal: number;
+  savings: number;
+  discountPercentage: number;
+  currency: string;
+}
+
+// Upload types
+export interface UploadResult {
+  url: string;
+  publicId: string;
+}
+
+// Avatar preset types (matching mobile profile.service.ts)
+export interface AvatarPreset {
+  _id: string;
+  url: string;
+  name: string;
 }

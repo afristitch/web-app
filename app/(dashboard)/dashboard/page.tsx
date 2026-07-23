@@ -58,31 +58,36 @@ export default function DashboardOverviewPage() {
   ).length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
       {/* Page Title & Action Bar */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200/80 pb-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-5">
         <div>
-          <h1 className="text-xl font-extrabold tracking-tight text-slate-900">
+          <h1 
+            className="text-2xl md:text-3xl font-extrabold tracking-tight text-white uppercase"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
+          >
             Business Dashboard
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5 font-medium">
+          <p className="text-xs text-stone-400 mt-1 font-medium">
             Real-time breakdown of tailoring orders, client revenue, and pending fittings.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setIsClientModalOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-stone-900 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-white hover:text-black transition-all cursor-pointer"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
-            <Plus className="h-3.5 w-3.5 text-slate-500" />
+            <Plus className="h-3.5 w-3.5" />
             Add Client
           </button>
           <button
             onClick={() => setIsOrderModalOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-slate-800 transition-all"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
-            <Plus className="h-3.5 w-3.5 text-white" />
+            <Plus className="h-3.5 w-3.5 text-black" />
             Create Order
           </button>
         </div>
@@ -91,76 +96,76 @@ export default function DashboardOverviewPage() {
       {/* Metrics Row */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Card 1: Revenue */}
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs transition-all hover:border-slate-300">
+        <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl transition-all hover:border-white/20">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Gross Revenue</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Wallet className="h-4 w-4" />
+            <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Gross Revenue</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-white">
+              <Wallet className="h-4.5 w-4.5" />
             </div>
           </div>
-          <div className="mt-3">
-            <p className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              ₦{totalRevenue.toLocaleString()}
+          <div className="mt-4">
+            <p className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
+              ₵{totalRevenue.toLocaleString()}
             </p>
-            <div className="mt-2 flex items-center justify-between text-[11px] font-medium text-slate-500">
-              <span className="text-emerald-600 font-semibold">₦{totalPaid.toLocaleString()} paid</span>
-              <span className="text-rose-500 font-semibold">₦{pendingBalance.toLocaleString()} pending</span>
+            <div className="mt-3 flex items-center justify-between text-[11px] font-medium text-stone-400">
+              <span className="text-white font-bold">₵{totalPaid.toLocaleString()} paid</span>
+              <span className="text-stone-400 font-bold">₵{pendingBalance.toLocaleString()} pending</span>
             </div>
           </div>
         </div>
 
         {/* Card 2: Active Orders */}
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs transition-all hover:border-slate-300">
+        <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl transition-all hover:border-white/20">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Active Work orders</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-              <ShoppingBag className="h-4 w-4" />
+            <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Active Work orders</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-white">
+              <ShoppingBag className="h-4.5 w-4.5" />
             </div>
           </div>
-          <div className="mt-3">
-            <p className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <div className="mt-4">
+            <p className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
               {activeOrdersCount}
             </p>
-            <div className="mt-2 flex items-center gap-1.5 text-[11px] text-slate-500">
-              <span className="inline-flex items-center gap-0.5 text-emerald-600 font-semibold">
-                <TrendingUp className="h-3 w-3" /> +12%
+            <div className="mt-3 flex items-center gap-1.5 text-[11px] text-stone-400">
+              <span className="inline-flex items-center gap-0.5 text-white font-bold">
+                <TrendingUp className="h-3 w-3" /> Live Sync
               </span>
-              <span>vs last month</span>
+              <span>with node api</span>
             </div>
           </div>
         </div>
 
         {/* Card 3: Total Clients */}
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs transition-all hover:border-slate-300">
+        <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl transition-all hover:border-white/20">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Total Clients</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
-              <Users className="h-4 w-4" />
+            <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Total Clients</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-white">
+              <Users className="h-4.5 w-4.5" />
             </div>
           </div>
-          <div className="mt-3">
-            <p className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              {clients.length}
+          <div className="mt-4">
+            <p className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
+              {safeClients.length}
             </p>
-            <p className="mt-2 text-[11px] text-slate-500 font-medium">
+            <p className="mt-3 text-[11px] text-stone-400 font-medium">
               Registered tailor clients
             </p>
           </div>
         </div>
 
         {/* Card 4: Upcoming Due Dates */}
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs transition-all hover:border-slate-300">
+        <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl transition-all hover:border-white/20">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500">Upcoming Fittings</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-              <Clock className="h-4 w-4" />
+            <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Upcoming Fittings</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-white">
+              <Clock className="h-4.5 w-4.5" />
             </div>
           </div>
-          <div className="mt-3">
-            <p className="text-2xl font-extrabold text-slate-900 tracking-tight">
-              {orders.filter((o) => o.status === "fitting").length}
+          <div className="mt-4">
+            <p className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
+              {safeOrders.filter((o) => o.status === "fitting").length}
             </p>
-            <p className="mt-2 text-[11px] text-amber-600 font-semibold">
+            <p className="mt-3 text-[11px] text-stone-400 font-bold">
               Requires client fitting session
             </p>
           </div>
@@ -168,19 +173,20 @@ export default function DashboardOverviewPage() {
       </div>
 
       {/* Main Grid: Orders Data Table */}
-      <div className="rounded-2xl border border-slate-200/80 bg-white shadow-xs overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+      <div className="rounded-3xl border border-white/10 bg-stone-950 shadow-xl overflow-hidden">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">
+            <h3 className="text-base font-bold text-white uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
               Recent Tailoring Orders
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5 font-medium">
+            <p className="text-xs text-stone-400 mt-1 font-medium">
               Manage live production status, deposits, and client delivery dates.
             </p>
           </div>
           <Link
             href="/orders"
-            className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-stone-300 transition-colors"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             View all orders <ChevronRight className="h-3.5 w-3.5" />
           </Link>
@@ -190,71 +196,71 @@ export default function DashboardOverviewPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                <th className="px-6 py-3">Order Ref</th>
-                <th className="px-6 py-3">Client</th>
-                <th className="px-6 py-3">Order Status</th>
-                <th className="px-6 py-3">Payment</th>
-                <th className="px-6 py-3">Total Amount</th>
-                <th className="px-6 py-3">Paid Deposit</th>
-                <th className="px-6 py-3">Due Date</th>
-                <th className="px-6 py-3 text-right">Actions</th>
+              <tr className="border-b border-white/10 bg-stone-900/60 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
+                <th className="px-6 py-4">Order Ref</th>
+                <th className="px-6 py-4">Client</th>
+                <th className="px-6 py-4">Order Status</th>
+                <th className="px-6 py-4">Payment</th>
+                <th className="px-6 py-4">Total Amount</th>
+                <th className="px-6 py-4">Paid Deposit</th>
+                <th className="px-6 py-4">Due Date</th>
+                <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-white/5">
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-8 text-center text-slate-400">
-                    Loading recent orders...
+                  <td colSpan={8} className="px-6 py-10 text-center text-stone-400 font-medium">
+                    Loading live orders from API...
                   </td>
                 </tr>
-              ) : orders.length === 0 ? (
+              ) : safeOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-8 text-center text-slate-400">
+                  <td colSpan={8} className="px-6 py-10 text-center text-stone-400 font-medium">
                     No orders created yet. Click "Create Order" to start.
                   </td>
                 </tr>
               ) : (
-                orders.slice(0, 5).map((order) => (
+                safeOrders.slice(0, 5).map((order) => (
                   <tr
                     key={order._id}
-                    className="group transition-colors hover:bg-slate-50/60"
+                    className="group transition-colors hover:bg-white/5"
                   >
-                    <td className="px-6 py-3.5 font-bold text-slate-900">
+                    <td className="px-6 py-4 font-bold text-white">
                       {order.orderNumber}
                     </td>
-                    <td className="px-6 py-3.5 font-medium text-slate-900">
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 font-bold text-slate-700 text-[11px]">
-                          {order.client.name ? order.client.name.slice(0, 2).toUpperCase() : "CL"}
+                    <td className="px-6 py-4 font-medium text-white">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 font-bold text-white text-[11px]">
+                          {order.client?.name ? order.client.name.slice(0, 2).toUpperCase() : "CL"}
                         </div>
                         <div>
-                          <p className="font-bold text-slate-900">{order.client.name}</p>
-                          <p className="text-[10px] text-slate-400">{order.client.phone}</p>
+                          <p className="font-bold text-white">{order.client?.name || "N/A"}</p>
+                          <p className="text-[10px] text-stone-400">{order.client?.phone || ""}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-3.5">
+                    <td className="px-6 py-4">
                       <OrderStatusBadge status={order.status} />
                     </td>
-                    <td className="px-6 py-3.5">
+                    <td className="px-6 py-4">
                       <PaymentStatusBadge status={order.paymentStatus} />
                     </td>
-                    <td className="px-6 py-3.5 font-bold text-slate-900">
-                      ₦{order.amount.toLocaleString()}
+                    <td className="px-6 py-4 font-bold text-white">
+                      ₵{(order.amount || 0).toLocaleString()}
                     </td>
-                    <td className="px-6 py-3.5 font-semibold text-emerald-600">
-                      ₦{order.amountPaid.toLocaleString()}
+                    <td className="px-6 py-4 font-bold text-white">
+                      ₵{(order.amountPaid || 0).toLocaleString()}
                     </td>
-                    <td className="px-6 py-3.5 text-slate-500 font-medium">
-                      {order.dueDate}
+                    <td className="px-6 py-4 text-stone-300 font-medium">
+                      {order.dueDate || "N/A"}
                     </td>
-                    <td className="px-6 py-3.5 text-right">
+                    <td className="px-6 py-4 text-right">
                       <Link
                         href={`/orders/${order._id}`}
-                        className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-100 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-xl border border-white/20 bg-stone-900 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-white hover:text-black transition-all"
                       >
-                        <Eye className="h-3 w-3 text-slate-500" /> View
+                        <Eye className="h-3 w-3" /> View
                       </Link>
                     </td>
                   </tr>

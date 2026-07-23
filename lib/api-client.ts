@@ -39,4 +39,22 @@ export const api = {
     put: (endpoint: string, body: unknown) => fetcher(endpoint, { method: "PUT", body: JSON.stringify(body) }),
     patch: (endpoint: string, body: unknown) => fetcher(endpoint, { method: "PATCH", body: JSON.stringify(body) }),
     delete: (endpoint: string) => fetcher(endpoint, { method: "DELETE" }),
+    /** Upload FormData (e.g. image files). Omits Content-Type so browser sets multipart boundary. */
+    upload: (endpoint: string, formData: FormData) => {
+        const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+        return fetch(`${BASE_URL}${endpoint}`, {
+            method: "POST",
+            headers: {
+                "ngrok-skip-browser-warning": "69420",
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: formData,
+        }).then(async (response) => {
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({ message: "Upload failed" }));
+                throw new Error(error.message || "Upload failed");
+            }
+            return response.json();
+        });
+    },
 };

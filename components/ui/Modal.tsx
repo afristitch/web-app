@@ -46,36 +46,36 @@ export function Modal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" style={{ fontFamily: 'var(--font-varela-round)' }}>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
         onClick={onClose}
       />
 
       {/* Modal Dialog Container */}
       <div
         className={cn(
-          "relative w-full rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-slate-900/5 transition-all animate-in zoom-in-95 duration-200 z-10 max-h-[90vh] flex flex-col",
+          "relative w-full rounded-3xl border border-white/10 bg-stone-950 p-6 sm:p-8 shadow-2xl text-white transition-all animate-in zoom-in-95 duration-200 z-10 max-h-[90vh] flex flex-col",
           widthClasses[maxWidth]
         )}
       >
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-slate-100 pb-4 mb-4 shrink-0">
+        <div className="flex items-start justify-between border-b border-white/10 pb-4 mb-4 shrink-0">
           <div>
-            <h3 className="text-base font-bold text-slate-900 tracking-tight">{title}</h3>
-            {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+            <h3 className="text-lg font-bold text-white uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>{title}</h3>
+            {subtitle && <p className="text-xs text-stone-400 mt-1 font-medium">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="rounded-full p-2 text-stone-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="flex-1 overflow-y-auto pr-1">{children}</div>
+        <div className="flex-1 overflow-y-auto pr-1 text-white">{children}</div>
       </div>
     </div>
   );

@@ -45,9 +45,9 @@ export function ClientModal({ isOpen, onClose, onSuccess }: ClientModalProps) {
       title="Add New Client"
       subtitle="Enter client contact details and notes for tailoring records."
     >
-      <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+      <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Full Name *
           </label>
           <input
@@ -56,27 +56,29 @@ export function ClientModal({ isOpen, onClose, onSuccess }: ClientModalProps) {
             placeholder="e.g. Amina Bello"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Phone Number *
             </label>
             <input
               type="tel"
               required
-              placeholder="+234 803 123 4567"
+              placeholder="+233 59 240 7690"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Email Address
             </label>
             <input
@@ -84,26 +86,28 @@ export function ClientModal({ isOpen, onClose, onSuccess }: ClientModalProps) {
               placeholder="amina@example.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Delivery / Physical Address
           </label>
           <input
             type="text"
-            placeholder="14 Victoria Island, Lagos"
+            placeholder="Ahodwo, Kumasi, Ghana"
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
+          <label className="block text-xs font-bold text-stone-300 mb-1.5">
             Style Preferences & Special Notes
           </label>
           <textarea
@@ -111,22 +115,25 @@ export function ClientModal({ isOpen, onClose, onSuccess }: ClientModalProps) {
             placeholder="e.g. Prefers slim fit cut, high waist preference..."
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            className="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs font-medium focus:border-slate-400 focus:outline-none resize-none"
+            className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none resize-none"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           />
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-slate-100 pt-4 mt-6">
+        <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-6">
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+            className="rounded-full border border-white/10 px-5 py-2.5 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 disabled:opacity-50 transition-colors shadow-xs"
+            className="rounded-full bg-white px-6 py-2.5 text-xs font-extrabold text-black hover:bg-stone-200 disabled:opacity-50 transition-all cursor-pointer shadow-xs"
+            style={{ fontFamily: 'var(--font-varela-round)' }}
           >
             {loading ? "Saving Client..." : "Save Client"}
           </button>

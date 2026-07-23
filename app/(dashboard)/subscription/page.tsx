@@ -86,6 +86,7 @@ function SubscriptionContent() {
   const [initializingMonths, setInitializingMonths] = useState<number | null>(null);
   const [paymentSuccessMsg, setPaymentSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [selectedMonths, setSelectedMonths] = useState<number | null>(12);
 
   const isPaymentComplete = searchParams.get("payment") === "complete" || !!searchParams.get("reference");
 
@@ -250,14 +251,18 @@ function SubscriptionContent() {
             const optTotal = Number((basePrice * opt.months * (1 - opt.discount)).toFixed(2));
             const perMonth = Number((optTotal / opt.months).toFixed(2));
             const isInitializingThisCard = initializingMonths === opt.months;
+            const isSelected = selectedMonths === opt.months;
 
             return (
               <div
                 key={opt.months}
-                className={`relative p-6 sm:p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
-                  opt.isPopular
-                    ? 'border-white bg-white/[0.04] shadow-2xl'
-                    : 'border-white/10 bg-stone-950 hover:border-white/20'
+                onClick={() => setSelectedMonths(isSelected ? null : opt.months)}
+                className={`relative p-6 sm:p-8 rounded-3xl border transition-all duration-200 flex flex-col justify-between cursor-pointer select-none ${
+                  isSelected
+                    ? 'border-white bg-white/[0.07] shadow-2xl ring-1 ring-white/30'
+                    : opt.isPopular
+                    ? 'border-white/40 bg-white/[0.04] hover:border-white/70'
+                    : 'border-white/10 bg-stone-950 hover:border-white/30'
                 }`}
               >
                 {opt.isPopular && (
@@ -292,7 +297,7 @@ function SubscriptionContent() {
                     </div>
                   </div>
 
-                  <div className="space-y-3 mb-8 border-t border-white/10 pt-5">
+                  <div className="space-y-3 mb-6 border-t border-white/10 pt-5">
                     {opt.features.map((feature, fIdx) => (
                       <div key={fIdx} className="flex items-center gap-2.5 text-stone-300">
                         <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center shrink-0">
@@ -304,25 +309,33 @@ function SubscriptionContent() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => handlePaystackPayment(opt.months)}
-                  disabled={initializingMonths !== null}
-                  className="w-full py-3 rounded-full font-extrabold tracking-wider uppercase text-xs transition-all hover:bg-stone-200 flex items-center justify-center gap-2 bg-white text-black disabled:opacity-50 cursor-pointer shadow-xs"
-                  style={{ fontFamily: 'var(--font-varela-round)' }}
+                {/* Pay button — only visible when this card is selected */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    isSelected ? 'max-h-20 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  {isInitializingThisCard ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin text-black" />
-                      Initializing...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className="w-4 h-4 text-black" />
-                      Pay ₵{optTotal}
-                    </>
-                  )}
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePaystackPayment(opt.months)}
+                    disabled={initializingMonths !== null}
+                    className="w-full py-3 rounded-full font-extrabold tracking-wider uppercase text-xs transition-all hover:bg-stone-200 flex items-center justify-center gap-2 bg-white text-black disabled:opacity-50 cursor-pointer shadow-xs"
+                    style={{ fontFamily: 'var(--font-varela-round)' }}
+                  >
+                    {isInitializingThisCard ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-black" />
+                        Initializing...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="w-4 h-4 text-black" />
+                        Pay ₵{optTotal}
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             );
           })}

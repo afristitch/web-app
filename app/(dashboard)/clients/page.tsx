@@ -87,7 +87,7 @@ export default function ClientsListPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-5">
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white uppercase" style={{ fontFamily: 'var(--font-varela-round)' }}>
-            Clients & Group Directory
+            Clients & Group
           </h1>
           <p className="text-xs text-stone-400 mt-1 font-medium">
             Manage your client profiles, tailoring measurements, and bulk event group orders.
@@ -182,7 +182,7 @@ export default function ClientsListPage() {
                   {loading ? (
                     <tr>
                       <td colSpan={6} className="px-6 py-10 text-center text-stone-400 font-medium">
-                        Loading client directory...
+                        Loading client...
                       </td>
                     </tr>
                   ) : filteredClients.length === 0 ? (
@@ -199,9 +199,18 @@ export default function ClientsListPage() {
                       >
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">
-                              {client.name.slice(0, 2).toUpperCase()}
-                            </div>
+                            {client.photoUrl ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={client.photoUrl}
+                                alt={client.name}
+                                className="h-8 w-8 rounded-full object-cover border border-white/20 flex-shrink-0"
+                              />
+                            ) : (
+                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white flex-shrink-0">
+                                {client.name.slice(0, 2).toUpperCase()}
+                              </div>
+                            )}
                             <div>
                               <Link
                                 href={`/clients/${client._id}`}

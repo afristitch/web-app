@@ -24,8 +24,8 @@ const navigationGroups = [
     title: "Document and Essentials",
     items: [
       { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { name: "Clients Directory", href: "/clients", icon: Users },
-      { name: "Orders & Fits", href: "/orders", icon: ShoppingBag },
+      { name: "Clients", href: "/clients", icon: Users },
+      { name: "Orders", href: "/orders", icon: ShoppingBag },
       { name: "Measurements", href: "/measurements", icon: Ruler },
     ],
   },

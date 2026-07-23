@@ -134,6 +134,13 @@ export const measurementService = {
     const res = await api.post("/measurements", data);
     return res.data || res;
   },
+  async update(id: string, data: Partial<CreateMeasurementRequest>): Promise<Measurement> {
+    const res = await api.put(`/measurements/${id}`, data);
+    return res.data || res;
+  },
+  async delete(id: string): Promise<void> {
+    await api.delete(`/measurements/${id}`);
+  },
   async getTemplates(): Promise<MeasurementTemplate[]> {
     try {
       const res = await api.get("/measurements/templates");

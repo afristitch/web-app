@@ -7,13 +7,18 @@ import {
   User,
   ChevronDown,
   Scissors,
+  Menu,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { profileService } from "@/lib/services";
 import Link from "next/link";
 import Image from "next/image";
 
-export function Header() {
+interface HeaderProps {
+  onMenuToggle: () => void;
+}
+
+export function Header({ onMenuToggle }: HeaderProps) {
   const { user, logout } = useAuth();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [photoUrl, setPhotoUrl] = useState<string | null>(user?.photoUrl || null);
@@ -32,8 +37,16 @@ export function Header() {
       className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-white/10 bg-black/90 px-6 backdrop-blur-md text-white"
       style={{ fontFamily: 'var(--font-varela-round)' }}
     >
-      {/* Left: Global Search Bar */}
-      <div className="flex items-center gap-4 flex-1 max-w-md">
+      {/* Left: Hamburger (mobile) + Search */}
+      <div className="flex items-center gap-3 flex-1 max-w-md">
+        {/* Hamburger — mobile only */}
+        <button
+          onClick={onMenuToggle}
+          className="lg:hidden p-2 rounded-xl border border-white/10 bg-stone-950 text-stone-300 hover:bg-white/10 hover:text-white transition-colors shadow-xs flex-shrink-0"
+          aria-label="Toggle navigation"
+        >
+          <Menu className="h-4 w-4" />
+        </button>
         <div className="relative w-full">
           <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
           <input

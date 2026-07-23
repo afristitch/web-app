@@ -14,6 +14,7 @@ import {
   UserCheck,
   Settings,
   Sparkles,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
@@ -50,7 +51,12 @@ const navigationGroups = [
   },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isPremium, setIsPremium] = useState(false);
 
@@ -64,13 +70,18 @@ export function Sidebar() {
     });
   }, []);
 
-  return (
-    <aside 
-      className="flex h-screen w-64 flex-col border-r border-white/10 bg-black font-sans transition-all shrink-0 text-white"
+  // Close drawer on route change
+  useEffect(() => {
+    onClose();
+  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const sidebarContent = (
+    <aside
+      className="flex h-full w-64 flex-col border-r border-white/10 bg-black font-sans text-white"
       style={{ fontFamily: 'var(--font-varela-round)' }}
     >
-      {/* Brand Header using User Logo */}
-      <div className="flex h-16 items-center px-5 border-b border-white/10">
+      {/* Brand Header */}
+      <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
         <Link href="/dashboard" className="flex items-center gap-2">
           <Image
             src="/stitch-logo-white.png"
@@ -89,12 +100,19 @@ export function Sidebar() {
             </span>
           </div>
         </Link>
+        {/* Close button — mobile only */}
+        <button
+          onClick={onClose}
+          className="lg:hidden p-1.5 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
+          aria-label="Close sidebar"
+        >
+          <X className="h-5 w-5" />
+        </button>
       </div>
 
       {/* Navigation Sections */}
       <div className="flex-1 overflow-y-auto px-3.5 py-4 space-y-6">
         {navigationGroups.map((group) => {
-          // Strictly filter out all PRO tabs for non-PRO users
           const visibleItems = group.items.filter((item) => !item.isPro || isPremium);
           if (visibleItems.length === 0) return null;
 
@@ -165,5 +183,29 @@ export function Sidebar() {
         </div>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop sidebar — always visible */}
+      <div className="hidden lg:flex h-screen w-64 shrink-0 transition-all">
+        {sidebarContent}
+      </div>
+
+      {/* Mobile drawer overlay */}
+      {isOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          {/* Drawer panel */}
+          <div className="relative z-10 h-full animate-in slide-in-from-left duration-200">
+            {sidebarContent}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

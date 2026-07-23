@@ -89,17 +89,17 @@ export function Header({ onMenuToggle }: HeaderProps) {
                 {user?.name ? user.name.slice(0, 2).toUpperCase() : "SD"}
               </div>
             )}
-            <span className="text-xs font-bold text-white hidden sm:inline-block">
+            <span className="text-xs font-bold text-white hidden sm:inline-block max-w-[120px] truncate">
               {user?.name || "Master Tailor"}
             </span>
-            <ChevronDown className="h-3 w-3 text-stone-400 hidden sm:block" />
+            <ChevronDown className="h-3 w-3 text-stone-400 hidden sm:block flex-shrink-0" />
           </button>
 
           {showProfileMenu && (
             <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-white/10 bg-stone-950 p-2 shadow-2xl z-40 animate-in fade-in zoom-in-95">
               <div className="px-3 py-2 border-b border-white/10 mb-1">
-                <p className="text-xs font-bold text-white">{user?.name || "Master Tailor"}</p>
-                <p className="text-[11px] text-stone-400 truncate">{user?.email || "tailor@sewdigital.com"}</p>
+                <p className="text-xs font-bold text-white max-w-[200px] truncate">{user?.name || "Master Tailor"}</p>
+                <p className="text-[11px] text-stone-400 max-w-[200px] truncate">{user?.email || "tailor@sewdigital.com"}</p>
               </div>
               <Link
                 href="/settings"

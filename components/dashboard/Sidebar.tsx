@@ -59,6 +59,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isPremium, setIsPremium] = useState(false);
+  const [orgProfile, setOrgProfile] = useState<any>(null);
 
   useEffect(() => {
     organizationService.getSubscription().then((sub) => {
@@ -67,6 +68,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       } else {
         setIsPremium(false);
       }
+    });
+
+    organizationService.getProfile().then((profile) => {
+      if (profile) setOrgProfile(profile);
     });
   }, []);
 
@@ -82,21 +87,27 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     >
       {/* Brand Header */}
       <div className="flex h-16 items-center justify-between px-5 border-b border-white/10">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <Image
-            src="/stitch-logo-white.png"
-            alt="SewDigital Logo"
-            width={38}
-            height={38}
-            className="object-contain shrink-0"
-            unoptimized
-          />
-          <div>
-            <span className="block text-base font-extrabold tracking-tight text-white">
-              SewDigital
+        <Link href="/dashboard" className="flex items-center gap-3 flex-1 min-w-0 pr-2">
+          {orgProfile?.logoUrl ? (
+            <Image
+              src={orgProfile.logoUrl}
+              alt={orgProfile.name || "Business Logo"}
+              width={38}
+              height={38}
+              className="object-cover shrink-0 rounded-full h-9 w-9 border border-white/20"
+              unoptimized
+            />
+          ) : (
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-lg font-extrabold text-black uppercase">
+              {orgProfile?.name ? orgProfile.name.slice(0, 1) : "B"}
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            <span className="block text-sm font-extrabold tracking-tight text-white truncate">
+              {orgProfile?.name || "Loading..."}
             </span>
-            <span className="block text-[10px] font-semibold text-stone-400 tracking-wider">
-              Tailoring Platform
+            <span className="block text-[10px] font-semibold text-stone-400 tracking-wider truncate">
+              {orgProfile?.email}
             </span>
           </div>
         </Link>

@@ -42,6 +42,28 @@ export const metadata: Metadata = {
     icon: "/stitchlogo.png",
     apple: "/stitchlogo.png",
   },
+  openGraph: {
+    title: "SewDigital | Next-generation Tailor Management Software",
+    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
+    url: "https://www.sewdigital.app",
+    siteName: "SewDigital",
+    images: [
+      {
+        url: "/home-screen.png",
+        width: 1200,
+        height: 630,
+        alt: "SewDigital - Tailor Management Software",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SewDigital | Next-generation Tailor Management Software",
+    description: "Stop running your tailoring business from a chaotic notebook. SewDigital keeps your clients, measurements, and orders perfectly organized in one place.",
+    images: ["/home-screen.png"],
+  },
 };
 
 export default function RootLayout({

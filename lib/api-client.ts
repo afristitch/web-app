@@ -23,6 +23,18 @@ async function fetcher(endpoint: string, options: RequestInit = {}) {
 
         if (!response.ok) {
             const error = await response.json().catch(() => ({ message: "An error occurred" }));
+            
+            // Redirect to login if token is expired or unauthorized
+            if (response.status === 401 || (error.message && error.message.toLowerCase().includes("token"))) {
+                if (typeof window !== "undefined") {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("organization");
+                    window.location.href = "/login";
+                }
+            }
+            
             throw new Error(error.message || "Failed to fetch data");
         }
 
@@ -52,6 +64,17 @@ export const api = {
         }).then(async (response) => {
             if (!response.ok) {
                 const error = await response.json().catch(() => ({ message: "Upload failed" }));
+                
+                if (response.status === 401 || (error.message && error.message.toLowerCase().includes("token"))) {
+                    if (typeof window !== "undefined") {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("refreshToken");
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("organization");
+                        window.location.href = "/login";
+                    }
+                }
+                
                 throw new Error(error.message || "Upload failed");
             }
             return response.json();

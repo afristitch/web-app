@@ -66,6 +66,21 @@ export const clientService = {
       return [];
     }
   },
+  async getPaginated(page: number = 1, limit: number = 10, search: string = ""): Promise<{ clients: Client[]; pagination: { total: number; page: number; limit: number; totalPages: number } }> {
+    try {
+      const query = new URLSearchParams({ page: page.toString(), limit: limit.toString() });
+      if (search) query.append("search", search);
+      const res = await api.get(`/clients?${query.toString()}`);
+      
+      const clients = extractArray<Client>(res);
+      const pagination = res?.data?.pagination || { total: clients.length, page, limit, totalPages: 1 };
+      
+      return { clients, pagination };
+    } catch (err) {
+      console.error("[clientService.getPaginated] Error:", err);
+      return { clients: [], pagination: { total: 0, page, limit, totalPages: 1 } };
+    }
+  },
   async getById(id: string): Promise<Client | null> {
     try {
       const res = await api.get(`/clients/${id}`);

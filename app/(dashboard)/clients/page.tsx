@@ -23,6 +23,9 @@ export default function ClientsListPage() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalClients, setTotalClients] = useState(0);
 
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
   const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
@@ -33,10 +36,12 @@ export default function ClientsListPage() {
     setLoading(true);
     try {
       const [clientData, groupData] = await Promise.all([
-        clientService.getAll(),
+        clientService.getPaginated(page, 10, searchTerm),
         groupService.getAll(),
       ]);
-      setClients(Array.isArray(clientData) ? clientData : []);
+      setClients(clientData.clients);
+      setTotalPages(clientData.pagination.totalPages);
+      setTotalClients(clientData.pagination.total);
       setGroups(Array.isArray(groupData) ? groupData : []);
     } catch (err) {
       console.error(err);
@@ -46,15 +51,18 @@ export default function ClientsListPage() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 300); // debounce search
+    return () => clearTimeout(timer);
+  }, [page, searchTerm]);
 
-  const filteredClients = clients.filter(
-    (c) =>
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.phone.includes(searchTerm) ||
-      (c.email && c.email.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  // When search changes, reset page to 1
+  useEffect(() => {
+    setPage(1);
+  }, [searchTerm]);
+
+  const filteredClients = clients; // now handled by backend
 
   const handleDeleteClient = async (id: string) => {
     if (confirm("Are you sure you want to delete this client record?")) {
@@ -156,7 +164,7 @@ export default function ClientsListPage() {
             </div>
             <div className="text-xs text-stone-400 font-bold whitespace-nowrap">
               <span className="hidden sm:inline">Total Clients: </span>
-              <span className="text-white font-extrabold">{filteredClients.length}</span>
+              <span className="text-white font-extrabold">{totalClients}</span>
             </div>
           </div>
 
@@ -271,6 +279,32 @@ export default function ClientsListPage() {
               </table>
             </div>
           </div>
+          
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between border-t border-white/10 pt-4 px-2">
+              <div className="text-xs text-stone-400 font-medium">
+                Showing page <span className="text-white font-bold">{page}</span> of{" "}
+                <span className="text-white font-bold">{totalPages}</span>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-bold text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-bold text-white disabled:opacity-50 hover:bg-white/10 transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 

@@ -20,7 +20,7 @@ import { ClientModal } from "@/components/clients/ClientModal";
 
 export default function DashboardOverviewPage() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [clients, setClients] = useState<Client[]>([]);
+  const [totalClients, setTotalClients] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
@@ -28,16 +28,16 @@ export default function DashboardOverviewPage() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [fetchedOrders, fetchedClients] = await Promise.all([
+      const [fetchedOrders, clientData] = await Promise.all([
         orderService.getAll(),
-        clientService.getAll(),
+        clientService.getPaginated(1, 1), // Only need 1 item to get the total count
       ]);
       setOrders(Array.isArray(fetchedOrders) ? fetchedOrders : []);
-      setClients(Array.isArray(fetchedClients) ? fetchedClients : []);
+      setTotalClients(clientData.pagination.total);
     } catch (err) {
       console.error(err);
       setOrders([]);
-      setClients([]);
+      setTotalClients(0);
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,6 @@ export default function DashboardOverviewPage() {
   }, []);
 
   const safeOrders = Array.isArray(orders) ? orders : [];
-  const safeClients = Array.isArray(clients) ? clients : [];
 
   const totalRevenue = safeOrders.reduce((acc, o) => acc + (o.amount || 0), 0);
   const totalPaid = safeOrders.reduce((acc, o) => acc + (o.amountPaid || 0), 0);
@@ -145,7 +144,7 @@ export default function DashboardOverviewPage() {
           </div>
           <div className="mt-4">
             <p className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
-              {safeClients.length}
+              {totalClients}
             </p>
             <p className="mt-3 text-[11px] text-stone-400 font-medium">
               Registered tailor clients

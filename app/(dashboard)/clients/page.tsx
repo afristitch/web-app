@@ -111,7 +111,7 @@ export default function ClientsListPage() {
                   : "text-stone-400 hover:text-white"
               }`}
             >
-              <span className="hidden sm:inline">Individual Clients </span>({clients.length})
+              <span className="hidden sm:inline">Individual Clients </span>({totalClients})
             </button>
             <button
               onClick={() => setViewMode("groups")}

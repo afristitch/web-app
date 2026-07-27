@@ -26,6 +26,8 @@ import {
   PriceBreakdown,
   UploadResult,
   AvatarPreset,
+  Proforma,
+  CreateProformaRequest,
 } from "./types";
 
 // Helper to safely extract Array from any API response structure
@@ -132,6 +134,9 @@ export const orderService = {
   async recordPayment(id: string, amount: number): Promise<Order> {
     const res = await api.patch(`/orders/${id}/payment`, { amount });
     return res.data || res;
+  },
+  async delete(id: string): Promise<void> {
+    await api.delete(`/orders/${id}`);
   },
 };
 
@@ -434,5 +439,32 @@ export const paymentService = {
   async initializePayment(planId: string, months: number, callbackUrl?: string): Promise<{ authorization_url: string; access_code: string; reference: string }> {
     const res = await api.post("/payments/initialize", { planId, months, callbackUrl });
     return res.data || res;
+  },
+};
+
+// ─── Proforma Service ───────────────────────────────────────────────────────
+export const proformaService = {
+  async getAll(): Promise<Proforma[]> {
+    try {
+      const res = await api.get("/proformas");
+      return extractArray<Proforma>(res);
+    } catch {
+      return [];
+    }
+  },
+  async getById(id: string): Promise<Proforma | null> {
+    try {
+      const res = await api.get(`/proformas/${id}`);
+      return res.data || res || null;
+    } catch {
+      return null;
+    }
+  },
+  async create(data: CreateProformaRequest): Promise<Proforma> {
+    const res = await api.post("/proformas", data);
+    return res.data || res;
+  },
+  async delete(id: string): Promise<void> {
+    await api.delete(`/proformas/${id}`);
   },
 };

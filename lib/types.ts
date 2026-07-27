@@ -14,6 +14,8 @@ export interface User {
 export interface Organization {
   _id: ID;
   name: string;
+  bio?: string;
+  specialties?: string[];
   email?: string;
   phone?: string;
   address?: string;
@@ -23,7 +25,14 @@ export interface Organization {
   subscriptionStatus?: "active" | "inactive" | "trial";
   subscriptionEndsAt?: string;
   isPremium?: boolean;
-  portfolioUrls?: string[];
+  portfolio?: {
+    _id?: string;
+    title: string;
+    description?: string;
+    imageUrl: string;
+    tags?: string[];
+    createdAt?: string;
+  }[];
   paymentInstructions?: {
     momo?: { network: string; number: string; name: string }[];
     bank?: { bankName: string; accountNumber: string; accountName: string; branch?: string }[];
@@ -314,3 +323,25 @@ export interface AvatarPreset {
   url: string;
   name: string;
 }
+
+// Proforma types
+export interface ProformaItem {
+  id: string;
+  description: string;
+  quantity: number;
+  price: number;
+}
+
+export interface Proforma {
+  _id: ID;
+  clientName: string;
+  clientPhone: string;
+  clientAddress?: string;
+  items: ProformaItem[];
+  subtotal: number;
+  notes?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export type CreateProformaRequest = Omit<Proforma, "_id" | "createdAt" | "updatedAt">;

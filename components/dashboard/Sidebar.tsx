@@ -34,6 +34,7 @@ const navigationGroups = [
     title: "Financials",
     items: [
       { name: "Invoices & Revenue", href: "/finances", icon: Receipt },
+      { name: "Pro-Forma Quotes", href: "/finances/proformas", icon: Receipt },
     ],
   },
   {

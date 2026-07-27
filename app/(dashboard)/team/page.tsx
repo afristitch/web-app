@@ -10,7 +10,7 @@ import { organizationService } from "@/lib/services";
 interface TeamMember {
   id: string;
   name: string;
-  role: "Master Tailor" | "Apprentice" | "Pattern Cutter" | "Finisher" | "Manager";
+  role: "ORG_ADMIN" | "STAFF";
   email: string;
   phone: string;
   status: "Active" | "Invited";
@@ -25,7 +25,7 @@ export default function TeamManagementPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
-  const [role, setRole] = useState<TeamMember["role"]>("Apprentice");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -47,7 +47,7 @@ export default function TeamManagementPage() {
     const newM: TeamMember = {
       id: `mem-${Date.now()}`,
       name,
-      role,
+      role: isAdmin ? "ORG_ADMIN" : "STAFF",
       email,
       phone: phone || "+233 00 000 0000",
       status: "Invited",
@@ -57,6 +57,7 @@ export default function TeamManagementPage() {
     setName("");
     setEmail("");
     setPhone("");
+    setIsAdmin(false);
     setIsModalOpen(false);
   };
 
@@ -88,7 +89,7 @@ export default function TeamManagementPage() {
             Team & Staff Management
           </h1>
           <p className="text-xs text-stone-400 mt-1 font-medium">
-            Manage your tailoring studio apprentices, pattern cutters, master tailors, and role permissions.
+            Manage your tailoring studio staff and role permissions.
           </p>
         </div>
 
@@ -113,11 +114,11 @@ export default function TeamManagementPage() {
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl space-y-2">
-          <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Master Tailors</span>
+          <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">Admins</span>
           <p className="text-3xl font-extrabold text-emerald-400 tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>
-            {members.filter((m) => m.role === "Master Tailor").length}
+            {members.filter((m) => m.role === "ORG_ADMIN").length}
           </p>
-          <p className="text-[11px] text-emerald-400 font-bold">Senior fitting leads</p>
+          <p className="text-[11px] text-emerald-400 font-bold">Staff with full access</p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-stone-950 p-6 shadow-xl space-y-2">
@@ -139,7 +140,7 @@ export default function TeamManagementPage() {
             No Staff Members Yet
           </h3>
           <p className="text-xs text-stone-400 font-medium max-w-sm mx-auto">
-            Invite master tailors, pattern cutters, or apprentices to your studio team. Click "Invite Staff Member" to send an invite.
+            Invite workers to your studio team. Click "Invite Staff Member" to send an invite.
           </p>
         </div>
       ) : (
@@ -176,7 +177,7 @@ export default function TeamManagementPage() {
                     <td className="px-6 py-4">
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-stone-900 px-3 py-1 text-[11px] font-bold text-white">
                         <Shield className="h-3 w-3 text-stone-400" />
-                        {member.role}
+                        {member.role === "ORG_ADMIN" ? "Admin" : "Staff"}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-stone-300 font-medium">
@@ -270,22 +271,15 @@ export default function TeamManagementPage() {
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-bold text-stone-300 mb-1.5">
-              Studio Role & Permissions *
+          <div className="mt-4 p-4 rounded-xl border border-white/10 bg-stone-900/50 flex items-center justify-between">
+            <div>
+              <p className="text-sm font-bold text-white">Make Admin</p>
+              <p className="text-xs text-stone-400 mt-1">Admins have full access to manage the business and workers.</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" className="sr-only peer" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
+              <div className="w-11 h-6 bg-stone-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
             </label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as TeamMember["role"])}
-              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
-            >
-              <option value="Master Tailor" className="bg-stone-900 text-white">Master Tailor (Full Access)</option>
-              <option value="Pattern Cutter" className="bg-stone-900 text-white">Pattern Cutter (Measurements & Fitting)</option>
-              <option value="Finisher" className="bg-stone-900 text-white">Finisher (Orders & Status)</option>
-              <option value="Apprentice" className="bg-stone-900 text-white">Apprentice (Read Only)</option>
-              <option value="Manager" className="bg-stone-900 text-white">Manager (Invoices & Billing)</option>
-            </select>
           </div>
 
           <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-6">

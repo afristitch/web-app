@@ -2,66 +2,119 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Image as ImageIcon, Plus, Tag } from "lucide-react";
+import { Image as ImageIcon, Plus, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import { Modal } from "@/components/ui/Modal";
-import { organizationService } from "@/lib/services";
-
-interface PortfolioItem {
-  id: string;
-  title: string;
-  category: string;
-  imageUrl: string;
-  notes: string;
-}
+import { organizationService, uploadService } from "@/lib/services";
 
 export default function PortfolioPage() {
   const router = useRouter();
-  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [items, setItems] = useState<any[]>([]);
   const [isPremium, setIsPremium] = useState(false);
-  const [loadingSub, setLoadingSub] = useState(true);
+  const [loading, setLoading] = useState(true);
 
+  // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Menswear");
-  const [imageUrl, setImageUrl] = useState("");
   const [notes, setNotes] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
 
   useEffect(() => {
-    organizationService.getSubscription().then((sub) => {
-      if (sub && (sub.isPremium || sub.status === "ACTIVE")) {
-        setIsPremium(true);
-      } else {
-        setIsPremium(false);
-        router.replace("/subscription");
+    async function loadData() {
+      try {
+        const sub = await organizationService.getSubscription();
+        if (sub && (sub.isPremium || sub.status === "ACTIVE")) {
+          setIsPremium(true);
+          const profile = await organizationService.getProfile();
+          if (profile && profile.portfolio) {
+            // Sort by newest first just in case
+            setItems(profile.portfolio.sort((a: any, b: any) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()));
+          }
+        } else {
+          setIsPremium(false);
+          router.replace("/subscription");
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-      setLoadingSub(false);
-    });
+    }
+    loadData();
   }, [router]);
 
-  const handleAddPortfolio = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title || !imageUrl) return;
-    setItems([
-      {
-        id: `p-${Date.now()}`,
-        title,
-        category,
-        imageUrl,
-        notes,
-      },
-      ...items,
-    ]);
-    setIsModalOpen(false);
-    setTitle("");
-    setImageUrl("");
-    setNotes("");
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedFiles(files);
+      setPreviews(files.map(f => URL.createObjectURL(f)));
+    }
   };
 
-  if (loadingSub || !isPremium) {
+  const removeFile = (index: number) => {
+    const newFiles = [...selectedFiles];
+    newFiles.splice(index, 1);
+    setSelectedFiles(newFiles);
+    
+    const newPreviews = [...previews];
+    URL.revokeObjectURL(newPreviews[index]);
+    newPreviews.splice(index, 1);
+    setPreviews(newPreviews);
+  };
+
+  const handleAddPortfolio = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title || selectedFiles.length === 0) {
+      alert("Title and at least one image are required.");
+      return;
+    }
+    
+    setIsUploading(true);
+    try {
+      const newItems = [];
+      for (const file of selectedFiles) {
+        const uploadRes = await uploadService.uploadImage(file, 'portfolio');
+        newItems.push({
+          title,
+          tags: [category],
+          imageUrl: (uploadRes as any).secure_url || uploadRes.url || (uploadRes as any).imageUrl,
+          description: notes,
+          createdAt: new Date(),
+        });
+      }
+
+      const updatedPortfolio = [...newItems, ...items];
+      await organizationService.updateProfile({ portfolio: updatedPortfolio });
+      
+      setItems(updatedPortfolio);
+      setIsModalOpen(false);
+      setTitle("");
+      setSelectedFiles([]);
+      setPreviews([]);
+      setNotes("");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to upload portfolio. Please try again.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleOpenModal = () => {
+    setTitle("");
+    setNotes("");
+    setSelectedFiles([]);
+    setPreviews([]);
+    setIsModalOpen(true);
+  };
+
+  if (loading || !isPremium) {
     return (
       <div className="flex h-64 items-center justify-center text-stone-400 font-medium text-xs">
-        Checking PRO subscription permissions...
+        Checking permissions and loading portfolio...
       </div>
     );
   }
@@ -83,7 +136,7 @@ export default function PortfolioPage() {
         </div>
 
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleOpenModal}
           className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-extrabold text-black shadow-xs hover:bg-stone-200 transition-all cursor-pointer"
           style={{ fontFamily: 'var(--font-varela-round)' }}
         >
@@ -107,9 +160,9 @@ export default function PortfolioPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
+          {items.map((item, idx) => (
             <div
-              key={item.id}
+              key={item._id || idx}
               className="group overflow-hidden rounded-3xl border border-white/10 bg-stone-950 shadow-xl transition-all hover:border-white/20"
             >
               <div className="relative h-64 w-full overflow-hidden bg-stone-900">
@@ -120,13 +173,13 @@ export default function PortfolioPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute top-3 right-3 rounded-full bg-black/80 border border-white/10 px-3 py-1 text-[10px] font-bold text-white backdrop-blur-md">
-                  {item.category}
+                  {item.tags?.[0] || 'Design'}
                 </span>
               </div>
 
               <div className="p-6 space-y-2">
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight" style={{ fontFamily: 'var(--font-varela-round)' }}>{item.title}</h3>
-                <p className="text-xs text-stone-400 font-medium leading-relaxed">{item.notes}</p>
+                {item.description && <p className="text-xs text-stone-400 font-medium leading-relaxed">{item.description}</p>}
               </div>
             </div>
           ))}
@@ -136,11 +189,43 @@ export default function PortfolioPage() {
       {/* Add Portfolio Modal */}
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Add Portfolio Design"
-        subtitle="Upload a finished outfit photo to your gallery."
+        onClose={() => !isUploading && setIsModalOpen(false)}
+        title="Add Portfolio Designs"
+        subtitle="Upload multiple finished outfit photos to your gallery."
       >
         <form onSubmit={handleAddPortfolio} className="space-y-4 pt-2 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
+          <div>
+            <label className="block text-xs font-bold text-stone-300 mb-1.5">
+              Select Images *
+            </label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleFileChange}
+              disabled={isUploading}
+              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-white file:text-black hover:file:bg-stone-200 cursor-pointer"
+            />
+            {previews.length > 0 && (
+              <div className="flex flex-wrap gap-3 mt-4">
+                {previews.map((preview, idx) => (
+                  <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden border border-white/10">
+                    <Image src={preview} alt="preview" fill className="object-cover" />
+                    {!isUploading && (
+                      <button
+                        type="button"
+                        onClick={() => removeFile(idx)}
+                        className="absolute top-1 right-1 bg-black/60 rounded-full p-1 hover:bg-red-500/80 transition"
+                      >
+                        <X className="w-3 h-3 text-white" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div>
             <label className="block text-xs font-bold text-stone-300 mb-1.5">
               Design Title *
@@ -148,11 +233,11 @@ export default function PortfolioPage() {
             <input
               type="text"
               required
-              placeholder="e.g. Bespoke Tailored Suit in Emerald Green"
+              disabled={isUploading}
+              placeholder="e.g. Bespoke Tailored Suits"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
 
@@ -163,29 +248,14 @@ export default function PortfolioPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              disabled={isUploading}
               className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white focus:border-white/30 focus:outline-none"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
             >
-              <option value="Menswear" className="bg-stone-900 text-white">Menswear</option>
-              <option value="Womenswear" className="bg-stone-900 text-white">Womenswear</option>
-              <option value="Suits" className="bg-stone-900 text-white">Suits & Tuxedos</option>
-              <option value="Custom Fit" className="bg-stone-900 text-white">Custom Event Apparel</option>
+              <option value="Menswear">Menswear</option>
+              <option value="Womenswear">Womenswear</option>
+              <option value="Suits & Tuxedos">Suits & Tuxedos</option>
+              <option value="Custom Event Apparel">Custom Event Apparel</option>
             </select>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-stone-300 mb-1.5">
-              Image URL *
-            </label>
-            <input
-              type="url"
-              required
-              placeholder="https://images.unsplash.com/photo-..."
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
-            />
           </div>
 
           <div>
@@ -194,29 +264,36 @@ export default function PortfolioPage() {
             </label>
             <textarea
               rows={3}
+              disabled={isUploading}
               placeholder="e.g. Premium wool fabric with handcrafted embroidery."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-stone-900 px-3.5 py-2.5 text-xs font-medium text-white placeholder-stone-500 focus:border-white/30 focus:outline-none resize-none"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
             />
           </div>
 
           <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4 mt-6">
             <button
               type="button"
+              disabled={isUploading}
               onClick={() => setIsModalOpen(false)}
-              className="rounded-full border border-white/10 px-5 py-2.5 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
+              className="rounded-full border border-white/10 px-5 py-2.5 text-xs font-bold text-stone-400 hover:bg-white/10 hover:text-white transition-all cursor-pointer disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-full bg-white px-6 py-2.5 text-xs font-extrabold text-black hover:bg-stone-200 transition-all cursor-pointer shadow-xs"
-              style={{ fontFamily: 'var(--font-varela-round)' }}
+              disabled={isUploading || selectedFiles.length === 0}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-extrabold text-black hover:bg-stone-200 transition-all cursor-pointer shadow-xs disabled:opacity-50"
             >
-              Save Design
+              {isUploading ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Save & Upload"
+              )}
             </button>
           </div>
         </form>

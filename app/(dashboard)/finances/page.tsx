@@ -5,6 +5,8 @@ import { Printer, Search, Filter, Eye } from "lucide-react";
 import { Order, Organization } from "@/lib/types";
 import { orderService, organizationService } from "@/lib/services";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+import { Trash2 } from "lucide-react";
 
 type InvoiceFilter = "all" | "paid" | "unpaid";
 
@@ -15,6 +17,8 @@ export default function FinancesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<InvoiceFilter>("all");
+  const { user } = useAuth();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -54,6 +58,24 @@ export default function FinancesPage() {
   const studioName = org?.name || "My Studio";
   const studioAddress = org?.address || "";
   const studioPhone = org?.phone || "";
+
+  const handleDelete = async (orderId: string) => {
+    if (!window.confirm("Are you sure you want to delete this invoice? This action cannot be undone.")) return;
+    
+    setIsDeleting(true);
+    try {
+      await orderService.delete(orderId);
+      setOrders(orders.filter(o => o._id !== orderId));
+      if (selectedOrder?._id === orderId) {
+        setSelectedOrder(null);
+      }
+    } catch (err) {
+      console.error("Failed to delete order", err);
+      alert("Failed to delete invoice.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <div className="space-y-6 text-white" style={{ fontFamily: 'var(--font-varela-round)' }}>
@@ -203,6 +225,17 @@ export default function FinancesPage() {
                   </span>
                   {studioAddress && <p className="text-xs text-stone-400 mt-1">{studioAddress}</p>}
                   {studioPhone && <p className="text-xs text-stone-400">Contact: {studioPhone}</p>}
+                  
+                  {user?.role === "ORG_ADMIN" && (
+                    <button
+                      onClick={() => handleDelete(selectedOrder._id)}
+                      disabled={isDeleting}
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1.5 text-[10px] font-bold text-red-500 hover:bg-red-500/20 transition-colors disabled:opacity-50 print:hidden cursor-pointer"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                      {isDeleting ? "Deleting..." : "Delete Invoice"}
+                    </button>
+                  )}
                 </div>
                 <div className="text-right">
                   <span className="inline-block px-3.5 py-1 bg-white text-black text-xs font-extrabold rounded-full tracking-wider uppercase">

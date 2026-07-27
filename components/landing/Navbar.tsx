@@ -172,7 +172,7 @@ export function Navbar() {
                                 href="/login"
                                 className="px-5 py-2 bg-white text-black rounded-full hover:bg-stone-200 transition-all hover:scale-105 active:scale-95 font-bold text-xs sm:text-sm shadow-xs"
                             >
-                                Sign Up
+                                Log In
                             </Link>
                         )}
                     </div>
@@ -232,7 +232,7 @@ export function Navbar() {
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="w-full py-3.5 bg-white text-black rounded-full hover:bg-stone-200 transition-all hover:scale-105 active:scale-95 font-bold text-sm text-center"
                             >
-                                Sign Up
+                                Log In
                             </Link>
                         )}
                     </div>

@@ -11,7 +11,7 @@ interface SocialAuthButtonsProps {
     redirectUrl?: string;
 }
 
-export function SocialAuthButtons({ onError, redirectUrl = "/subscription" }: SocialAuthButtonsProps) {
+export function SocialAuthButtons({ onError, redirectUrl = "/dashboard" }: SocialAuthButtonsProps) {
     const { login } = useAuth();
     const [loading, setLoading] = useState(false);
 

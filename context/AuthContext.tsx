@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         initializeAuth();
     }, []);
 
-    const login = (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }, redirectUrl: string = "/subscription") => {
+    const login = (data: { user: User; accessToken: string; refreshToken: string; organization: Organization }, redirectUrl: string = "/dashboard") => {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("user", JSON.stringify(data.user));

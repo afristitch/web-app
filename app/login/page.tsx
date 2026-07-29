@@ -25,7 +25,7 @@ export default function LoginPage() {
 function LoginForm() {
     const { login } = useAuth();
     const searchParams = useSearchParams();
-    const redirectUrl = searchParams.get("redirectUrl") || "/subscription";
+    const redirectUrl = searchParams.get("redirectUrl") || "/dashboard";
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

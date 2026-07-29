@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { api } from "@/lib/api-client";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
+import { SocialAuthButtons } from "@/components/SocialAuthButtons";
 import { ArrowRight, Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
@@ -146,6 +147,8 @@ function LoginForm() {
                                 )}
                             </button>
                         </form>
+
+                        <SocialAuthButtons onError={(msg) => setError(msg)} redirectUrl={redirectUrl} />
                     </div>
 
                     <div className="mt-8 text-center text-xs text-stone-500">

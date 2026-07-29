@@ -6,6 +6,8 @@ import { AuthProvider } from "@/context/AuthContext";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 const DASHBOARD_ROUTES = [
   "/dashboard",
   "/clients",
@@ -26,10 +28,12 @@ export function ClientLayoutWrapper({ children }: { children: React.ReactNode })
   );
 
   return (
-    <AuthProvider>
-      {!isDashboardRoute && <Navbar />}
-      {children}
-      {!isDashboardRoute && <Footer />}
-    </AuthProvider>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}>
+      <AuthProvider>
+        {!isDashboardRoute && <Navbar />}
+        {children}
+        {!isDashboardRoute && <Footer />}
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }

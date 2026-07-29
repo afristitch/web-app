@@ -7,6 +7,7 @@ import Image from "next/image";
 import { api } from "@/lib/api-client";
 import { useAuth } from "@/context/AuthContext";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
+import { SocialAuthButtons } from "@/components/SocialAuthButtons";
 import { ArrowRight, Lock, Mail, User, Building2, Phone, AlertCircle, Loader2, CheckCircle2 } from "lucide-react";
 
 export default function SignUpPage() {
@@ -241,6 +242,8 @@ function SignUpForm() {
                                         )}
                                     </button>
                                 </form>
+
+                                <SocialAuthButtons onError={(msg) => setError(msg)} redirectUrl="/dashboard" />
                             </>
                         )}
                     </div>

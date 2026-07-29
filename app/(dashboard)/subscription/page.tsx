@@ -77,7 +77,7 @@ const DURATION_OPTIONS = [
 ];
 
 function SubscriptionContent() {
-  const { user, organization, loading: authLoading } = useAuth();
+  const { user, activeWorkspace: organization, loading: authLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 

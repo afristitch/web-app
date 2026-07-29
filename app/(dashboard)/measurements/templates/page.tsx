@@ -18,7 +18,7 @@ const SUGGESTED_ICONS = [
 ];
 
 export default function TemplatesPage() {
-  const { organization } = useAuth();
+  const { activeWorkspace: organization } = useAuth();
   const [templates, setTemplates] = useState<MeasurementTemplate[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);

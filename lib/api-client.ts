@@ -2,16 +2,29 @@
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000/api/v1";
 
 async function fetcher(endpoint: string, options: RequestInit = {}) {
-    const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+    let token = null;
+    let orgId = null;
+    
+    if (typeof window !== "undefined") {
+        token = localStorage.getItem("accessToken");
+        const activeWorkspaceStr = localStorage.getItem("activeWorkspace");
+        if (activeWorkspaceStr && activeWorkspaceStr !== "undefined") {
+            try {
+                const activeWorkspace = JSON.parse(activeWorkspaceStr);
+                orgId = activeWorkspace._id || activeWorkspace.id;
+            } catch (e) {}
+        }
+    }
 
     const headers = {
         "Content-Type": "application/json",
         "ngrok-skip-browser-warning": "69420", // Skip ngrok browser warning
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(orgId ? { "x-organization-id": orgId } : {}),
         ...options.headers,
     };
 
-    console.log(`[API] Fetching ${endpoint}`, { method: options.method || 'GET', hasToken: !!token });
+    console.log(`[API] Fetching ${endpoint}`, { method: options.method || 'GET', hasToken: !!token, orgId });
 
     try {
         const response = await fetch(`${BASE_URL}${endpoint}`, {

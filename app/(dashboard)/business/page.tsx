@@ -24,7 +24,7 @@ const businessTools = [
 ];
 
 export default function MyBusinessPage() {
-  const { organization } = useAuth();
+  const { activeWorkspace: organization } = useAuth();
   const [org, setOrg] = useState<Organization | null>(null);
   const [loading, setLoading] = useState(true);
   const [logoError, setLogoError] = useState(false);

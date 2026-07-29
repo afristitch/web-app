@@ -13,7 +13,7 @@ export function Navbar() {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const { user, organization, logout } = useAuth();
+    const { user, activeWorkspace: organization, logout } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {

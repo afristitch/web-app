@@ -29,10 +29,13 @@ export default function TeamManagementPage() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [loadingMembers, setLoadingMembers] = useState(false);
+
   useEffect(() => {
     organizationService.getSubscription().then((sub) => {
       if (sub && (sub.isPremium || sub.status === "ACTIVE")) {
         setIsPremium(true);
+        fetchMembers();
       } else {
         setIsPremium(false);
         router.replace("/subscription");
@@ -41,29 +44,62 @@ export default function TeamManagementPage() {
     });
   }, [router]);
 
-  const handleAddMember = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isPremium || !name || !email) return;
-    const newM: TeamMember = {
-      id: `mem-${Date.now()}`,
-      name,
-      role: isAdmin ? "ORG_ADMIN" : "STAFF",
-      email,
-      phone: phone || "+233 00 000 0000",
-      status: "Invited",
-      joinedDate: new Date().toISOString().split("T")[0],
-    };
-    setMembers([newM, ...members]);
-    setName("");
-    setEmail("");
-    setPhone("");
-    setIsAdmin(false);
-    setIsModalOpen(false);
+  const fetchMembers = async () => {
+    try {
+      const { api } = await import('@/lib/api-client');
+      setLoadingMembers(true);
+      const res = await api.get('/users');
+      // The API returns paginatedResponse with data in res.data
+      if (res && res.data) {
+         const membersArray = Array.isArray(res.data) ? res.data : (res.data.data || []);
+         setMembers(membersArray.map((u: any) => ({
+            id: u._id,
+            name: u.name,
+            email: u.email,
+            phone: u.phone || '',
+            role: u.role || 'STAFF',
+            status: u.status === 'pending_invite' ? 'Invited' : 'Active',
+            joinedDate: new Date(u.createdAt).toISOString().split("T")[0]
+         })));
+      }
+    } catch (err) {
+      console.error('Failed to fetch members', err);
+    } finally {
+      setLoadingMembers(false);
+    }
   };
 
-  const handleDeleteMember = (id: string) => {
+  const handleAddMember = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isPremium || !name || !email) return;
+    
+    try {
+      const { api } = await import('@/lib/api-client');
+      const role = isAdmin ? "ORG_ADMIN" : "STAFF";
+      await api.post('/users', { name, email, phone, role });
+      
+      alert('Invitation sent successfully!');
+      fetchMembers();
+      
+      setName("");
+      setEmail("");
+      setPhone("");
+      setIsAdmin(false);
+      setIsModalOpen(false);
+    } catch (err: any) {
+      alert(err.message || 'Failed to send invite');
+    }
+  };
+
+  const handleDeleteMember = async (id: string) => {
     if (confirm("Are you sure you want to remove this staff member from your studio team?")) {
-      setMembers(members.filter((m) => m.id !== id));
+      try {
+        const { api } = await import('@/lib/api-client');
+        await api.delete(`/users/${id}`);
+        fetchMembers();
+      } catch (err: any) {
+        alert(err.message || 'Failed to remove member');
+      }
     }
   };
 
@@ -183,7 +219,7 @@ export default function TeamManagementPage() {
                     <td className="px-6 py-4 text-stone-300 font-medium">
                       <div className="flex items-center gap-1.5">
                         <Phone className="h-3 w-3 text-stone-400" />
-                        {member.phone}
+                        {member.phone || <span className="text-stone-500 italic text-xs">Not provided</span>}
                       </div>
                     </td>
                     <td className="px-6 py-4">

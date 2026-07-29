@@ -17,7 +17,7 @@ export default function FinancesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<InvoiceFilter>("all");
-  const { user } = useAuth();
+  const { activeRole } = useAuth();
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -226,7 +226,7 @@ export default function FinancesPage() {
                   {studioAddress && <p className="text-xs text-stone-400 mt-1">{studioAddress}</p>}
                   {studioPhone && <p className="text-xs text-stone-400">Contact: {studioPhone}</p>}
                   
-                  {user?.role === "ORG_ADMIN" && (
+                  {activeRole === "ORG_ADMIN" && (
                     <button
                       onClick={() => handleDelete(selectedOrder._id)}
                       disabled={isDeleting}

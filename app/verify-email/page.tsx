@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
-import Link from "next/link";
 import { SectionWrapper } from "@/components/landing/SectionWrapper";
 
 function VerifyEmailContent() {
@@ -52,17 +51,17 @@ function VerifyEmailContent() {
     }
 
     return (
-        <main className="min-h-screen pt-32 pb-20 overflow-x-hidden bg-black text-white">
+        <main className="min-h-[80vh] flex flex-col justify-center pt-32 pb-20 overflow-x-hidden bg-black text-white">
             <SectionWrapper>
-                <div className="container mx-auto max-w-7xl px-6">
-                    <div className="max-w-xl">
-                        <div className="flex items-center gap-4 mb-8">
+                <div className="container mx-auto max-w-7xl px-6 flex justify-center">
+                    <div className="max-w-xl flex flex-col items-center md:items-start text-center md:text-left">
+                        <div className="flex items-center justify-center md:justify-start gap-4 mb-8">
                             {status === "loading" && <Loader2 className="h-8 w-8 animate-spin text-stone-500" />}
                             {status === "success" && <CheckCircle2 className="h-8 w-8 text-[#FDDA0D]" />}
                             {status === "error" && <XCircle className="h-8 w-8 text-rose-500" />}
 
                             <h1
-                                className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none"
+                                className="text-3xl md:text-5xl font-bold tracking-tighter uppercase border-l border-white/10 pl-6 leading-none text-left"
                                 style={{ fontFamily: 'var(--font-varela-round)' }}
                             >
                                 {status === "loading" && <>Verification <span className="opacity-40">In Progress.</span></>}
@@ -71,18 +70,9 @@ function VerifyEmailContent() {
                             </h1>
                         </div>
 
-                        <p className="text-xl text-stone-500 font-medium leading-relaxed mb-12">
+                        <p className="text-xl text-stone-500 font-medium leading-relaxed">
                             {message || "We are currently processing your verification request. This usually takes just a few seconds."}
                         </p>
-
-                        <div className="pt-12 border-t border-white/5 mt-24">
-                            <div className="flex flex-wrap gap-x-8 gap-y-4 text-[13px] font-bold tracking-cinematic uppercase text-stone-500">
-                                <span>© 2026 SewDigital</span>
-                                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                                <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
-                                <Link href="/support" className="hover:text-white transition-colors">Support</Link>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </SectionWrapper>
